@@ -12,6 +12,7 @@ from typing import TYPE_CHECKING
 import yaml
 
 from libro import ALTO_MM, ALTO_PULGADAS, ANCHO_MM, ANCHO_PULGADAS, NOMBRE_SALIDA
+from libro.presentacion import formatear_markdown, presentar_cuerpo
 from libro.datos import (
     RAIZ,
     CondicionBlog,
@@ -384,9 +385,9 @@ def _generar_capitulo_condicion(cond: CondicionBlog, meta: MetadatosLibro) -> st
                 f"{h.sensibilidad} | {h.especificidad} | {h.lr_positivo} | {h.lr_negativo} | "
                 f"{_celda_referencias(h.referencia)} |"
             )
-        lineas.extend(["", ': {tbl-colwidths="[25,11,11,9,9,12,12,11]"}', ""])
+        lineas.extend(["", ': {tbl-colwidths="[21,11,10,9,9,12,12,16]"}', ""])
 
-    lineas.append(cond.cuerpo_md.strip())
+    lineas.append(presentar_cuerpo(cond.cuerpo_md, cond.evidencia)[0].strip())
     lineas.append("")
 
     if cond.caso_compilado is not None:
@@ -419,15 +420,12 @@ def _generar_apendice_autoevaluacion(libro: LibroCompleto) -> str:
     ]
 
     for idx, q in enumerate(todas, start=1):
-        ref_txt = f" (`{q.referencia_id}`)" if q.referencia_id else ""
-        lineas.extend(
-            [
-                f"### Pregunta {idx}. {q.condicion_nombre} (`{q.condicion_id}`){ref_txt} {{.unnumbered}}",
-                "",
-                q.pregunta,
-                "",
-            ]
-        )
+        # La referencia va bajo el encabezado y no en él: en el índice del PDF los títulos
+        # con dos identificadores en monoespaciada no caben en la línea.
+        lineas.extend([f"### Pregunta {idx}. {q.condicion_nombre} (`{q.condicion_id}`) {{.unnumbered}}", ""])
+        if q.referencia_id:
+            lineas.extend([f"*Referencia:* `{q.referencia_id}`", ""])
+        lineas.extend([q.pregunta, ""])
         for op_idx, op in enumerate(q.opciones):
             letra = chr(ord("A") + op_idx)
             lineas.append(f"- **{letra}.** {op.texto}")
@@ -483,7 +481,7 @@ def _generar_apendice_evidencia(libro: LibroCompleto) -> str:
     lineas.extend(
         [
             "",
-            ': {tbl-colwidths="[10,20,28,9,9,12,12]"}',
+            ': {tbl-colwidths="[12,19,26,9,9,12,13]"}',
             "",
             "## Registro de iconografía clínica abierta (Wikimedia Commons)",
             "",
@@ -498,7 +496,7 @@ def _generar_apendice_evidencia(libro: LibroCompleto) -> str:
                 f"| `{c.condicion_id}` | {c.nombre_corto} | `{img.titulo_commons}` | "
                 f"{img.licencia} | {img.autor} |"
             )
-    lineas.extend(["", ': {tbl-colwidths="[10,22,30,14,24]"}', ""])
+    lineas.extend(["", ': {tbl-colwidths="[12,22,28,14,24]"}', ""])
     return "\n".join(lineas)
 
 
@@ -652,13 +650,13 @@ def generar_proyecto_quarto(
         for cid in parte.condiciones:
             cond = libro.condiciones[cid]
             nombre = _nombre_archivo_condicion(cond)
-            archivos_parte.append(escribir(nombre, _generar_capitulo_condicion(cond, meta)))
+            archivos_parte.append(escribir(nombre, formatear_markdown(_generar_capitulo_condicion(cond, meta))))
         capitulos.append({"part": parte.titulo, "chapters": archivos_parte})
 
     # Apéndices
     apendices = [
-        escribir("apendice-a-autoevaluacion.qmd", _generar_apendice_autoevaluacion(libro)),
-        escribir("apendice-b-evidencia-iconografia.qmd", _generar_apendice_evidencia(libro)),
+        escribir("apendice-a-autoevaluacion.qmd", formatear_markdown(_generar_apendice_autoevaluacion(libro))),
+        escribir("apendice-b-evidencia-iconografia.qmd", formatear_markdown(_generar_apendice_evidencia(libro))),
         escribir(
             "apendice-c-declaracion-ia.qmd",
             _declaracion_ia(meta),

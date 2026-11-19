@@ -11,3 +11,4 @@ Los commits sin ese trailer no declaran asistencia de IA en el historial.
 | Commit | Fecha | Asistencia | Alcance |
 | :--- | :--- | :--- | :--- |
 | [`099eeb9`](https://github.com/alcyedmundo281/medicina-ciencia/commit/099eeb9acdb523687d11dcabd8f2b079f0a1e177) | 2026-11-19 | Claude Code (Claude Opus 5.5) | Corrige la columna «Ref.» y completa el caso socrático en el render |
+| [`49be953`](https://github.com/alcyedmundo281/medicina-ciencia/commit/49be953bb734bf9449f4016e27b954bd95d59279) | 2026-11-19 | Claude Code (Claude Opus 5.5) | Alinea metadatos y paratextos con los datos y declara el uso de IA |

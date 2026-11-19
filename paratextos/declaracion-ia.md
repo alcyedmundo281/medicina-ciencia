@@ -30,7 +30,8 @@ herramientas computacionales:
   código, de los metadatos y de la coherencia entre los paratextos y la base clínica, de la
   que salió una lista de correcciones que el autor priorizó.
 - **Corrección de la capa de render:** cambios en `tools/libro/` y `assets/libro/` que
-  modifican cómo se presentan los datos (tablas, casos socráticos, portada), no los datos.
+  modifican cómo se presentan los datos (tablas, casos socráticos, portada, coma decimal y
+  espacio fino ante «%», composición de página), no los datos.
 - **Propuestas de redacción de paratextos** (prefacio, portada, créditos y esta
   declaración), que el autor revisó y aprobó antes de incorporarlas.
 

@@ -42,6 +42,8 @@
 \newunicodechar{γ}{\ensuremath{\gamma}}
 \newunicodechar{δ}{\ensuremath{\delta}}
 \newunicodechar{μ}{\ensuremath{\mu}}
+% Espacio fino antes de «%» (U+202F, escrito por tools/libro/presentacion.py).
+\newunicodechar{ }{\,}
 \newunicodechar{▸}{{\fallbackserif ▸}}
 \newunicodechar{✓}{{\fallbackserif ✓}}
 \newunicodechar{✗}{{\fallbackserif ✗}}
@@ -139,10 +141,13 @@
   afterskip=0.25\baselineskip
 ]{subsubsection}
 
-% Evitar títulos sueltos al final de la página.
-\preto\section{\needspace{5\baselineskip}}
-\preto\subsection{\needspace{4\baselineskip}}
-\preto\subsubsection{\needspace{3\baselineskip}}
+% Evitar títulos sueltos al final de la página. \Needspace (no \needspace): la variante
+% minúscula calcula mal el espacio restante tras las cajas tcolorbox, salta de página sin
+% necesidad y, si sigue una longtable, su cabecera se imprime duplicada sobre el título.
+% La reserva de cada nivel cubre también el subtítulo que suele seguirle inmediatamente.
+\preto\section{\Needspace{8\baselineskip}}
+\preto\subsection{\Needspace{6\baselineskip}}
+\preto\subsubsection{\Needspace{3\baselineskip}}
 
 % Cabeceras y pies de página (scrbook twoside).
 \clearpairofpagestyles
@@ -387,3 +392,8 @@
         \,%
       \fi}}}
 \makeatother
+
+% Desbordes: los identificadores (\path desde diseno-pdf.lua) pueden cortarse en cualquier
+% carácter; el filtro prefiere el corte tras el prefijo («pmid:»).
+\usepackage{xurl}
+\urlstyle{tt}
