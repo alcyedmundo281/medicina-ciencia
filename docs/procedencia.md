@@ -2,8 +2,8 @@
 
 Este repositorio compila el libro **Medicina y Ciencia: ciencia de datos, estadística
 biomédica y semiótica clínica basada en la evidencia**, publicación independiente de acceso
-abierto dirigida al público general, estudiantes y profesionales de la salud, con DOI e ISBN
-propios.
+abierto dirigida al público general, estudiantes y profesionales de la salud. Su DOI y su
+ISBN están pendientes de asignación.
 
 ## Árboles de procedencia fijados
 

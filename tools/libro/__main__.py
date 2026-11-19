@@ -10,6 +10,7 @@ Tubería reproducible: JSON -> QMD -> Quarto (HTML, PDF LuaLaTeX 170 x 244 mm y 
 - ``epub``:  compila el EPUB 3 y verifica su estructura.
 - ``all``:   genera JSON, QMD, HTML, PDF y EPUB.
 - ``mapa``:  regenera ``mapa-maestro-libro.md``.
+- ``registro-ia``: regenera ``docs/registro-ia.md`` desde los trailers ``Asistido-por``.
 - ``check``: valida ``mapa.yaml``, revisión fijada de ``medsemiotics-db``, 48 posts, 18 casos y
              artefactos compilados si existen.
 """
@@ -112,6 +113,7 @@ def main(argv: list[str] | None = None) -> int:
     p_all.add_argument("--latex-zip", type=Path, default=RUTA_LATEX_ZIP_DEFECTO)
 
     sub.add_parser("mapa", help="Regenera mapa-maestro-libro.md.")
+    sub.add_parser("registro-ia", help="Regenera docs/registro-ia.md desde git log.")
 
     p_check = sub.add_parser("check", help="Valida fuentes, mapa, casos y salidas compiladas.")
     p_check.add_argument("--proyecto", type=Path, default=RUTA_PROYECTO_DEFECTO)
@@ -163,6 +165,13 @@ def main(argv: list[str] | None = None) -> int:
     if args.orden == "mapa":
         ruta = escribir_mapa_maestro(RAIZ)
         print(f"Mapa maestro actualizado en {ruta}.")
+        return 0
+
+    if args.orden == "registro-ia":
+        from libro.registro_ia import escribir_registro
+
+        ruta = escribir_registro(RAIZ)
+        print(f"Registro de uso de IA actualizado en {ruta}.")
         return 0
 
     # check

@@ -7,6 +7,11 @@ abstract: >-
   4 capítulos metodológicos, 48 condiciones clínicas verificadas desde medsemiotics-db,
   18 casos socráticos y 90 preguntas de autoevaluación en formato HTML, PDF (LuaLaTeX) y EPUB 3.
 type: dataset
+# Versión y fecha: deben coincidir con obra.version y obra.fecha_edicion de mapa.yaml.
+version: 0.1.0
+date-released: 2026-11-19
+# DOI de concepto: se añadirá como «doi:» e «identifiers» cuando Zenodo lo asigne;
+# mientras obra.doi empiece por «Pendiente», este archivo no declara ningún DOI propio.
 authors:
   - family-names: Torres Guerrero
     given-names: Alcy Edmundo

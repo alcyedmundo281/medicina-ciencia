@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import shutil
 import subprocess
 import textwrap
@@ -18,6 +19,7 @@ from libro.datos import (
     MetadatosLibro,
     cargar_libro,
     exportar_libro_json,
+    identificador_asignado,
     renderizar_caso_qmd,
 )
 
@@ -32,6 +34,26 @@ RUTA_CSS_EPUB = RAIZ / "assets" / "libro" / "estilo-epub.css"
 RUTA_DECLARACION_IA = RAIZ / "paratextos" / "declaracion-ia.md"
 
 
+_MARCADOR_RE = re.compile(r"\{\{([A-Z_]+)\}\}")
+
+
+def _declaracion_ia(meta: MetadatosLibro) -> str:
+    """Declaración de uso de IA con sus marcadores ``{{MAYÚSCULAS}}`` resueltos.
+
+    Aborta si queda un marcador desconocido: un enlace roto en la declaración la haría
+    inverificable, que es justo lo que la declaración promete evitar.
+    """
+    valores = {
+        "URL_REGISTRO_IA": f"{meta.url_repositorio}/blob/main/docs/registro-ia.md",
+        "URL_REPOSITORIO": meta.url_repositorio,
+    }
+    texto = RUTA_DECLARACION_IA.read_text(encoding="utf-8")
+    desconocidos = sorted({m for m in _MARCADOR_RE.findall(texto) if m not in valores})
+    if desconocidos:
+        raise ValueError(f"{RUTA_DECLARACION_IA}: marcadores sin resolver: {desconocidos}")
+    return _MARCADOR_RE.sub(lambda m: valores[m.group(1)], texto)
+
+
 def _escapar_tex(texto: str) -> str:
     barra = chr(92)
     for caracter in "&%$#_{}":
@@ -39,8 +61,41 @@ def _escapar_tex(texto: str) -> str:
     return texto
 
 
-def _datos_libro_tex(meta: MetadatosLibro) -> str:
+def _sello_edicion(meta: MetadatosLibro) -> str:
+    """Rótulo de la tarjeta de portada; solo nombra DOI o ISBN si ``mapa.yaml`` los tiene asignados."""
+    asignados = [
+        nombre
+        for nombre, valor in (("DOI", meta.doi), ("ISBN", meta.isbn))
+        if identificador_asignado(valor)
+    ]
+    if not asignados:
+        return "PUBLICACIÓN INDEPENDIENTE"
+    propio = "PROPIOS" if len(asignados) > 1 else "PROPIO"
+    return f"PUBLICACIÓN INDEPENDIENTE · EDICIÓN CON {' E '.join(asignados)} {propio}"
+
+
+def _contenido_portada(libro: LibroCompleto) -> tuple[tuple[str, ...], tuple[str, ...]]:
+    """Las dos líneas de contenido de la portada, con contadores calculados desde los datos."""
+    casos = sum(1 for c in libro.condiciones.values() if c.caso_compilado is not None)
+    preguntas = sum(len(c.preguntas) for c in libro.condiciones.values())
+    return (
+        (
+            f"{len(libro.unidades)} capítulos de fundamentos",
+            f"{len(libro.condiciones)} condiciones verificadas de medsemiotics-db",
+        ),
+        (
+            f"{casos} casos socráticos",
+            f"{preguntas} preguntas de autoevaluación",
+            "HTML, PDF y EPUB",
+        ),
+    )
+
+
+def _datos_libro_tex(libro: LibroCompleto) -> str:
+    meta = libro.metadatos
     barra = chr(92)
+    separador = f" {barra}enspace·{barra}enspace "
+    linea_uno, linea_dos = _contenido_portada(libro)
     nombres = (barra * 2 + " ").join(_escapar_tex(a.nombre) for a in meta.autores)
     sello = f"Primera edición {barra}enspace·{barra}enspace {_escapar_tex(meta.licencia)}"
     return (
@@ -50,6 +105,11 @@ def _datos_libro_tex(meta: MetadatosLibro) -> str:
         f"{barra}newcommand{{{barra}librosubtitulo}}{{{_escapar_tex(meta.subtitulo)}}}\n"
         f"{barra}newcommand{{{barra}libroautoresportada}}{{{nombres}}}\n"
         f"{barra}newcommand{{{barra}librosellopie}}{{{sello}}}\n"
+        f"{barra}newcommand{{{barra}librosellotarjeta}}{{{_escapar_tex(_sello_edicion(meta))}}}\n"
+        f"{barra}newcommand{{{barra}librocontenidouno}}"
+        f"{{{separador.join(_escapar_tex(x) for x in linea_uno)}}}\n"
+        f"{barra}newcommand{{{barra}librocontenidodos}}"
+        f"{{{separador.join(_escapar_tex(x) for x in linea_dos)}}}\n"
     )
 
 
@@ -60,8 +120,10 @@ def _tspans(texto: str, ancho: int, salto: int, x: int = 164) -> list[str]:
     ]
 
 
-def _generar_portada_svg(meta: MetadatosLibro) -> str:
+def _generar_portada_svg(libro: LibroCompleto) -> str:
     """Genera portada vectorial SVG 1700 × 2440 (170 × 244 mm) para HTML y EPUB."""
+    meta = libro.metadatos
+    linea_uno, linea_dos = _contenido_portada(libro)
     autores_txt = " · ".join(a.nombre for a in meta.autores)
     lineas = [
         '<?xml version="1.0" encoding="UTF-8"?>',
@@ -104,9 +166,12 @@ def _generar_portada_svg(meta: MetadatosLibro) -> str:
         '    <text x="0" y="355" text-anchor="middle" fill="#C69C6D" font-family="sans-serif" font-size="22" letter-spacing="2">SENSIBILIDAD · ESPECIFICIDAD · LR+ · LR− · FAGAN</text>',
         "  </g>",
         '  <rect x="164" y="1720" width="1372" height="215" fill="#F8F6F1" fill-opacity="0.06" stroke="#C69C6D" stroke-opacity="0.45" stroke-width="2" />',
-        '  <text x="205" y="1782" fill="#C69C6D" font-family="sans-serif" font-size="26" font-weight="700">PUBLICACIÓN INDEPENDIENTE · EDICIÓN CON DOI E ISBN PROPIOS</text>',
-        '  <text x="205" y="1840" fill="#F8F6F1" fill-opacity="0.92" font-family="sans-serif" font-size="24">4 capítulos de fundamentos · 48 condiciones verificadas de medsemiotics-db</text>',
-        '  <text x="205" y="1892" fill="#F8F6F1" fill-opacity="0.82" font-family="sans-serif" font-size="24">18 casos socráticos · 90 preguntas de autoevaluación · HTML, PDF y EPUB</text>',
+        '  <text x="205" y="1782" fill="#C69C6D" font-family="sans-serif" font-size="26" font-weight="700">'
+        f"{escape(_sello_edicion(meta))}</text>",
+        '  <text x="205" y="1840" fill="#F8F6F1" fill-opacity="0.92" font-family="sans-serif" font-size="24">'
+        f"{escape(' · '.join(linea_uno))}</text>",
+        '  <text x="205" y="1892" fill="#F8F6F1" fill-opacity="0.82" font-family="sans-serif" font-size="24">'
+        f"{escape(' · '.join(linea_dos))}</text>",
         '  <text x="164" y="2110" fill="#F8F6F1" font-family="sans-serif" '
         f'font-size="36" font-weight="700">{escape(autores_txt)}</text>',
         '  <text x="164" y="2295" fill="#C69C6D" font-family="sans-serif" '
@@ -190,6 +255,11 @@ def _generar_index_qmd(libro: LibroCompleto) -> str:
             f"**{meta.licencia_fuentes}** y el código fuente se distribuye bajo **MIT**."
         ),
         "",
+        (
+            "**Uso de inteligencia artificial:** qué hizo y qué no hizo la IA en esta obra se "
+            "declara en @sec-declaracion-ia."
+        ),
+        "",
         "::: {.alerta-ficha}",
         "**Publicación independiente y aviso médico-legal:** Esta obra es una publicación "
         "independiente con fines educativos y de divulgación científica para el público general, "
@@ -210,8 +280,9 @@ def _generar_index_qmd(libro: LibroCompleto) -> str:
         (
             "**Medicina y Ciencia** aborda la ciencia de datos y la estadística biomédica como "
             "instrumentos cotidianos para entender el diagnóstico médico. Cada concepto se "
-            "explica a partir de casos clínicos reales del **blog MedSemiotics**, respaldados por "
-            "literatura primaria verificada en PubMed, de modo que cualquier lector —desde un "
+            "explica a partir de casos clínicos ficticios, construidos sobre las condiciones del "
+            "**blog MedSemiotics** y anclados en evidencia real: literatura primaria verificada "
+            "en PubMed, de modo que cualquier lector —desde un "
             "lector curioso hasta un estudiante o clínico en ejercicio— pueda seguir cómo un "
             "hallazgo se convierte en probabilidad y decisión."
         ),
@@ -447,7 +518,7 @@ def _configuracion_quarto(
             "title": meta.titulo,
             "subtitle": meta.subtitulo,
             "author": [a.nombre for a in meta.autores],
-            "date": "2026-11-19",
+            "date": meta.fecha_edicion,
             "output-file": NOMBRE_SALIDA,
             "repo-url": meta.url_repositorio,
             "chapters": ["index.qmd", *capitulos],
@@ -519,14 +590,14 @@ def generar_proyecto_quarto(
     carpeta_salida.mkdir(parents=True, exist_ok=True)
 
     shutil.copyfile(RUTA_PREAMBULO, carpeta_salida / "preambulo-libro.tex")
-    (carpeta_salida / "datos-libro.tex").write_text(_datos_libro_tex(meta), encoding="utf-8")
+    (carpeta_salida / "datos-libro.tex").write_text(_datos_libro_tex(libro), encoding="utf-8")
     shutil.copyfile(RUTA_FILTRO_LUA, carpeta_salida / "diseno-pdf.lua")
     shutil.copyfile(RUTA_FILTRO_TITULO, carpeta_salida / "quitar-titulo.lua")
     shutil.copyfile(RUTA_CSS_WEB, carpeta_salida / "estilo-web.css")
     shutil.copyfile(RUTA_CSS_EPUB, carpeta_salida / "estilo-epub.css")
 
     ruta_portada = carpeta_salida / "portada.svg"
-    ruta_portada.write_text(_generar_portada_svg(meta), encoding="utf-8")
+    ruta_portada.write_text(_generar_portada_svg(libro), encoding="utf-8")
 
     # Rasteriza portada.svg -> portada.png si rsvg-convert está disponible (compatibilidad Kindle/Calibre).
     portada_epub = "portada.svg"
@@ -590,7 +661,7 @@ def generar_proyecto_quarto(
         escribir("apendice-b-evidencia-iconografia.qmd", _generar_apendice_evidencia(libro)),
         escribir(
             "apendice-c-declaracion-ia.qmd",
-            RUTA_DECLARACION_IA.read_text(encoding="utf-8"),
+            _declaracion_ia(meta),
         ),
     ]
 

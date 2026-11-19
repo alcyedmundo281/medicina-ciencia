@@ -1,6 +1,8 @@
 {
   "title": "Medicina y Ciencia: ciencia de datos, estadística biomédica y semiótica clínica basada en la evidencia",
   "description": "Publicación independiente sobre ciencia de datos, estadística biomédica y razonamiento diagnóstico bayesiano, compilada a partir del blog de semiótica clínica cuantitativa de MedSemiotics y medsemiotics-db (48 condiciones verificadas, 18 casos socráticos y 90 preguntas de autoevaluación).",
+  "version": "0.1.0",
+  "publication_date": "2026-11-19",
   "upload_type": "publication",
   "publication_type": "book",
   "access_right": "open",
@@ -35,5 +37,6 @@
     "razonamiento diagnóstico bayesiano",
     "estadística biomédica",
     "medicina basada en la evidencia"
-  ]
+  ],
+  "notes": "Publicación independiente. El contenido no implica aval ni representación de ninguna institución sanitaria o académica."
 }

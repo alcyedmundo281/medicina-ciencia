@@ -41,6 +41,8 @@ class MetadatosLibro:
     subtitulo: str
     coleccion: str
     edicion: str
+    version: str
+    fecha_edicion: str
     doi: str
     isbn: str
     audiencia: str
@@ -170,6 +172,23 @@ def _requerido(datos: dict[str, Any], clave: str, origen: str) -> str:
     return valor.strip()
 
 
+def _fecha_iso(valor: Any, origen: str) -> str:
+    """Normaliza una fecha YAML (``date`` o texto) a ``AAAA-MM-DD`` y falla si no es válida."""
+    if isinstance(valor, date):
+        return valor.isoformat()
+    if isinstance(valor, str):
+        try:
+            return date.fromisoformat(valor.strip()).isoformat()
+        except ValueError:
+            pass
+    raise ValueError(f"{origen}: se esperaba una fecha AAAA-MM-DD, se obtuvo {valor!r}")
+
+
+def identificador_asignado(valor: str) -> bool:
+    """Un DOI o ISBN existe solo si su valor en ``mapa.yaml`` no empieza por «Pendiente»."""
+    return bool(valor.strip()) and not valor.strip().lower().startswith("pendiente")
+
+
 def _fmt_pct(valor: Any) -> str:
     if valor is None:
         return "—"
@@ -285,6 +304,8 @@ def leer_metadatos(raiz: Path = RAIZ) -> tuple[MetadatosLibro, tuple[UnidadCurso
         subtitulo=_requerido(obra, "subtitulo", "mapa.yaml"),
         coleccion=_requerido(obra, "coleccion", "mapa.yaml"),
         edicion=_requerido(obra, "edicion", "mapa.yaml"),
+        version=_requerido(obra, "version", "mapa.yaml"),
+        fecha_edicion=_fecha_iso(obra.get("fecha_edicion"), "mapa.yaml: fecha_edicion"),
         doi=_requerido(obra, "doi", "mapa.yaml"),
         isbn=_requerido(obra, "isbn", "mapa.yaml"),
         audiencia=_requerido(obra, "audiencia", "mapa.yaml"),

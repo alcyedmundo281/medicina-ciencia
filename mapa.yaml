@@ -13,6 +13,10 @@ obra:
   subtitulo: "Ciencia de datos, estadística biomédica y semiótica clínica basada en la evidencia"
   coleccion: "COLECCIÓN POWERSEMIOTICS · PUBLICACIÓN INDEPENDIENTE"
   edicion: "Primera edición · Publicación independiente"
+  # Versión y fecha de esta edición: fuente única para _quarto.yml, CITATION.cff y .zenodo.json.
+  version: "0.1.0"
+  fecha_edicion: "2026-11-19"
+  # Mientras empiecen por «Pendiente», ningún texto puede afirmar que existen.
   doi: "Pendiente de asignación (Zenodo)"
   isbn: "Pendiente de asignación (edición impresa)"
   audiencia: "Público general interesado en ciencia médica, estudiantes y profesionales de la salud"

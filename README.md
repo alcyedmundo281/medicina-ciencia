@@ -3,7 +3,7 @@
 **Ciencia de datos, estadística biomédica y semiótica clínica basada en la evidencia.**
 
 Publicación independiente dirigida al público general, estudiantes y profesionales de la
-salud, con DOI e ISBN propios, compilada a partir del
+salud (DOI e ISBN: pendientes de asignación), compilada a partir del
 [blog de MedSemiotics](https://powersemiotics.com/medsemiotics/index.html) y
 [`medsemiotics-db`](https://github.com/alcyedmundo281/medsemiotics-db) con la arquitectura
 editorial de [`alcyedmundo281/neurology`](https://github.com/alcyedmundo281/neurology) y el
