@@ -36,21 +36,14 @@ class AutorLibro:
 
 
 @dataclass(frozen=True)
-class DatosCurso:
-    institucion: str
-    catedra: str
-    periodo: str
-    horario: str
-    sedes: str
-    aula_virtual: str
-    asistente: str
-
-
-@dataclass(frozen=True)
 class MetadatosLibro:
     titulo: str
     subtitulo: str
     coleccion: str
+    edicion: str
+    doi: str
+    isbn: str
+    audiencia: str
     licencia: str
     licencia_nombre: str
     licencia_fuentes: str
@@ -65,7 +58,6 @@ class MetadatosLibro:
     fuente_blog_repo: str
     fuente_blog_revision: str
     fuente_blog_doi: str
-    curso: DatosCurso
     autores: tuple[AutorLibro, ...]
 
 
@@ -235,7 +227,6 @@ def leer_metadatos(raiz: Path = RAIZ) -> tuple[MetadatosLibro, tuple[UnidadCurso
         raise ValueError(f"{ruta_mapa}: se esperaba un mapeo YAML")
 
     obra = raw["obra"]
-    curso_raw = raw["curso"]
     fc = obra["fuente_clinica"]
     fb = obra["fuente_blog"]
 
@@ -256,19 +247,14 @@ def leer_metadatos(raiz: Path = RAIZ) -> tuple[MetadatosLibro, tuple[UnidadCurso
         )
         for a in raw["autores"]
     )
-    curso = DatosCurso(
-        institucion=_requerido(curso_raw, "institucion", "mapa.yaml"),
-        catedra=_requerido(curso_raw, "catedra", "mapa.yaml"),
-        periodo=_requerido(curso_raw, "periodo", "mapa.yaml"),
-        horario=_requerido(curso_raw, "horario", "mapa.yaml"),
-        sedes=_requerido(curso_raw, "sedes", "mapa.yaml"),
-        aula_virtual=_requerido(curso_raw, "aula_virtual", "mapa.yaml"),
-        asistente=_requerido(curso_raw, "asistente", "mapa.yaml"),
-    )
     meta = MetadatosLibro(
         titulo=_requerido(obra, "titulo", "mapa.yaml"),
         subtitulo=_requerido(obra, "subtitulo", "mapa.yaml"),
         coleccion=_requerido(obra, "coleccion", "mapa.yaml"),
+        edicion=_requerido(obra, "edicion", "mapa.yaml"),
+        doi=_requerido(obra, "doi", "mapa.yaml"),
+        isbn=_requerido(obra, "isbn", "mapa.yaml"),
+        audiencia=_requerido(obra, "audiencia", "mapa.yaml"),
         licencia=lic,
         licencia_nombre=LICENCIAS[lic],
         licencia_fuentes=_requerido(obra, "licencia_fuentes", "mapa.yaml"),
@@ -283,7 +269,6 @@ def leer_metadatos(raiz: Path = RAIZ) -> tuple[MetadatosLibro, tuple[UnidadCurso
         fuente_blog_repo=_requerido(fb, "repositorio", "mapa.yaml"),
         fuente_blog_revision=_requerido(fb, "revision", "mapa.yaml"),
         fuente_blog_doi=_requerido(fb, "doi", "mapa.yaml"),
-        curso=curso,
         autores=autores,
     )
     unidades = tuple(

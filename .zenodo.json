@@ -1,6 +1,6 @@
 {
-  "title": "Medicina y Ciencia: ciencia de datos y estadística biomédica en el razonamiento clínico",
-  "description": "Texto oficial de la cátedra Medicina y Ciencia (Universidad Central del Ecuador, 2026–2027), compilado a partir del blog de semiótica clínica cuantitativa de MedSemiotics y medsemiotics-db (48 condiciones verificadas, 18 casos socráticos y 90 preguntas de autoevaluación).",
+  "title": "Medicina y Ciencia: ciencia de datos, estadística biomédica y semiótica clínica basada en la evidencia",
+  "description": "Publicación independiente sobre ciencia de datos, estadística biomédica y razonamiento diagnóstico bayesiano, compilada a partir del blog de semiótica clínica cuantitativa de MedSemiotics y medsemiotics-db (48 condiciones verificadas, 18 casos socráticos y 90 preguntas de autoevaluación).",
   "upload_type": "publication",
   "publication_type": "book",
   "access_right": "open",
@@ -9,8 +9,7 @@
   "creators": [
     {
       "name": "Torres Guerrero, Alcy Edmundo",
-      "orcid": "0000-0002-9742-375X",
-      "affiliation": "Hospital de Especialidades Carlos Andrade Marín (IESS); Universidad Central del Ecuador"
+      "orcid": "0000-0002-9742-375X"
     }
   ],
   "related_identifiers": [

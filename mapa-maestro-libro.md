@@ -3,20 +3,20 @@
 <!-- GENERADO desde mapa.yaml, posts/ y casos/ con `python -m libro mapa`. No editar a mano. -->
 
 **Obra:** Medicina y Ciencia — *Ciencia de datos, estadística biomédica y semiótica clínica basada en la evidencia*  
-**Cátedra:** Medicina y Ciencia: Ciencia de datos y estadística biomédica en el razonamiento clínico (Universidad Central del Ecuador — Facultad de Ciencias Médicas, Carrera de Medicina)  
+**Edición:** Primera edición · Publicación independiente · **DOI:** Pendiente de asignación (Zenodo) · **ISBN:** Pendiente de asignación (edición impresa)  
 **Fuente clínica fijada:** `alcyedmundo281/medsemiotics-db@ea2f6e63b850` (DOI `10.5281/zenodo.22064424`)  
 **Licencia:** CC BY-NC-SA 4.0 (obra) · CC BY-SA 4.0 (fichas del blog) · MIT (código)
 
-**Resumen del compendio:** 4 unidades curriculares (16 semanas) · 6 partes clínicas · 48 condiciones verificadas · 18 casos socráticos ABP · 90 preguntas de autoevaluación.
+**Resumen de la obra:** 4 capítulos de fundamentos · 6 partes clínicas · 48 condiciones verificadas · 18 casos socráticos · 90 preguntas de autoevaluación.
 
-## Parte I — Programa del curso (16 semanas)
+## Parte I — Fundamentos: del hallazgo a la decisión
 
-| Unidad | Semanas | Título | Casos ancla |
+| Cap. | Bloque | Título | Casos ancla |
 | :--- | :--- | :--- | :--- |
-| 1 | 1–4 | Unidad 1 · Del hallazgo al número (semanas 1–4) | `HM:6009`, `HM:6007` |
-| 2 | 5–8 | Unidad 2 · Razonar con probabilidades (semanas 5–8) | `HM:6043`, `HM:6040`, `HM:6042`, `HM:6044`, `HM:6035` |
-| 3 | 9–12 | Unidad 3 · Cuán seguro es el número (semanas 9–12) | `HM:6007`, `HM:6036`, `HM:6034`, `HM:6038` |
-| 4 | 13–16 | Unidad 4 · Datos, IA y comunicación (semanas 13–16) | `HM:6030`, `HM:6029` |
+| 1 | Fundamentos I | Capítulo 1 · Del hallazgo al número | `HM:6009`, `HM:6007` |
+| 2 | Fundamentos II | Capítulo 2 · Razonar con probabilidades | `HM:6043`, `HM:6040`, `HM:6042`, `HM:6044`, `HM:6035` |
+| 3 | Lectura crítica | Capítulo 3 · Cuán seguro es el número | `HM:6007`, `HM:6036`, `HM:6034`, `HM:6038` |
+| 4 | Síntesis aplicada | Capítulo 4 · Datos, inteligencia artificial y comunicación del riesgo | `HM:6030`, `HM:6029` |
 
 ## Parte 2 — Urgencias, medicina crítica y aparato cardiovascular
 

@@ -23,20 +23,20 @@ def renderizar_mapa_maestro(raiz: Path = RAIZ) -> str:
         "<!-- GENERADO desde mapa.yaml, posts/ y casos/ con `python -m libro mapa`. No editar a mano. -->",
         "",
         f"**Obra:** {meta.titulo} — *{meta.subtitulo}*  ",
-        f"**Cátedra:** {meta.curso.catedra} ({meta.curso.institucion})  ",
+        f"**Edición:** {meta.edicion} · **DOI:** {meta.doi} · **ISBN:** {meta.isbn}  ",
         f"**Fuente clínica fijada:** `{meta.fuente_clinica_repo}@{meta.fuente_clinica_revision[:12]}` "
         f"(DOI `{meta.fuente_clinica_doi}`)  ",
         f"**Licencia:** {meta.licencia} (obra) · {meta.licencia_fuentes} (fichas del blog) · MIT (código)",
         "",
         (
-            f"**Resumen del compendio:** {len(libro.unidades)} unidades curriculares (16 semanas) · "
+            f"**Resumen de la obra:** {len(libro.unidades)} capítulos de fundamentos · "
             f"{len(libro.partes)} partes clínicas · {total_cond} condiciones verificadas · "
-            f"{total_casos} casos socráticos ABP · {total_quiz} preguntas de autoevaluación."
+            f"{total_casos} casos socráticos · {total_quiz} preguntas de autoevaluación."
         ),
         "",
-        "## Parte I — Programa del curso (16 semanas)",
+        "## Parte I — Fundamentos: del hallazgo a la decisión",
         "",
-        "| Unidad | Semanas | Título | Casos ancla |",
+        "| Cap. | Bloque | Título | Casos ancla |",
         "| :--- | :--- | :--- | :--- |",
     ]
 

@@ -1,21 +1,18 @@
 cff-version: 1.2.0
 message: Si utiliza las fuentes o el texto de esta obra, por favor cítelos así.
-title: "Medicina y Ciencia: ciencia de datos y estadística biomédica en el razonamiento clínico"
+title: "Medicina y Ciencia: ciencia de datos, estadística biomédica y semiótica clínica basada en la evidencia"
 abstract: >-
-  Texto oficial de la cátedra Medicina y Ciencia (Universidad Central del Ecuador,
-  2026–2027) compilado desde el blog de semiótica clínica cuantitativa de MedSemiotics
-  y medsemiotics-db: 48 condiciones clínicas verificadas, 18 casos socráticos ABP y
-  90 preguntas de autoevaluación en formato web (HTML), impreso (PDF LuaLaTeX) y EPUB.
+  Publicación independiente de divulgación rigurosa y formación médica abierta sobre
+  ciencia de datos, estadística biomédica y razonamiento diagnóstico bayesiano. Compila
+  4 capítulos metodológicos, 48 condiciones clínicas verificadas desde medsemiotics-db,
+  18 casos socráticos y 90 preguntas de autoevaluación en formato HTML, PDF (LuaLaTeX) y EPUB 3.
 type: dataset
 authors:
   - family-names: Torres Guerrero
     given-names: Alcy Edmundo
     orcid: https://orcid.org/0000-0002-9742-375X
-    affiliation: >-
-      Hospital de Especialidades Carlos Andrade Marín (IESS);
-      Universidad Central del Ecuador
 repository-code: https://github.com/alcyedmundo281/medicina-ciencia
-url: https://alcyedmundo281.github.io/medicina-ciencia/
+url: https://powersemiotics.com/medicina-ciencia/
 license: CC-BY-NC-SA-4.0
 keywords:
   - medicina y ciencia

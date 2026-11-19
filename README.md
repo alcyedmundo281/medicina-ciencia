@@ -2,22 +2,24 @@
 
 **Ciencia de datos, estadística biomédica y semiótica clínica basada en la evidencia.**
 
-Texto oficial de la cátedra *Medicina y Ciencia* (Facultad de Ciencias Médicas, Carrera de
-Medicina, Universidad Central del Ecuador, período 2026–2027), compilado a partir del
+Publicación independiente dirigida al público general, estudiantes y profesionales de la
+salud, con DOI e ISBN propios, compilada a partir del
 [blog de MedSemiotics](https://powersemiotics.com/medsemiotics/index.html) y
-[`medsemiotics-db`](https://github.com/alcyedmundo281/medsemiotics-db) con la misma
-arquitectura editorial de [`alcyedmundo281/neurology`](https://github.com/alcyedmundo281/neurology).
+[`medsemiotics-db`](https://github.com/alcyedmundo281/medsemiotics-db) con la arquitectura
+editorial de [`alcyedmundo281/neurology`](https://github.com/alcyedmundo281/neurology) y el
+motor de publicación de [`alcyedmundo281/biosemiotics`](https://github.com/alcyedmundo281/biosemiotics).
 
 ## Contenido del libro
 
 El [mapa maestro](mapa-maestro-libro.md) registra la estructura completa:
 
-- **Parte I — Programa del curso (16 semanas, 4 unidades):** planificación microcurricular,
-  resultados de aprendizaje, casos ancla y rúbrica oficial de la cátedra.
+- **Parte I — Fundamentos: del hallazgo a la decisión:** 4 capítulos metodológicos
+  (inferencia clínica y tabla $2 \times 2$, razonamiento bayesiano, valoración crítica de
+  la evidencia, datos clínicos, IA y comunicación del riesgo), enlazados a sus casos ancla.
 - **Partes II–VII — Compendio completo del blog MedSemiotics:** las **48 condiciones
   clínicas verificadas** (`HM:6001` a `HM:6048`) a una única revisión fijada de
   `medsemiotics-db` (`ea2f6e63b850`, DOI `10.5281/zenodo.22064424`), con sus **18 casos
-  socráticos ABP** compilados determinísticamente desde `casos/`.
+  socráticos** compilados determinísticamente desde `casos/`.
 - **Apéndices:** banco completo de **90 preguntas de autoevaluación** (*Reto clínico*) con
   clave razonada, índice maestro de hallazgos con $\text{LR}^+ / \text{LR}^-$ medido,
   registro de iconografía abierta de Wikimedia Commons y declaración de uso de IA.

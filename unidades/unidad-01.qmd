@@ -1,55 +1,354 @@
-# Unidad 1 · Del hallazgo al número (semanas 1–4) {#sec-unidad-01}
+# Del hallazgo al número {#sec-unidad-01}
 
 ::: {.alerta-ficha}
-**Resultado de aprendizaje (Bloom: comprender / aplicar):** calcula e interpreta las medidas
-de exactitud diagnóstica (sensibilidad, especificidad, VPP y VPN) a partir de una tabla
-$2 \times 2$ y de la literatura primaria, y las traduce a cocientes de verosimilitud
-($\text{LR}^+$ y $\text{LR}^-$).
+**Propósito de este capítulo:** pasar de la observación clínica cualitativa a su
+cuantificación diagnóstica. Al terminar su lectura, el lector podrá distinguir las tres
+formas de inferencia clínica, reconocer cómo se estructuran y protegen los datos
+biomédicos, construir e interpretar una tabla $2 \times 2$ (sensibilidad, especificidad,
+VPP y VPN), demostrar por qué el valor predictivo depende de la prevalencia y traducir el
+rendimiento de un hallazgo a cocientes de verosimilitud ($\text{LR}^+$ y $\text{LR}^-$).
 :::
 
-## Eje conceptual de la unidad
+## El razonamiento clínico como inferencia
 
-El razonamiento clínico no comienza con un laboratorio ni con una imagen: comienza con un
-**hallazgo semiológico** interpretado como evidencia bajo incertidumbre. Esta primera unidad
-establece el puente entre la semiótica clínica clásica (significante, significado y decisión)
-y la cuantificación probabilística:
+La medicina rara vez opera con certezas absolutas. Frente a una persona que consulta por
+dolor torácico, fiebre u odinofagia, el clínico no observa directamente la enfermedad:
+observa **signos** —relatos, hallazgos de la exploración física, trazados eléctricos,
+imágenes o cifras de laboratorio— y debe inferir qué proceso patológico los explica y qué
+decisión reduce mejor el riesgo para ese paciente.
 
-1. **Inferencia clínica:** abducción (generación de hipótesis diagnósticas), deducción
-   (predicción de hallazgos esperados) e inducción (actualización empírica con datos).
-2. **Estructura y ética de los datos clínicos:** tipos de variables, bases relacionales,
-   encuestas poblacionales (ENSANUT), bases clínicas abiertas (MIMIC-IV), desidentificación
-   estricta y prohibición de cargar datos personales de pacientes.
-3. **Tabla $2 \times 2$ y valores predictivos:** sensibilidad, especificidad, valor
-   predictivo positivo (VPP) y negativo (VPN), comprendiendo por qué el VPP y el VPN
-   cambian drásticamente con la prevalencia.
-4. **Cocientes de verosimilitud ($\text{LR}^+$ y $\text{LR}^-$):** propiedades operativas
-   independientes de la prevalencia (bajo espectro estable) y magnitudes que modifican la
-   conducta clínica.
+En términos lógicos, el razonamiento diagnóstico combina tres modos de inferencia que se
+encadenan en cada encuentro clínico:
+
+1. **Abducción (generación de hipótesis).** A partir de un hallazgo llamativo o de un
+   patrón de síntomas, el clínico propone las explicaciones más plausibles. Si un adulto
+   llega con dolor torácico opresivo irradiado a ambos brazos, la abducción coloca al
+   síndrome coronario agudo en el conjunto de hipótesis prioritarias. La abducción es
+   creativa y rápida, pero nunca demuestra la hipótesis.
+2. **Deducción (predicción de consecuencias observables).** Dada una hipótesis, se deduce
+   qué otros hallazgos deberían aparecer —o estar ausentes— si esa hipótesis fuera cierta.
+   Si la causa de la odinofagia es una faringitis estreptocócica, esperaríamos encontrar
+   exudado amigdalino, adenopatía cervical anterior dolorosa y ausencia de tos con mayor
+   frecuencia que en una faringitis viral.
+3. **Inducción (actualización empírica con datos).** Contrastamos nuestras predicciones con
+   la realidad clínica y con la evidencia acumulada en estudios de pacientes semejantes.
+   Aquí entra la estadística biomédica: no para sustituir el juicio clínico, sino para
+   medir **cuánto** fortalece o debilita cada hallazgo una hipótesis diagnóstica.
+
+### El hallazgo clínico como signo: la tríada semiótica
+
+Desde la perspectiva de la semiótica clínica que estructura esta obra, un hallazgo no es un
+dato decorativo ni un epónimo para memorizar. Todo hallazgo útil articula tres componentes
+inseparables:
+
+::: {.triada-signo}
+**Tríada semiótica del hallazgo clínico**
+
+- **Significante:** lo que se observa, palpa, ausculta o mide en el paciente (por ejemplo,
+  un descenso del segmento ST en el electrocardiograma o un exudado amigdalino).
+- **Significado:** la realidad fisiopatológica o diagnóstica a la que remite el
+  significante, junto con sus posibles falsos positivos.
+- **Decisión:** qué cambia en la conducta clínica —pedir una prueba adicional, iniciar un
+  tratamiento, observar o descartar— cuando ese hallazgo está presente o ausente.
+:::
+
+Sin el tercer componente —la decisión— un hallazgo es trivia. La pregunta central de la
+ciencia de datos aplicada al diagnóstico no es «¿qué tan clásico es este signo?», sino
+«¿cuánto desplaza este hallazgo la probabilidad de enfermedad y qué tan cerca nos deja de
+actuar?».
+
+### La ruta de un hallazgo
+
+A lo largo de todo este libro, cada condición clínica del compendio sigue la misma cadena
+inferencial:
+
+1. **Hallazgo clínico** (anamnesis, exploración, prueba rápida o imagen).
+2. **Probabilidad basal** (*¿qué tan frecuente es la condición en esta población?*).
+3. **Exactitud diagnóstica** (sensibilidad, especificidad, $\text{LR}^+$ y $\text{LR}^-$).
+4. **Incertidumbre y calidad de la fuente** (intervalo de confianza del 95 %, diseño del
+   estudio, posibles sesgos).
+5. **Umbral de decisión** (*¿el desplazamiento de probabilidad cambia la conducta?*).
+6. **Comunicación del riesgo** (*¿cómo traducirlo en frecuencias comprensibles para el
+   paciente?*).
+
+## Datos clínicos: estructura, fuentes y ética
+
+Antes de calcular cualquier medida diagnóstica conviene entender de dónde provienen los
+números clínicos y bajo qué condiciones éticas y técnicas pueden analizarse.
+
+### Tipos de variables en medicina
+
+En toda base de datos clínica —desde una hoja de registro de consulta hasta una cohorte
+multicéntrica— las variables pertenecen a cuatro familias operativas:
+
+| Tipo de variable | Definición | Ejemplo clínico | Implicación analítica |
+| :--- | :--- | :--- | :--- |
+| **Dicotómica (binaria)** | Solo admite dos estados mutuamente excluyentes | Exudado amigdalino (sí/no); cultivo positivo (sí/no) | Entra directamente en una tabla $2 \times 2$ |
+| **Nominal** | Categorías sin orden natural | Grupo sanguíneo (A, B, AB, O); etiología de faringitis | Frecuencias y proporciones; no admite promedios |
+| **Ordinal** | Categorías ordenadas sin intervalos iguales | Puntuación de Centor (0 a 4); escala HEART (0 a 10) | Permite estratos de riesgo y puntos de corte |
+| **Continua** | Magnitud medida en una escala numérica | Temperatura (°C); troponina sérica; presión arterial | Al dicotomizarla se pierde información y se elige un umbral |
+
+: {tbl-colwidths="[20,28,27,25]"}
+
+### Bases de datos relacionales y fuentes abiertas
+
+Los datos biomédicos reales rara vez viven en una sola tabla plana. En sistemas clínicos y
+en ciencia de datos se organizan en **bases relacionales** (tablas vinculadas por claves):
+una tabla de pacientes, una tabla de episodios o consultas, una tabla de hallazgos y signos
+vitales, y una tabla de resultados de referencia (laboratorio, imagen o diagnóstico final).
+Separar estas entidades evita duplicidades y permite responder preguntas precisas mediante
+consultas estructuradas (SQL) o análisis reproducibles en R y Python.
+
+Para el aprendizaje y la investigación reproducible existen dos grandes tipos de fuentes
+abiertas:
+
+- **Encuestas poblacionales de salud** (por ejemplo, encuestas nacionales de salud y
+  nutrición como ENSANUT), que estiman **prevalencias poblacionales** y factores de riesgo
+  en la comunidad.
+- **Bases clínicas hospitalarias desidentificadas** (como MIMIC-IV, publicada en *Scientific
+  Data*, DOI `10.1038/s41597-022-01899-x`), que reúnen registros de urgencias y cuidados
+  críticos con variables fisiológicas, pruebas diagnósticas y desenlaces, permitiendo
+  calcular medidas de exactitud en escenarios asistenciales reales.
+
+### Desidentificación y ética del manejo de datos
+
+El rigor estadístico carece de legitimidad sin rigor ético. Trabajar con datos de personas
+enfermas impone tres reglas no negociables:
+
+1. **Anonimización estricta.** Ningún conjunto de datos destinado a análisis, docencia o
+   publicación debe contener nombres, números de identificación, teléfonos, direcciones,
+   fechas exactas de nacimiento ni combinaciones de atributos que permitan reidentificar a
+   un paciente.
+2. **Trazabilidad de las cifras.** Toda medida diagnóstica —prevalencia, sensibilidad,
+   especificidad o cociente de verosimilitud— debe conservar su fuente verificable (PMID o
+   DOI). Citar un número de memoria o atribuirlo sin verificar su población de origen
+   corrompe la decisión clínica.
+3. **Transparencia ante la ausencia de datos.** Cuando no existe un estudio válido que
+   mida el rendimiento de un signo, la respuesta científicamente honesta no es inventar una
+   cifra ni rellenar el vacío con intuición, sino declarar que el dato no está medido o no
+   es medible.
+
+## La tabla $2 \times 2$: sensibilidad, especificidad, VPP y VPN
+
+Para evaluar qué tan bien separa un hallazgo (o una prueba) a las personas que tienen una
+enfermedad de las que no la tienen, se cruza el resultado del hallazgo frente a un
+**estándar de referencia** (*gold standard*, como un cultivo faríngeo, una angiografía o un
+seguimiento clínico adjudicado). Ese cruce genera la **tabla $2 \times 2$**:
+
+| Resultado del hallazgo o prueba | Enfermedad presente ($E^+$) | Enfermedad ausente ($E^-$) | Total |
+| :--- | :---: | :---: | :---: |
+| **Positivo ($T^+$)** | Verdaderos positivos ($VP$) | Falsos positivos ($FP$) | $VP + FP$ |
+| **Negativo ($T^-$)** | Falsos negativos ($FN$) | Verdaderos negativos ($VN$) | $FN + VN$ |
+| **Total** | $VP + FN$ | $FP + VN$ | $N$ |
+
+: {tbl-colwidths="[34,24,24,18]"}
+
+A partir de estas cuatro celdas se definen cuatro métricas fundamentales, que responden a
+dos preguntas completamente distintas:
+
+### Propiedades del hallazgo (lectura por columnas)
+
+- **Sensibilidad ($S$):** proporción de personas **con la enfermedad** que presentan el
+  hallazgo positivo. Responde: *«si el paciente tiene la enfermedad, ¿qué tan probable es
+  que el signo esté presente?»*.
 
 $$
-\text{LR}^+ = \frac{\text{Sensibilidad}}{1 - \text{Especificidad}}, \qquad
-\text{LR}^- = \frac{1 - \text{Sensibilidad}}{\text{Especificidad}}
+\text{Sensibilidad} = P(T^+ \mid E^+) = \frac{VP}{VP + FN}
 $$
 
-## Planificación semanal y casos ancla
+- **Especificidad ($E$):** proporción de personas **sin la enfermedad** en quienes el
+  hallazgo está ausente. Responde: *«si el paciente no tiene la enfermedad, ¿qué tan
+  probable es que el signo sea negativo?»*.
 
-| Semana | Fecha | Contenido central | Caso ancla y recursos del curso | Evaluación |
-| :--- | :--- | :--- | :--- | :--- |
-| 1 | 11 nov 2026 | El razonamiento clínico como inferencia: abducción, deducción, inducción; el hallazgo como evidencia | Presentación del blog MedSemiotics; recorrido por un artículo completo; *Fundamentos semióticos*; *Razonamiento clínico* | Participación diagnóstica |
-| 2 | 18 nov 2026 | Datos clínicos: tipos de variable, bases relacionales, ENSANUT, MIMIC-IV, desidentificación y ética | Datos anonimizados de Chimborazo; *Laboratorio de Código*; *Estadísticos Clínicos* | Taller guiado |
-| 3 | 25 nov 2026 | Tabla $2 \times 2$: sensibilidad, especificidad, VPP y VPN; dependencia del VPP respecto a la prevalencia | **Faringitis estreptocócica** (`HM:6009`, ver @sec-hm6009); *Cuantificando la incertidumbre* | Publicación: Informe de caso, Unidad 1 |
-| 4 | 02 dic 2026 | De sensibilidad/especificidad a $\text{LR}^+$ y $\text{LR}^-$: definición, interpretación y magnitudes clínicas | **Síndrome coronario agudo** (`HM:6007`, descenso del ST, ver @sec-hm6007); *Cuantificando la incertidumbre* | Taller de cálculo en parejas |
+$$
+\text{Especificidad} = P(T^- \mid E^-) = \frac{VN}{FP + VN}
+$$
 
-: {tbl-colwidths="[8,13,34,29,16]"}
+### Valores predictivos (lectura por filas)
 
-## Guía de estudio con el blog MedSemiotics
+En la consulta, el clínico casi nunca conoce la columna ($E^+$ o $E^-$): conoce el
+resultado del hallazgo ($T^+$ o $T^-$) y necesita estimar la probabilidad de enfermedad.
+Esa es la pregunta que responden los valores predictivos:
 
-- Al revisar **Faringitis estreptocócica** (@sec-hm6009), construya la tabla $2 \times 2$
-  de los criterios de Centor y compare cómo cambia el VPP cuando la prevalencia basal pasa
-  de un entorno comunitario (10 %) a una consulta con brote epidémico (35 %).
-- Al revisar **Síndrome coronario agudo** (@sec-hm6007), contraste los hallazgos clínicos
-  de la anamnesis y la exploración con el rendimiento del ECG (descenso del segmento ST)
-  y anote los PMID que sustentan cada $\text{LR}^+$ y $\text{LR}^-$.
-- **Entregable formativo (Informe de caso · Unidad 1):** se publica el 25 de noviembre de
-  2026 (semana 3) y se entrega el 09 de diciembre de 2026 (semana 5, hasta las 21:30 en
-  Classroom).
+- **Valor predictivo positivo (VPP):** probabilidad de tener la enfermedad dado un hallazgo
+  positivo.
+
+$$
+\text{VPP} = P(E^+ \mid T^+) = \frac{VP}{VP + FP}
+$$
+
+- **Valor predictivo negativo (VPN):** probabilidad de no tener la enfermedad dado un
+  hallazgo negativo.
+
+$$
+\text{VPN} = P(E^- \mid T^-) = \frac{VN}{FN + VN}
+$$
+
+### Por qué el VPP depende de la prevalencia: un ejemplo trabajado
+
+Uno de los errores más frecuentes en medicina consiste en creer que una prueba con buena
+especificidad «casi siempre confirma» la enfermedad cuando resulta positiva. El siguiente
+experimento numérico demuestra por qué eso es falso si ignoramos la **prevalencia**
+(probabilidad basal).
+
+Supongamos un hallazgo clínico con **sensibilidad de 50 %** y **especificidad de 85 %**
+(valores ilustrativos cuyo cociente positivo es $\text{LR}^+ = 0{,}50 / (1 - 0{,}85) = 3{,}33$,
+muy próximo al $\text{LR}^+ = 3{,}4$ documentado para el exudado amigdalino en faringitis
+estreptocócica según `pmid:11147989`; véase @sec-hm6009). Apliquemos exactamente ese mismo
+hallazgo a **1 000 pacientes** en dos escenarios con prevalencias distintas:
+
+1. **Escenario A — Prevalencia baja (10 %, típico de adultos en atención primaria fuera de
+   brote):** de 1 000 pacientes con odinofagia, 100 tienen faringitis estreptocócica y 900
+   no la tienen.
+   - $VP = 100 \times 0{,}50 = 50$; $FN = 50$.
+   - $VN = 900 \times 0{,}85 = 765$; $FP = 900 - 765 = 135$.
+   - $\text{VPP} = 50 / (50 + 135) = 50 / 185 \approx \mathbf{27{,}0\,\%}$.
+   - $\text{VPN} = 765 / (765 + 50) = 765 / 815 \approx \mathbf{93{,}9\,\%}$.
+
+2. **Escenario B — Prevalencia moderada-alta (37 %, prevalencia agrupada documentada en
+   niños menores de 18 años con odinofagia según el metaanálisis de 29 estudios
+   `pmid:20696723`):** de 1 000 niños, 370 tienen faringitis estreptocócica y 630 no.
+   - $VP = 370 \times 0{,}50 = 185$; $FN = 185$.
+   - $VN = 630 \times 0{,}85 = 536$; $FP = 630 - 536 = 94$.
+   - $\text{VPP} = 185 / (185 + 94) = 185 / 279 \approx \mathbf{66{,}3\,\%}$.
+   - $\text{VPN} = 536 / (536 + 185) = 536 / 721 \approx \mathbf{74{,}3\,\%}$.
+
+| Escenario | Prevalencia basal | Sensibilidad | Especificidad | VPP | VPN |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| A · Prevalencia baja | 10,0 % | 50,0 % | 85,0 % | **27,0 %** | **93,9 %** |
+| B · Prevalencia pediátrica (`pmid:20696723`) | 37,0 % | 50,0 % | 85,0 % | **66,3 %** | **74,3 %** |
+
+: {tbl-colwidths="[34,16,13,13,12,12]"}
+
+Con la **misma** sensibilidad y la **misma** especificidad, el VPP saltó de **27,0 %** a
+**66,3 %** únicamente porque cambió la prevalencia basal. Por esta razón, el VPP y el VPN
+publicados en un hospital de tercer nivel nunca pueden trasladarse mecánicamente a una
+consulta ambulatoria donde la enfermedad es mucho menos frecuente.
+
+### Lección clínica en faringitis estreptocócica (`HM:6009`)
+
+Al revisar la evidencia real de **Faringitis estreptocócica** (@sec-hm6009, revisión
+sistemática de Ebell et al., `pmid:11147989`), ningún hallazgo aislado confirma ni descarta
+la infección:
+
+- El **exudado amigdalino** (`HM:3026`) es el hallazgo aislado más informativo, con
+  $\text{LR}^+ = 3{,}4$, pero por sí solo es insuficiente para confirmar el diagnóstico.
+- El **exudado faríngeo** (`HM:3027`, $\text{LR}^+ = 2{,}1$) y la **exposición reciente** en
+  las dos semanas previas (`HM:3028`, $\text{LR}^+ = 1{,}9$) aportan un peso todavía menor.
+- La ausencia de **adenopatía cervical anterior dolorosa** (`HM:3029`, $\text{LR}^- = 0{,}60$),
+  de **hipertrofia amigdalina** (`HM:3030`, $\text{LR}^- = 0{,}63$) o de **exudado**
+  ($\text{LR}^- = 0{,}74$) reduce modestamente la probabilidad, pero no descarta la
+  enfermedad.
+- Por eso resultan más útiles las escalas clínicas validadas que combinan hallazgos, como
+  los **criterios de Centor** (`pmid:6763125`, donde la probabilidad pasa de 2,5 % con 0
+  puntos a 56 % con 4 puntos) o la **escala de McIsaac** ajustada por edad (`pmid:9475915`),
+  orientando cuándo solicitar prueba rápida de antígeno o cultivo.
+
+## De sensibilidad y especificidad a los cocientes de verosimilitud ($\text{LR}^+$ y $\text{LR}^-$)
+
+Si el VPP y el VPN dependen de la prevalencia, ¿cómo resumimos el poder diagnóstico propio
+de un hallazgo en un solo número que funcione en cualquier escenario? Mediante los
+**cocientes de verosimilitud** (*likelihood ratios*, $\text{LR}$).
+
+Un cociente de verosimilitud compara cuán probable es observar un resultado en alguien con
+la enfermedad frente a alguien sin ella:
+
+$$
+\text{LR}^+ = \frac{P(T^+ \mid E^+)}{P(T^+ \mid E^-)} = \frac{\text{Sensibilidad}}{1 - \text{Especificidad}}
+$$
+
+$$
+\text{LR}^- = \frac{P(T^- \mid E^+)}{P(T^- \mid E^-)} = \frac{1 - \text{Sensibilidad}}{\text{Especificidad}}
+$$
+
+Las ventajas de trabajar con $\text{LR}$ sobre sensibilidad y especificidad por separado son
+cuatro:
+
+1. **Sintetizan ambas dimensiones** en una sola razón (tasa de verdaderos positivos sobre
+   tasa de falsos positivos para $\text{LR}^+$; falsos negativos sobre verdaderos negativos
+   para $\text{LR}^-$).
+2. **Son transportables entre escenarios** con distinta prevalencia (siempre que el espectro
+   clínico de los pacientes sea comparable).
+3. **Se aplican a pruebas con múltiples niveles** (por ejemplo, tramos bajo, intermedio y
+   alto de una escala como HEART o TIMI), sin obligar a colapsar todo en un corte binario.
+4. **Conectan directamente con la actualización bayesiana** (*odds* postest $=$ *odds*
+   pretest $\times \text{LR}$), tema central del capítulo siguiente.
+
+### Magnitudes que cambian la conducta clínica
+
+Como guía práctica de lectura rápida:
+
+| Magnitud de $\text{LR}^+$ | Efecto sobre la probabilidad | Magnitud de $\text{LR}^-$ | Efecto sobre la probabilidad |
+| :--- | :--- | :--- | :--- |
+| $\text{LR}^+ \ge 10$ | Incremento grande y con frecuencia concluyente | $\text{LR}^- \le 0{,}10$ | Reducción grande; útil para descartar (*rule-out*) |
+| $5 \le \text{LR}^+ < 10$ | Incremento moderado; relevante según el pretest | $0{,}10 < \text{LR}^- \le 0{,}20$ | Reducción moderada |
+| $2 \le \text{LR}^+ < 5$ | Incremento pequeño; rara vez basta aislado | $0{,}20 < \text{LR}^- \le 0{,}50$ | Reducción pequeña |
+| $1 \le \text{LR}^+ < 2$ | Cambio mínimo o clínicamente irrelevante | $0{,}50 < \text{LR}^- \le 1{,}0$ | Cambio mínimo; no sirve para descartar |
+
+: {tbl-colwidths="[22,28,22,28]"}
+
+Un $\text{LR} = 1{,}0$ significa que el hallazgo aparece exactamente con la misma frecuencia
+en enfermos y en sanos: su valor informativo es nulo.
+
+### Aplicación clínica en síndrome coronario agudo (`HM:6007`)
+
+El **síndrome coronario agudo (SCA)** en el servicio de urgencias ilustra con claridad por
+qué mirar únicamente la especificidad puede engañar y por qué el cociente de verosimilitud
+ordena mejor la toma de decisiones (véase @sec-hm6007; revisión sistemática *The Rational
+Clinical Examination*, Fanaroff et al., JAMA 2015, `pmid:26547467`).
+
+En pacientes que acuden a urgencias por dolor torácico agudo, la probabilidad basal de SCA
+documentada es de **10 %**. Comparemos cinco hallazgos individuales y dos escalas
+integradas de esa misma fuente:
+
+| Hallazgo o instrumento (`HM:6007`) | Especificidad | $\text{LR}^+$ (IC 95 %) | $\text{LR}^-$ (IC 95 %) | Interpretación clínica |
+| :--- | :---: | :---: | :---: | :--- |
+| **Descenso del segmento ST** (`HM:3015`) | 95 % | 5,3 (2,1–8,6) | — | Hallazgo aislado más útil, pero insuficiente para confirmar por sí solo |
+| **Signos de isquemia en el ECG** (`HM:3016`) | 91 % | 3,6 (1,6–5,7) | — | Categoría más amplia que el descenso del ST y con menor peso |
+| **Prueba de esfuerzo previa anormal** (`HM:3017`) | 96 % | 3,1 (2,0–4,7) | — | Antecedente; desplaza poco la probabilidad aguda |
+| **Enfermedad arterial periférica** (`HM:3018`) | 97 % | 2,7 (1,5–4,8) | — | Factor de riesgo con cociente modesto |
+| **Dolor irradiado a ambos brazos** (`HM:3014`) | 96 % | 2,6 (1,8–3,7) | — | Muy específico (96 %), pero con $\text{LR}^+$ bajo |
+| **Escala HEART 7–10 puntos** (riesgo alto) | — | **13** (7,0–24) | — | Instrumento potente para confirmar (integra primera troponina) |
+| **Escala HEART 0–3 puntos** (riesgo bajo) | — | — | **0,20** (0,13–0,30) | Reduce sustancialmente la probabilidad |
+| **Escala TIMI 5–7 / 0–1 puntos** | — | 6,8 (5,2–8,9) | 0,31 (0,23–0,43) | Rendimiento moderado en ambos extremos |
+
+: {tbl-colwidths="[28,11,16,16,29]"}
+
+Observe el contraste decisivo: el dolor irradiado a ambos brazos tiene una especificidad
+altísima (**96 %**), superior incluso a la de los signos generales de isquemia en el ECG
+(**91 %**), pero su $\text{LR}^+$ es apenas **2,6** porque su sensibilidad es baja. En
+cambio, cuando se integra la anamnesis, el ECG, la edad, los factores de riesgo y la
+primera troponina en la **escala HEART**, el tramo alto alcanza $\text{LR}^+ = 13$ (cruzando
+el umbral de gran impacto diagnóstico) y el tramo bajo logra $\text{LR}^- = 0{,}20$.
+
+## Límites del capítulo: cuándo un hallazgo no tiene LR
+
+Antes de pasar al razonamiento bayesiano secuencial conviene fijar dos límites que aparecen
+repetidamente en las 48 fichas de este libro:
+
+1. **LR no medible por definición de población o sesgo de incorporación.** En faringitis
+   estreptocócica (`HM:6009`), la **odinofagia** (`HM:0211`) figura como *LR no medible*:
+   es el motivo de consulta que define qué pacientes entran en el estudio, no una prueba
+   que discrimine dentro de esa cohorte. Lo mismo ocurre con el **dolor torácico**
+   (`HM:0206`) en los estudios de SCA (`HM:6007`), o con la elevación de transaminasas en
+   la hepatitis viral aguda (`HM:6001`, @sec-hm6001), donde el marcador forma parte de la
+   propia definición de caso.
+2. **LR no medido por laguna de la literatura.** En otras condiciones, el hallazgo es
+   clínicamente relevante pero no existe aún un estudio diagnóstico con grupo de control
+   apropiado que permita calcular su sensibilidad y especificidad simultáneamente. Reconocer
+   ese vacío evita sobreinterpretar un signo cuya capacidad discriminativa real se ignora.
+
+## Práctica integradora recomendada
+
+Para consolidar este capítulo con los casos reales del compendio:
+
+1. Lea la ficha completa y el caso socrático de **Faringitis estreptocócica**
+   (@sec-hm6009) y calcule cómo varía el VPP de una prueba rápida con sensibilidad de 85 % y
+   especificidad de 95 % en pacientes con puntuación de Centor de 1 (prevalencia 6,5 %)
+   frente a Centor de 4 (prevalencia 56 %).
+2. Revise **Síndrome coronario agudo** (@sec-hm6007) y su caso socrático: compare el
+   desplazamiento diagnóstico del descenso del ST ($\text{LR}^+ = 5{,}3$) frente a una
+   puntuación HEART de 7–10 ($\text{LR}^+ = 13$) partiendo de una probabilidad basal de
+   10 %.
+3. Resuelva las preguntas de autoevaluación correspondientes a `HM:6009` y `HM:6007` en el
+   @sec-apendice-autoevaluacion.

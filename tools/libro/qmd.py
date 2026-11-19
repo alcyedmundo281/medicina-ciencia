@@ -42,7 +42,7 @@ def _escapar_tex(texto: str) -> str:
 def _datos_libro_tex(meta: MetadatosLibro) -> str:
     barra = chr(92)
     nombres = (barra * 2 + " ").join(_escapar_tex(a.nombre) for a in meta.autores)
-    sello = f"Edición 2026–2027 {barra}enspace·{barra}enspace {_escapar_tex(meta.licencia)}"
+    sello = f"Primera edición {barra}enspace·{barra}enspace {_escapar_tex(meta.licencia)}"
     return (
         "% GENERADO por tools/libro/qmd.py desde mapa.yaml. No editar a mano.\n"
         f"{barra}newcommand{{{barra}librocoleccion}}{{{_escapar_tex(meta.coleccion)}}}\n"
@@ -104,13 +104,13 @@ def _generar_portada_svg(meta: MetadatosLibro) -> str:
         '    <text x="0" y="355" text-anchor="middle" fill="#C69C6D" font-family="sans-serif" font-size="22" letter-spacing="2">SENSIBILIDAD · ESPECIFICIDAD · LR+ · LR− · FAGAN</text>',
         "  </g>",
         '  <rect x="164" y="1720" width="1372" height="215" fill="#F8F6F1" fill-opacity="0.06" stroke="#C69C6D" stroke-opacity="0.45" stroke-width="2" />',
-        '  <text x="205" y="1782" fill="#C69C6D" font-family="sans-serif" font-size="26" font-weight="700">TEXTO OFICIAL DE LA CÁTEDRA · UNIVERSIDAD CENTRAL DEL ECUADOR</text>',
-        '  <text x="205" y="1840" fill="#F8F6F1" fill-opacity="0.92" font-family="sans-serif" font-size="24">4 unidades (16 semanas) · 48 condiciones verificadas de medsemiotics-db</text>',
-        '  <text x="205" y="1892" fill="#F8F6F1" fill-opacity="0.82" font-family="sans-serif" font-size="24">18 casos socráticos ABP · 90 preguntas de autoevaluación · HTML, PDF y EPUB</text>',
+        '  <text x="205" y="1782" fill="#C69C6D" font-family="sans-serif" font-size="26" font-weight="700">PUBLICACIÓN INDEPENDIENTE · EDICIÓN CON DOI E ISBN PROPIOS</text>',
+        '  <text x="205" y="1840" fill="#F8F6F1" fill-opacity="0.92" font-family="sans-serif" font-size="24">4 capítulos de fundamentos · 48 condiciones verificadas de medsemiotics-db</text>',
+        '  <text x="205" y="1892" fill="#F8F6F1" fill-opacity="0.82" font-family="sans-serif" font-size="24">18 casos socráticos · 90 preguntas de autoevaluación · HTML, PDF y EPUB</text>',
         '  <text x="164" y="2110" fill="#F8F6F1" font-family="sans-serif" '
         f'font-size="36" font-weight="700">{escape(autores_txt)}</text>',
         '  <text x="164" y="2295" fill="#C69C6D" font-family="sans-serif" '
-        f'font-size="24">Edición 2026–2027 · {escape(meta.licencia)}</text>',
+        f'font-size="24">Primera edición · {escape(meta.licencia)}</text>',
         "</svg>\n",
     ]
     return "\n".join(lineas)
@@ -118,7 +118,6 @@ def _generar_portada_svg(meta: MetadatosLibro) -> str:
 
 def _generar_index_qmd(libro: LibroCompleto) -> str:
     meta = libro.metadatos
-    curso = meta.curso
     total_cond = len(libro.condiciones)
     total_casos = sum(1 for c in libro.condiciones.values() if c.caso_compilado is not None)
     total_quiz = sum(len(c.preguntas) for c in libro.condiciones.values())
@@ -152,20 +151,20 @@ def _generar_index_qmd(libro: LibroCompleto) -> str:
         f"*{meta.subtitulo}*",
         "",
         *[f"**{a.nombre}**  " for a in meta.autores],
-        f"{curso.institucion}",
+        f"{meta.edicion}",
         ":::",
         "",
         "::: {.creditos-pdf}",
         f"**{meta.titulo}**  ",
         f"*{meta.subtitulo}*",
         "",
-        "**Autoría y docencia:**  ",
+        "**Autoría:**  ",
         *lineas_autores,
         "",
-        f"**Cátedra:** {curso.catedra}  ",
-        f"**Período académico:** {curso.periodo}  ",
-        f"**Horario y sedes:** {curso.horario} · {curso.sedes}  ",
-        f"**Aula virtual:** {curso.aula_virtual}  ",
+        f"**Edición:** {meta.edicion}  ",
+        f"**DOI:** {meta.doi}  ",
+        f"**ISBN:** {meta.isbn}  ",
+        f"**Dirigido a:** {meta.audiencia}  ",
         f"**Repositorio fuente:** <{meta.url_repositorio}>  ",
         f"**Edición web:** <{meta.url_web}>  ",
         f"**Blog clínico de origen:** <{meta.url_blog}>  ",
@@ -192,10 +191,12 @@ def _generar_index_qmd(libro: LibroCompleto) -> str:
         ),
         "",
         "::: {.alerta-ficha}",
-        "**Aviso médico-legal y docente:** Esta obra tiene carácter exclusivamente educativo y "
-        "científico para estudiantes de medicina, residentes y profesionales de la salud. Ningún "
-        "algoritmo, cociente de verosimilitud o caso socrático sustituye el juicio clínico "
-        "individual frente al paciente ni las guías oficiales vigentes.",
+        "**Publicación independiente y aviso médico-legal:** Esta obra es una publicación "
+        "independiente con fines educativos y de divulgación científica para el público general, "
+        "estudiantes y profesionales de la salud; no implica aval ni representación de ninguna "
+        "institución sanitaria o académica. Ningún algoritmo, cociente de verosimilitud o caso "
+        "socrático sustituye el juicio clínico individual frente al paciente ni las guías "
+        "oficiales vigentes.",
         ":::",
         ":::",
         "",
@@ -204,26 +205,26 @@ def _generar_index_qmd(libro: LibroCompleto) -> str:
         "\\cleardoublepage",
         "```",
         "",
-        "# Prefacio y guía metodológica del curso {.unnumbered}",
+        "# Prefacio y guía de lectura {.unnumbered}",
         "",
         (
-            "La cátedra **Medicina y Ciencia** enseña ciencia de datos y estadística biomédica "
-            "como instrumento de decisión diagnóstica. Cada concepto estadístico se aprende "
-            "resolviendo un caso clínico real del **blog MedSemiotics**, y la herramienta "
-            "computacional (calculadora de estadísticos, SQL, R o Python) entra exactamente cuando "
-            "el caso la necesita."
+            "**Medicina y Ciencia** aborda la ciencia de datos y la estadística biomédica como "
+            "instrumentos cotidianos para entender el diagnóstico médico. Cada concepto se "
+            "explica a partir de casos clínicos reales del **blog MedSemiotics**, respaldados por "
+            "literatura primaria verificada en PubMed, de modo que cualquier lector —desde un "
+            "lector curioso hasta un estudiante o clínico en ejercicio— pueda seguir cómo un "
+            "hallazgo se convierte en probabilidad y decisión."
         ),
         "",
         "## La ruta de un hallazgo clínico {.unnumbered}",
         "",
         (
-            "Todo hallazgo semiológico sigue una misma cadena inferencial desde la cabecera del "
-            "paciente hasta la decisión terapéutica: **hallazgo clínico** $\\rightarrow$ "
-            "**probabilidad basal** (*¿qué tan frecuente es?*) $\\rightarrow$ **exactitud "
-            "diagnóstica** (sensibilidad, especificidad, $\\text{LR}^+$ y $\\text{LR}^-$) "
-            "$\\rightarrow$ **incertidumbre** (IC 95 %, calidad STARD/QUADAS-2) $\\rightarrow$ "
-            "**umbrales de decisión** (*¿cambia la conducta?*) $\\rightarrow$ **comunicación al "
-            "paciente** con frecuencias naturales."
+            "Todo hallazgo semiológico sigue una misma cadena inferencial: **hallazgo clínico** "
+            "$\\rightarrow$ **probabilidad basal** (*¿qué tan frecuente es?*) $\\rightarrow$ "
+            "**exactitud diagnóstica** (sensibilidad, especificidad, $\\text{LR}^+$ y "
+            "$\\text{LR}^-$) $\\rightarrow$ **incertidumbre** (IC 95 %, calidad STARD/QUADAS-2) "
+            "$\\rightarrow$ **umbrales de decisión** (*¿cambia la conducta?*) $\\rightarrow$ "
+            "**comunicación del riesgo** con frecuencias naturales."
         ),
         "",
         "$$",
@@ -237,25 +238,14 @@ def _generar_index_qmd(libro: LibroCompleto) -> str:
         "\\text{LR}^- = \\frac{1 - \\text{Sensibilidad}}{\\text{Especificidad}}",
         "$$",
         "",
-        "## Estructura de cada sesión (90 minutos) {.unnumbered}",
-        "",
-        "| Minutos | Momento | Actividad en aula |",
-        "| :--- | :--- | :--- |",
-        "| 0–10 | Caso socrático | Viñeta ABP sin revelar el cociente; estimación de probabilidad pretest |",
-        "| 10–35 | Concepto | Mini-clase del concepto estadístico del día anclado en el caso |",
-        "| 35–65 | Cálculo y debate | Trabajo en parejas: tabla $2 \\times 2$, LR y postest (calculadora o R/Python) |",
-        "| 65–80 | Autoevaluación | Preguntas del blog (*Reto clínico*) sobre el LR documentado |",
-        "| 80–90 | Cierre | «¿Qué cambia en la conducta?» y límites de la evidencia |",
-        "",
-        ': {tbl-colwidths="[14,22,64]"}',
-        "",
         "## Contenido de esta edición {.unnumbered}",
         "",
         (
-            f"Este volumen integra las **{len(libro.unidades)} unidades del sílabo** (16 semanas), "
-            f"el compendio completo de las **{total_cond} condiciones verificadas** del blog "
-            f"MedSemiotics (**{total_hallazgos} hallazgos clínicos documentados**), "
-            f"**{total_casos} casos socráticos ABP** con resolución determinista de evidencia y "
+            f"Este volumen integra **{len(libro.unidades)} capítulos de fundamentos** (del "
+            "hallazgo al número, razonamiento bayesiano, lectura crítica de evidencia y ciencia "
+            f"de datos/IA), el compendio completo de las **{total_cond} condiciones verificadas** "
+            f"del blog MedSemiotics (**{total_hallazgos} hallazgos clínicos documentados**), "
+            f"**{total_casos} casos socráticos** con resolución determinista de evidencia y "
             f"**{total_quiz} preguntas de autoevaluación** con clave razonada."
         ),
         "",
@@ -573,7 +563,7 @@ def generar_proyecto_quarto(
 
     capitulos: list[object] = [
         {
-            "part": "Programa del curso Medicina y Ciencia (16 semanas)",
+            "part": "Fundamentos: del hallazgo a la decisión",
             "chapters": archivos_unidades,
         }
     ]

@@ -1,25 +1,24 @@
-# Unidad 3 · Cuán seguro es el número (semanas 9–12) {#sec-unidad-03}
+# Cuán seguro es el número {#sec-unidad-03}
 
 ::: {.alerta-ficha}
-**Resultado de aprendizaje (Bloom: analizar / evaluar):** valora críticamente un estudio de
-exactitud diagnóstica (STARD, QUADAS-2, sesgo de espectro y de verificación), interpreta la
-incertidumbre estadística de un $\text{LR}$ (IC 95 %), analiza reglas de decisión clínica y
-curvas ROC, y distingue diagnóstico, pronóstico, causalidad y sesgos cognitivos.
+**Propósito de este capítulo:** valorar críticamente un estudio de exactitud diagnóstica
+(STARD, QUADAS-2, sesgo de espectro y de verificación), interpretar la incertidumbre
+estadística de un $\text{LR}$ (IC 95 %), analizar reglas de decisión clínica y curvas ROC,
+y distinguir diagnóstico, pronóstico, causalidad y sesgos cognitivos.
 :::
 
-## Eje conceptual de la unidad
+## Eje conceptual
 
 Un cociente de verosimilitud puntual sin intervalo de confianza ni contexto metodológico
-puede inducir a error. Esta unidad entrena la lectura crítica de la evidencia diagnóstica y
-causal:
+puede inducir a error. Este capítulo desarrolla la lectura crítica de la evidencia
+diagnóstica y causal:
 
 1. **Incertidumbre estadística:** interpretación del intervalo de confianza del 95 % de una
    sensibilidad, especificidad o $\text{LR}$, valor $p$ y tamaño del efecto; qué ocurre
    cuando el IC 95 % de un $\text{LR}$ cruza $1{,}0$.
 2. **Calidad metodológica (STARD 2015 y QUADAS-2):** selección de pacientes, sesgo de
    espectro, estándar de referencia imperfecto, sesgo de verificación parcial y sesgo de
-   incorporación (por qué ciertos hallazgos figuran como *LR no medible* en
-   `medsemiotics-db`).
+   incorporación.
 3. **Reglas de decisión clínica y curvas ROC:** compromiso entre sensibilidad y
    especificidad según el punto de corte, área bajo la curva (AUC) y reglas diseñadas para
    descartar con seguridad (*rule-out*).
@@ -27,24 +26,24 @@ causal:
    diferencia entre asociación predictiva y efecto causal; confusión, colisionadores y
    grafos acíclicos dirigidos (DAG).
 
-## Planificación semanal y casos ancla
+## Recorrido y casos ancla del compendio
 
-| Semana | Fecha | Contenido central | Caso ancla y recursos del curso | Evaluación |
-| :--- | :--- | :--- | :--- | :--- |
-| 9 | 20 ene 2027 | Incertidumbre estadística: IC 95 %, valor $p$, tamaño de efecto; leer el IC de un $\text{LR}$ | **Síndrome coronario agudo** (`HM:6007`, ver @sec-hm6007) y **Neumonía infantil** (`HM:6036`, ver @sec-hm6036); *Cuantificando la incertidumbre* | Taller de IC en parejas |
-| 10 | 27 ene 2027 | Calidad de los estudios de exactitud: STARD, QUADAS-2, sesgo de espectro y de verificación | **Cáncer de mama** (`HM:6034`, ver @sec-hm6034) | Publicación: Informe de caso, Unidad 3 |
-| 11 | 03 feb 2027 | Reglas de decisión clínica, puntos de corte y curvas ROC | **Lesión intracraneal en TCE leve del adulto** (`HM:6038`, ver @sec-hm6038) | Análisis de reglas de decisión |
-| 12 | 10 feb 2027 | Sesgos cognitivos (anclaje, disponibilidad) y causalidad: confusión, colisionadores, DAG | *CausalMed* (caso TRH; reingresos y TEV en Chimborazo); *Sesgos de la mente*; *Inferencia causal* | Entrega: Informe de caso, Unidad 3 |
+| Sección | Tema central | Casos ancla en el compendio |
+| :--- | :--- | :--- |
+| 3.1 | Incertidumbre estadística: IC 95 %, valor $p$, tamaño de efecto y lectura del IC de un $\text{LR}$ | **Síndrome coronario agudo** (`HM:6007`, @sec-hm6007) y **Neumonía infantil** (`HM:6036`, @sec-hm6036) |
+| 3.2 | Calidad de estudios diagnósticos: STARD, QUADAS-2, sesgo de espectro y verificación | **Cáncer de mama** (`HM:6034`, @sec-hm6034) |
+| 3.3 | Reglas de decisión clínica, puntos de corte y curvas ROC | **Lesión intracraneal en TCE leve del adulto** (`HM:6038`, @sec-hm6038) |
+| 3.4 | Sesgos cognitivos (anclaje, disponibilidad) y causalidad (confusión, colisionadores, DAG) | Análisis causal aplicado sobre escenarios clínicos |
 
-: {tbl-colwidths="[8,13,34,29,16]"}
+: {tbl-colwidths="[12,48,40]"}
 
-## Guía de estudio con el blog MedSemiotics
+## Guía de lectura y práctica
 
 - En **Neumonía infantil** (@sec-hm6036), compare los intervalos de confianza del 95 % de
-  taquipnea, tiraje y auscultación, identificando qué hallazgos mantienen precisión estrecha
-  y cuáles muestran alta incertidumbre.
+  los distintos signos respiratorios e identifique dónde la precisión es estrecha y dónde
+  hay amplia incertidumbre.
 - En **Cáncer de mama** (@sec-hm6034), aplique los cuatro dominios de QUADAS-2 a los
-  estudios de exploración mamaria citados en la ficha.
+  estudios citados en la ficha.
 - En **Lesión intracraneal en el traumatismo craneal leve del adulto** (@sec-hm6038),
   examine cómo la *Canadian CT Head Rule* optimiza el $\text{LR}^-$ para descartar lesiones
   neuroquirúrgicas con mínimo riesgo de falsos negativos.

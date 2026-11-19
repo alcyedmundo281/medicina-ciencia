@@ -11,7 +11,11 @@
 obra:
   titulo: "Medicina y Ciencia"
   subtitulo: "Ciencia de datos, estadística biomédica y semiótica clínica basada en la evidencia"
-  coleccion: "COLECCIÓN POWERSEMIOTICS · MEDICINA Y CIENCIA"
+  coleccion: "COLECCIÓN POWERSEMIOTICS · PUBLICACIÓN INDEPENDIENTE"
+  edicion: "Primera edición · Publicación independiente"
+  doi: "Pendiente de asignación (Zenodo)"
+  isbn: "Pendiente de asignación (edición impresa)"
+  audiencia: "Público general interesado en ciencia médica, estudiantes y profesionales de la salud"
   licencia: "CC BY-NC-SA 4.0"
   licencia_fuentes: "CC BY-SA 4.0"
   contacto: "alcy.torres@powersemiotics.com"
@@ -26,46 +30,37 @@ obra:
     revision: "956f3b1aa0b6b38f728caa5d6fc9b201f192e053"
     doi: "10.5281/zenodo.22069641"
 
-curso:
-  institucion: "Universidad Central del Ecuador — Facultad de Ciencias Médicas, Carrera de Medicina"
-  catedra: "Medicina y Ciencia: Ciencia de datos y estadística biomédica en el razonamiento clínico"
-  periodo: "2026–2027 (16 semanas: 11 de noviembre de 2026 al 10 de marzo de 2027)"
-  horario: "Miércoles 20:00–21:30 (sesión semanal de 90 minutos; 24 horas de clase)"
-  sedes: "IESS San Francisco y MSP Calderón"
-  aula_virtual: "Google Classroom «Medicina y Ciencia 2026-2027»"
-  asistente: "medsemiotics-copilot"
-
 autores:
   - nombre: "Alcy Edmundo Torres Guerrero"
     nombre_bibliografico: "Alcy E. Torres-Guerrero"
-    rol: "autor y docente titular"
+    rol: "autor y editor"
     orcid: "0000-0002-9742-375X"
-    afiliacion: "Hospital de Especialidades Carlos Andrade Marín (IESS); Universidad Central del Ecuador"
+    afiliacion: "PowerSemiotics · Publicación independiente"
 
 unidades:
   - numero: 1
     clave: unidad-01
     archivo: unidades/unidad-01.qmd
-    titulo: "Unidad 1 · Del hallazgo al número (semanas 1–4)"
-    semanas: "1–4"
+    titulo: "Capítulo 1 · Del hallazgo al número"
+    semanas: "Fundamentos I"
     casos_ancla: ["HM:6009", "HM:6007"]
   - numero: 2
     clave: unidad-02
     archivo: unidades/unidad-02.qmd
-    titulo: "Unidad 2 · Razonar con probabilidades (semanas 5–8)"
-    semanas: "5–8"
+    titulo: "Capítulo 2 · Razonar con probabilidades"
+    semanas: "Fundamentos II"
     casos_ancla: ["HM:6043", "HM:6040", "HM:6042", "HM:6044", "HM:6035"]
   - numero: 3
     clave: unidad-03
     archivo: unidades/unidad-03.qmd
-    titulo: "Unidad 3 · Cuán seguro es el número (semanas 9–12)"
-    semanas: "9–12"
+    titulo: "Capítulo 3 · Cuán seguro es el número"
+    semanas: "Lectura crítica"
     casos_ancla: ["HM:6007", "HM:6036", "HM:6034", "HM:6038"]
   - numero: 4
     clave: unidad-04
     archivo: unidades/unidad-04.qmd
-    titulo: "Unidad 4 · Datos, IA y comunicación (semanas 13–16)"
-    semanas: "13–16"
+    titulo: "Capítulo 4 · Datos, inteligencia artificial y comunicación del riesgo"
+    semanas: "Síntesis aplicada"
     casos_ancla: ["HM:6030", "HM:6029"]
 
 partes_blog:

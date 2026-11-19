@@ -1,7 +1,7 @@
 # Declaración de uso de inteligencia artificial y trazabilidad {#sec-declaracion-ia .unnumbered}
 
-Esta obra adopta de forma estricta las reglas éticas y metodológicas de la cátedra
-*Medicina y Ciencia* y del ecosistema *PowerSemiotics*:
+Esta publicación independiente adopta reglas verificables sobre evidencia clínica y uso de
+herramientas computacionales:
 
 1. **Fuente clínica única y verificable.** Ninguna cifra de sensibilidad, especificidad,
    cociente de verosimilitud ($\text{LR}^+$ o $\text{LR}^-$), intervalo de confianza ni
@@ -14,11 +14,9 @@ Esta obra adopta de forma estricta las reglas éticas y metodológicas de la cá
    ingeniería asistida por IA exclusivamente para el andamiaje de compilación
    (`JSON → QMD → Quarto + LuaLaTeX / EPUB`), las pruebas automatizadas y la maquetación
    editorial. La salida de cualquier modelo de lenguaje se trata siempre como borrador
-   sujeto a verificación determinista y revisión docente humana; nunca como fuente clínica.
-3. **Asistente de la cátedra (`medsemiotics-copilot`).** En el aula, el asistente
-   conversacional responde únicamente desde los artículos del blog y `medsemiotics-db`
-   citando PMID/DOI, formula preguntas socráticas sin entregar las claves de evaluación y
-   no recibe ni almacena datos personales de pacientes ni de estudiantes.
-4. **Privacidad clínica.** Todo caso clínico y toda base de datos empleada en prácticas
-   del curso está completamente anonimizada; se prohíbe cargar nombres, cédulas o
-   identificadores de pacientes en cualquier herramienta digital.
+   sujeto a verificación determinista y revisión humana; nunca como fuente clínica.
+3. **Privacidad clínica.** Todos los casos clínicos de esta obra son viñetas educativas
+   ficticias o datos completamente anonimizados; no se emplean datos identificables de
+   pacientes reales.
+4. **Independencia editorial.** Esta obra es una publicación independiente y no implica
+   aval, representación ni postura oficial de ninguna institución sanitaria o académica.
