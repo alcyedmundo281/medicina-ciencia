@@ -1,0 +1,135 @@
+name: EPUB y LuaLaTeX del libro
+
+# Motor de publicación replicado de alcyedmundo281/biosemiotics:
+# genera EPUB 3 (validado con EPUBCheck 5.1.0), PDF LuaLaTeX (170 x 244 mm,
+# verificado con pdfinfo) y fuente LuaLaTeX autocontenida (.zip) desde el mismo
+# proyecto Quarto (JSON -> QMD -> Quarto).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'mapa.yaml'
+      - 'posts/**'
+      - 'casos/**'
+      - 'unidades/**'
+      - 'paratextos/**'
+      - 'assets/**'
+      - 'tools/**'
+      - 'CITATION.cff'
+      - 'requirements.txt'
+      - '.github/workflows/epub-pdf.yml'
+  pull_request:
+    paths:
+      - 'mapa.yaml'
+      - 'posts/**'
+      - 'casos/**'
+      - 'unidades/**'
+      - 'paratextos/**'
+      - 'assets/**'
+      - 'tools/**'
+      - 'CITATION.cff'
+      - 'requirements.txt'
+      - '.github/workflows/epub-pdf.yml'
+  release:
+    types: [published]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: editorial-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    name: Generar JSON, EPUB, PDF LuaLaTeX y ZIP fuente
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: tools
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+
+      - name: Instalar dependencias de Python
+        run: pip install -r requirements.txt
+
+      - name: Instalar dependencias del sistema (LuaLaTeX, poppler, rsvg-convert, Java)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            pandoc fonts-freefont-ttf default-jre-headless librsvg2-bin \
+            poppler-utils texlive-latex-recommended texlive-latex-extra \
+            texlive-bibtex-extra texlive-lang-spanish texlive-luatex
+          echo "rsvg-convert: $(rsvg-convert --version)"
+          echo "lualatex: $(lualatex --version | head -1)"
+          echo "pdfinfo: $(pdfinfo -v 2>&1 | head -1)"
+
+      - name: Instalar Libertinus 7.051
+        run: |
+          VER=7.051
+          curl -fsSL -o /tmp/libertinus.zip \
+            "https://github.com/alerque/libertinus/releases/download/v${VER}/Libertinus-${VER}.zip"
+          unzip -q /tmp/libertinus.zip -d /tmp/libertinus
+          mkdir -p ~/.local/share/fonts
+          find /tmp/libertinus -name 'Libertinus*.otf' -exec cp {} ~/.local/share/fonts/ \;
+          fc-cache -f
+          for familia in "Libertinus Serif" "Libertinus Sans" "Libertinus Serif Display"; do
+            fc-list | grep -q "$familia" || { echo "::error::Falta la fuente $familia"; exit 1; }
+          done
+
+      - name: Instalar Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      - name: Instalar EPUBCheck 5.1.0
+        run: |
+          VER=5.1.0
+          curl -fsSL -o /tmp/epubcheck.zip \
+            "https://github.com/w3c/epubcheck/releases/download/v${VER}/epubcheck-${VER}.zip"
+          unzip -q /tmp/epubcheck.zip -d /opt
+          echo "EPUBCHECK_JAR=/opt/epubcheck-${VER}/epubcheck.jar" >> "$GITHUB_ENV"
+
+      - name: Validar fuentes y pruebas
+        run: |
+          python -m libro check
+          python -m pytest
+
+      - name: Compilar EPUB 3, PDF LuaLaTeX y paquete fuente LuaLaTeX
+        run: |
+          python -m libro epub
+          python -m libro pdf
+          python -m libro latex-zip
+          python -m libro check
+
+      - name: Validar EPUB con EPUBCheck
+        run: java -jar "$EPUBCHECK_JAR" build/libro-medicina-y-ciencia.epub
+
+      - name: Adjuntar artefactos al release
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release upload "${{ github.event.release.tag_name }}"
+          build/libro.json
+          build/libro-medicina-y-ciencia.epub
+          build/libro-medicina-y-ciencia.pdf
+          build/quarto/libro-medicina-y-ciencia.tex
+          build/medicina-ciencia-latex.zip --clobber
+
+      - name: Publicar artefactos descargables
+        if: github.event_name != 'release'
+        uses: actions/upload-artifact@v4
+        with:
+          name: medicina-ciencia-epub-pdf-latex
+          path: |
+            build/libro.json
+            build/libro-medicina-y-ciencia.epub
+            build/libro-medicina-y-ciencia.pdf
+            build/quarto/libro-medicina-y-ciencia.tex
+            build/medicina-ciencia-latex.zip
+          retention-days: 90

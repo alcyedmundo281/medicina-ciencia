@@ -1,0 +1,59 @@
+/* Estilo editorial portable para la edición EPUB 3 de Medicina y Ciencia */
+
+body {
+  font-family: Georgia, "Libertinus Serif", serif;
+  line-height: 1.45;
+  color: #1a202c;
+}
+
+h1, h2, h3, h4 {
+  color: #14283d;
+  page-break-after: avoid;
+}
+
+.triada-signo,
+.alerta-ficha,
+.caso-socratico,
+.perlas-clinicas {
+  border-left: 3px solid #14283d;
+  background-color: #f7f8fa;
+  padding: 0.7em 0.9em;
+  margin: 0.9em 0;
+}
+
+.alerta-ficha {
+  border-left-color: #7a2e1d;
+  background-color: #fdf5f3;
+}
+
+.caso-socratico {
+  border-left-color: #2b547e;
+  background-color: #f2f6fa;
+}
+
+.enlace-ficha {
+  font-size: 0.88em;
+  color: #4a5568;
+  border-bottom: 1px solid #cbd5e1;
+  padding-bottom: 0.4em;
+  margin-bottom: 0.8em;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.88em;
+  margin: 0.8em 0;
+}
+
+th, td {
+  border-bottom: 1px solid #cbd5e1;
+  padding: 0.35em 0.45em;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  color: #14283d;
+  font-weight: bold;
+}

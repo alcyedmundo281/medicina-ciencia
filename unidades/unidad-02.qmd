@@ -1,0 +1,53 @@
+# Unidad 2 · Razonar con probabilidades (semanas 5–8) {#sec-unidad-02}
+
+::: {.alerta-ficha}
+**Resultado de aprendizaje (Bloom: aplicar / analizar):** actualiza la probabilidad de
+enfermedad (pretest $\rightarrow$ postest) mediante *odds*, cocientes de verosimilitud y
+nomograma de Fagan; combina hallazgos reconociendo los límites de la independencia
+condicional y fundamenta conductas con umbrales de prueba y tratamiento.
+:::
+
+## Eje conceptual de la unidad
+
+Cuantificar un hallazgo solo tiene valor clínico cuando modifica la probabilidad de un
+diagnóstico en un paciente concreto y ayuda a cruzar un umbral de decisión:
+
+1. **Probabilidad pretest, *odds* y teorema de Bayes:** estimación explícita de la
+   probabilidad basal desde prevalencia poblacional y contexto clínico, evitando la falacia
+   de la tasa base.
+2. **Actualización con $\text{LR}$ y nomograma de Fagan:** conversión entre probabilidad y
+   *odds*, producto por $\text{LR}^+$ o $\text{LR}^-$ y retorno a probabilidad postest.
+3. **Combinación de múltiples hallazgos:** cuándo es razonable multiplicar cocientes de
+   verosimilitud y cuándo la dependencia condicional entre signos redundantes infla
+   artificialmente la probabilidad postest.
+4. **Umbrales de prueba y de tratamiento:** el principio de Pauker y Kassirer para decidir
+   cuándo no pedir una prueba porque su resultado no puede cambiar la conducta.
+
+$$
+\text{Odds} = \frac{P}{1 - P}, \qquad
+\text{Odds}_{\text{postest}} = \text{Odds}_{\text{pretest}} \times \text{LR}, \qquad
+P_{\text{postest}} = \frac{\text{Odds}_{\text{postest}}}{1 + \text{Odds}_{\text{postest}}}
+$$
+
+## Planificación semanal y casos ancla
+
+| Semana | Fecha | Contenido central | Caso ancla y recursos del curso | Evaluación |
+| :--- | :--- | :--- | :--- | :--- |
+| 5 | 09 dic 2026 | Probabilidad pretest, *odds* y nomograma de Fagan; intuición bayesiana y falacia de la tasa base | **Apendicitis aguda** (`HM:6043`, ver @sec-hm6043); *La Intuición Bayesiana* | Entrega: Informe de caso, Unidad 1 |
+| 6 | 16 dic 2026 | Combinar hallazgos: producto de $\text{LR}$, independencia condicional y sus límites | **Pancreatitis aguda** (`HM:6040`, ver @sec-hm6040) y **Colecistitis aguda** (`HM:6042`, ver @sec-hm6042) | Publicación: Informe de caso, Unidad 2 |
+| 7 | 06 ene 2027 | Umbrales de prueba y de tratamiento; cuándo una prueba no debe pedirse | **Tromboembolia pulmonar** (`HM:6044`, ver @sec-hm6044) y **Trombosis venosa profunda** (`HM:6035`, ver @sec-hm6035) | Entrega: Informe de caso, Unidad 2 |
+| 8 | 13 ene 2027 | **Evaluación sumativa 1:** razonamiento bayesiano sobre casos nuevos | Condiciones no vistas del compendio del blog; *Reto clínico* | **Sumativa 1 (25 % · 5 puntos)** |
+
+: {tbl-colwidths="[8,13,34,29,16]"}
+
+## Guía de estudio con el blog MedSemiotics
+
+- En **Apendicitis aguda** (@sec-hm6043), calcule el desplazamiento de probabilidad pretest
+  $\rightarrow$ postest ante migración del dolor, signo de rebote y fiebre usando los
+  cocientes documentados.
+- En **Pancreatitis aguda** (@sec-hm6040) y **Colecistitis aguda** (@sec-hm6042), discuta
+  qué hallazgos comparten mecanismo fisiopatológico y por qué no deben multiplicarse como si
+  fueran independientes.
+- En **Tromboembolia pulmonar** (@sec-hm6044) y **Trombosis venosa profunda**
+  (@sec-hm6035), trace los umbrales de prueba (dímero D, ecografía compresiva, angio-TC) y
+  de anticoagulación empírica.

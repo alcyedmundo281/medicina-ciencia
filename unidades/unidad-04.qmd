@@ -1,0 +1,51 @@
+# Unidad 4 · Datos, IA y comunicación (semanas 13–16) {#sec-unidad-04}
+
+::: {.alerta-ficha}
+**Resultado de aprendizaje (Bloom: aplicar / evaluar / crear):** consulta y analiza una base
+clínica anonimizada (SQL, R/Python) para estimar medidas de exactitud diagnóstica con sus
+intervalos de confianza; evalúa críticamente modelos de predicción e inteligencia artificial
+clínica (discriminación, calibración, validación externa y explicabilidad); y comunica el
+riesgo al paciente mediante frecuencias naturales y decisión compartida.
+:::
+
+## Eje conceptual de la unidad
+
+La cuarta unidad cierra el ciclo completo de la cátedra: pasar de consumir cifras publicadas
+a producir análisis reproducibles, auditar algoritmos predictivos y traducir probabilidades
+a decisiones humanas compartidas con el paciente.
+
+1. **Laboratorio de datos clínicos:** consultas SQL sobre tablas normalizadas y cálculo
+   reproducible en R o Python de sensibilidad, especificidad, $\text{LR}^+$, $\text{LR}^-$ e
+   IC 95 % a partir de datos anonimizados.
+2. **Modelos de predicción e IA clínica:** diferencia entre **discriminación** (AUC-ROC,
+   estadístico C) y **calibración** (pendiente, intercepto, Brier score); importancia de la
+   validación externa y límites de la explicabilidad post-hoc.
+3. **Comunicación del riesgo:** conversión de probabilidades y cocientes de verosimilitud a
+   **frecuencias naturales** («de cada 100 pacientes como usted…»), apoyo visual y toma de
+   decisiones compartida.
+4. **Proyecto integrador:** síntesis en parejas que integra pregunta clínica PICO, base
+   anonimizada, cálculo de medidas diagnósticas con IC 95 %, valoración de sesgos y guion de
+   comunicación al paciente.
+
+## Planificación semanal y casos ancla
+
+| Semana | Fecha | Contenido central | Caso ancla y recursos del curso | Evaluación |
+| :--- | :--- | :--- | :--- | :--- |
+| 13 | 17 feb 2027 | Laboratorio de datos: consultas SQL y análisis en R/Python; calcular sensibilidad, especificidad y $\text{LR}$ desde una base | Base anonimizada de Chimborazo; *Laboratorio de Código* | Inicio del proyecto integrador |
+| 14 | 24 feb 2027 | Modelos de predicción e IA clínica: discriminación, calibración, validación externa, explicabilidad | **Infarto agudo de miocardio** (`HM:6030`, ver @sec-hm6030); *Razonamiento clínico: IA explicable* | Revisión de avance del proyecto |
+| 15 | 03 mar 2027 | Comunicar el riesgo: frecuencias naturales, visualización y decisión compartida | **Hipertensión arterial en adultos** (`HM:6029`, ver @sec-hm6029); *Comunicación y visualización* | Taller de comunicación clínica |
+| 16 | 10 mar 2027 | **Evaluación final / proyecto integrador** | Condición elegida por la pareja del compendio del blog | **Sumativa final (35 % · 7 puntos)** |
+
+: {tbl-colwidths="[8,13,34,29,16]"}
+
+## Rúbrica de informes de caso y proyecto integrador
+
+| Criterio | Puntos (sobre 20) | Estándar de exigencia |
+| :--- | :---: | :--- |
+| Probabilidad pretest estimada y justificada | 6 | Anclada en prevalencia documentada y escenario clínico explícito |
+| Cálculo e interpretación (sens., esp., $\text{LR}$, postest) | 6 | Procedimiento reproducible en tabla $2 \times 2$ / *odds* / Fagan |
+| Valoración crítica de la evidencia (IC 95 %, calidad, aplicabilidad) | 4 | Identifica incertidumbre, espectro y posibles sesgos (QUADAS-2) |
+| Decisión clínica, comunicación y referencias verificables | 4 | Conducta coherente con umbrales, frecuencias naturales y PMID/DOI reales |
+| **Total** | **20** | **Un número sin fuente verificable no puntúa** |
+
+: {tbl-colwidths="[40,16,44]"}

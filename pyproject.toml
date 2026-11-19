@@ -1,0 +1,20 @@
+[project]
+name = "medicina-ciencia"
+version = "0.1.0"
+description = "Texto de la cátedra Medicina y Ciencia: ciencia de datos, estadística biomédica y semiótica clínica basada en la evidencia (JSON -> QMD -> Quarto HTML, PDF LuaLaTeX y EPUB)."
+requires-python = ">=3.12"
+dependencies = [
+    "PyYAML>=6.0.1",
+    "pydantic>=2.6.0,<3",
+    "tzdata>=2024.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0,<10",
+    "cffconvert==2.0.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["tools"]
+testpaths = ["tools/tests"]

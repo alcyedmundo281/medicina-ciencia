@@ -1,0 +1,57 @@
+/* Estilo editorial para la edición web (HTML) de Medicina y Ciencia */
+
+.triada-signo,
+.alerta-ficha,
+.caso-socratico,
+.perlas-clinicas {
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem;
+  margin: 1.1rem 0;
+  font-size: 0.96rem;
+}
+
+.triada-signo {
+  background-color: #f7f8fa;
+  border-left: 4px solid #14283d;
+}
+
+.alerta-ficha {
+  background-color: #fdf5f3;
+  border-left: 4px solid #7a2e1d;
+}
+
+.caso-socratico {
+  background-color: #f2f6fa;
+  border-left: 4px solid #2b547e;
+}
+
+.perlas-clinicas {
+  background-color: #f7f8fa;
+  border-left: 4px solid #14283d;
+}
+
+.enlace-ficha {
+  font-size: 0.88rem;
+  color: #4a5568;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.portadilla-titulo {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #14283d;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.creditos-pdf {
+  font-size: 0.9rem;
+  color: #4a5568;
+  background: #fafafa;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  padding: 1rem 1.2rem;
+  margin: 1.2rem 0;
+}

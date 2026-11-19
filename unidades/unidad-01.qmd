@@ -1,0 +1,55 @@
+# Unidad 1 · Del hallazgo al número (semanas 1–4) {#sec-unidad-01}
+
+::: {.alerta-ficha}
+**Resultado de aprendizaje (Bloom: comprender / aplicar):** calcula e interpreta las medidas
+de exactitud diagnóstica (sensibilidad, especificidad, VPP y VPN) a partir de una tabla
+$2 \times 2$ y de la literatura primaria, y las traduce a cocientes de verosimilitud
+($\text{LR}^+$ y $\text{LR}^-$).
+:::
+
+## Eje conceptual de la unidad
+
+El razonamiento clínico no comienza con un laboratorio ni con una imagen: comienza con un
+**hallazgo semiológico** interpretado como evidencia bajo incertidumbre. Esta primera unidad
+establece el puente entre la semiótica clínica clásica (significante, significado y decisión)
+y la cuantificación probabilística:
+
+1. **Inferencia clínica:** abducción (generación de hipótesis diagnósticas), deducción
+   (predicción de hallazgos esperados) e inducción (actualización empírica con datos).
+2. **Estructura y ética de los datos clínicos:** tipos de variables, bases relacionales,
+   encuestas poblacionales (ENSANUT), bases clínicas abiertas (MIMIC-IV), desidentificación
+   estricta y prohibición de cargar datos personales de pacientes.
+3. **Tabla $2 \times 2$ y valores predictivos:** sensibilidad, especificidad, valor
+   predictivo positivo (VPP) y negativo (VPN), comprendiendo por qué el VPP y el VPN
+   cambian drásticamente con la prevalencia.
+4. **Cocientes de verosimilitud ($\text{LR}^+$ y $\text{LR}^-$):** propiedades operativas
+   independientes de la prevalencia (bajo espectro estable) y magnitudes que modifican la
+   conducta clínica.
+
+$$
+\text{LR}^+ = \frac{\text{Sensibilidad}}{1 - \text{Especificidad}}, \qquad
+\text{LR}^- = \frac{1 - \text{Sensibilidad}}{\text{Especificidad}}
+$$
+
+## Planificación semanal y casos ancla
+
+| Semana | Fecha | Contenido central | Caso ancla y recursos del curso | Evaluación |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | 11 nov 2026 | El razonamiento clínico como inferencia: abducción, deducción, inducción; el hallazgo como evidencia | Presentación del blog MedSemiotics; recorrido por un artículo completo; *Fundamentos semióticos*; *Razonamiento clínico* | Participación diagnóstica |
+| 2 | 18 nov 2026 | Datos clínicos: tipos de variable, bases relacionales, ENSANUT, MIMIC-IV, desidentificación y ética | Datos anonimizados de Chimborazo; *Laboratorio de Código*; *Estadísticos Clínicos* | Taller guiado |
+| 3 | 25 nov 2026 | Tabla $2 \times 2$: sensibilidad, especificidad, VPP y VPN; dependencia del VPP respecto a la prevalencia | **Faringitis estreptocócica** (`HM:6009`, ver @sec-hm6009); *Cuantificando la incertidumbre* | Publicación: Informe de caso, Unidad 1 |
+| 4 | 02 dic 2026 | De sensibilidad/especificidad a $\text{LR}^+$ y $\text{LR}^-$: definición, interpretación y magnitudes clínicas | **Síndrome coronario agudo** (`HM:6007`, descenso del ST, ver @sec-hm6007); *Cuantificando la incertidumbre* | Taller de cálculo en parejas |
+
+: {tbl-colwidths="[8,13,34,29,16]"}
+
+## Guía de estudio con el blog MedSemiotics
+
+- Al revisar **Faringitis estreptocócica** (@sec-hm6009), construya la tabla $2 \times 2$
+  de los criterios de Centor y compare cómo cambia el VPP cuando la prevalencia basal pasa
+  de un entorno comunitario (10 %) a una consulta con brote epidémico (35 %).
+- Al revisar **Síndrome coronario agudo** (@sec-hm6007), contraste los hallazgos clínicos
+  de la anamnesis y la exploración con el rendimiento del ECG (descenso del segmento ST)
+  y anote los PMID que sustentan cada $\text{LR}^+$ y $\text{LR}^-$.
+- **Entregable formativo (Informe de caso · Unidad 1):** se publica el 25 de noviembre de
+  2026 (semana 3) y se entrega el 09 de diciembre de 2026 (semana 5, hasta las 21:30 en
+  Classroom).

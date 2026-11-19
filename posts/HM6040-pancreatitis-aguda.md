@@ -1,0 +1,334 @@
+---
+id: HM6040-01
+slug: pancreatitis-aguda-precision-semiotica
+title: 'Pancreatitis aguda: hallazgos y evidencia clínica'
+subtitle: Hallazgos y criterios clínicos sin cocientes de verosimilitud medidos.
+date: '2026-09-18'
+author: Alcy E. Torres-Guerrero
+category: medicina_interna
+category_label: Medicina Interna
+tags:
+- medicina_interna
+- pancreatitis-aguda
+- semiologia
+reading_time: 8 min
+difficulty: Intermedio
+fuente:
+  repositorio: alcyedmundo281/medsemiotics-db
+  revision: ea2f6e63b8508e6a36a28fd11950bd28c0900a49
+  doi: 10.5281/zenodo.22064424
+  condicion: condiciones/HM6040-pancreatitis-aguda.yaml
+  archivos:
+    CITATION.cff: 6e9c73a515bb6225965edda4efc52104a4e3b9776dab1bd4fce8e643d86eb1d2
+    conceptos/HM0201-dolor-abdominal.yaml: adbaa4992613e08871e7e4d6259066ab9da4d9696dd256e274007f5965dd7813
+    conceptos/HM0202-dolor-epigastrico.yaml: 284406d6397caf6b3b25e539e0237ddf1d424b846f97b94cbb2ff75b2c1ef99a
+    conceptos/HM0205-dolor-abdominal-en-cinturon.yaml: 0f13e881a8d29bac46d58b3c6664e9414fd2ba135075822528317bf09e1fb47b
+    conceptos/HM0300-sintoma-digestivo.yaml: 2c9dfe41462c5927070d1020039bd0dac823bcf998d53ac0a7d8e04ccab240aa
+    conceptos/HM0302-vomitos.yaml: c2a3e83028a5dbb8b5d22771c6f413648cbe087e1f3dffa381f416e6bc5a12c9
+    conceptos/HM0600-signo-de-exploracion.yaml: 86a2ac9babe66028eecc797ddbf4d9ea382a6fd685e9cb8df91bb959029d62bf
+    conceptos/HM0601-irritacion-peritoneal.yaml: 05237c0ae13ba1c349514b2e63ecc620a13a04defc2b7219c2e9c0313ac9eb21
+    conceptos/HM0611-signo-de-cullen.yaml: 62e0a5988b00f41af3b6ed75aa0592dc4a79051730d1a35351c642294a0064ac
+    conceptos/HM0730-alteracion-enzimatica.yaml: eaace3c0ef5fc70eda08396c77e4b145c690302347b2c6dca54ffe7c2ceb5298
+    conceptos/HM0731-hiperamilasemia.yaml: 1b410460c87df8c6666cb99675252d225a10ef6f58bd871a82229c183236ef74
+    conceptos/HM0732-hiperlipasemia.yaml: b12f57b2eeca3e2cd72c9d2d39a02f46b456322b5845692f3abfe329c027f275
+    conceptos/HM0900-hallazgo-de-imagen.yaml: 0b40c9368c746533cc335071c04e027c4465fb29158ed2cc747d65b9bb573e67
+    conceptos/HM0901-hallazgos-de-imagen-compatibles-con-pancreatitis.yaml: 556099a1a0c2481e4eb806459f1ba00a07749282e3e74ce4efeb6a92d009e23a
+    condiciones/HM6040-pancreatitis-aguda.yaml: e611ea546fa844fdd726005f15da408d3596946a89550963638742d1457d8e87
+    referencias/pmid-23100216.yaml: 43d6b498ae28cb9451014d13d219e7caa00ea9fc8107af092b8c171438a26abd
+    referencias/pmid-25088919.yaml: b0be6e2c04299a8adea4085e3e6b28f10849d8bd0118e734da36efa36e1bef81
+    referencias/pmid-26844279.yaml: 6c58e2666a253432e0cfa871160a02df14cacdcfc95e2f1425a8c29071db45b9
+    referencias/pmid-27820614.yaml: 0d9f1a12fd2c091c5b8dceb4b30aa62f209df443d05df3417253626d2660b596
+    referencias/pmid-28431198.yaml: 2585ea3e375b75c9e33bff7301d6e75d2008c5bb2e68eebfd5f68dd6654afa22
+    referencias/pmid-6237447.yaml: 847a002a01f2be5533e4c6d7d9968888b25eb51537335404afff8e639a0b757d
+grounding:
+  condicion_id: HM:6040
+  condicion_nombre: Pancreatitis aguda
+  concepto_id: HM:0732
+  concepto_nombre: Hiperlipasemia
+  estado_lr: no_medido
+  lr_positivo: null
+  lr_negativo: null
+  lr_positivo_rango: null
+  lr_negativo_rango: null
+  poblacion: personas con dolor abdominal agudo que acuden a urgencias; lipasa sérica por encima de tres veces el límite normal
+  referencia_id: pmid:23100216
+  referencia_cita: 'Banks PA, Bollen TL, Dervenis C, Gooszen HG, Johnson CD, Sarr MG, Tsiotos GG, Vege SS Classification of acute pancreatitis--2012: revision of the Atlanta classification and definitions by international consensus Gut 2013'
+  pmid: '23100216'
+  doi: 10.1136/gutjnl-2012-302779
+  sensibilidad: 0.79
+  especificidad: 0.89
+triada:
+  significante: Hiperlipasemia
+  significado: El mecanismo fisiopatológico no está documentado en esta fuente.
+  decision: 'es el criterio de referencia de laboratorio y el más discriminante, por encima de la amilasa: se eleva más tiempo y es más específica del páncreas'
+evidencia:
+- concepto: HM:0732
+  rol: prueba_especifica
+  estado_lr: no_medido
+  sensibilidad: 0.79
+  ic95_sensibilidad:
+  - 0.54
+  - 0.92
+  especificidad: 0.89
+  ic95_especificidad:
+  - 0.46
+  - 0.99
+  poblacion: personas con dolor abdominal agudo que acuden a urgencias; lipasa sérica por encima de tres veces el límite normal
+  ref: pmid:28431198
+  motivo: la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí
+  decision: 'es el criterio de referencia de laboratorio y el más discriminante, por encima de la amilasa: se eleva más tiempo y es más específica del páncreas'
+  nota: el corte es más de tres veces el límite alto, que es también el que exige Atlanta. Las cifras sustituyen al cociente del protocolo de origen, que no declaraba procedencia. El estudio que aportó unos dos tercios de los participantes quedó fuera del análisis presentado por problemas con los participantes incluidos.
+- concepto: HM:0731
+  rol: prueba_especifica
+  estado_lr: no_medido
+  sensibilidad: 0.72
+  ic95_sensibilidad:
+  - 0.59
+  - 0.82
+  especificidad: 0.93
+  ic95_especificidad:
+  - 0.66
+  - 0.99
+  poblacion: personas con dolor abdominal agudo que acuden a urgencias; amilasa sérica por encima de tres veces el límite normal
+  ref: pmid:28431198
+  motivo: la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí
+  decision: 'el mismo papel que la lipasa pero menos específica: se eleva también en patología salival y en otras causas, y se normaliza antes'
+  advertencia: no se confunde con la lipasa ni se sustituye por ella. Son enzimas distintas con especificidad distinta, y no se emparejan entre sí.
+- concepto: HM:0202
+  rol: manifestacion
+  estado_lr: no_medido
+  decision: fija la sospecha de partida. Sensible y poco específico, así que lo que se aprovecha de él es sobre todo su ausencia
+- concepto: HM:0302
+  rol: apoyo
+  estado_lr: no_medido
+  decision: aporta poca certeza por sí solo
+- concepto: HM:0601
+  rol: apoyo
+  estado_lr: no_medido
+  decision: signo de Blumberg; apoya, no decide
+- concepto: HM:0611
+  rol: apoyo
+  estado_lr: no_medido
+  decision: 'raro pero llamativo: orienta a pancreatitis necrotizante o hemorrágica'
+  advertencia: su AUSENCIA no descarta nada, y por eso no se le declara cociente negativo. Es infrecuente incluso dentro de la enfermedad.
+- concepto: HM:0901
+  rol: imagen
+  estado_lr: no_medido
+  decision: es el tercero de los tres criterios de Atlanta, y el que permite diagnosticar cuando las enzimas no llegan al corte
+  nota: la referencia es la tomografía con contraste; la ecografía sirve sobre todo para buscar la causa biliar, no para confirmar la pancreatitis
+autoevaluacion:
+- id: q1
+  pregunta: En Pancreatitis aguda, ¿qué estado de la evidencia corresponde a «Hiperlipasemia» según la fuente?
+  concepto_id: HM:0732
+  referencia_id: pmid:28431198
+  pmid: '28431198'
+  doi: 10.1002/14651858.CD012010.pub2
+  fuente_doi: 10.5281/zenodo.22064424
+  evidencia:
+    condicion_id: HM:6040
+    concepto_id: HM:0732
+    estado_lr: no_medido
+    campo: null
+    dato: null
+    poblacion: personas con dolor abdominal agudo que acuden a urgencias; lipasa sérica por encima de tres veces el límite normal
+    motivo: la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí
+    decision: 'es el criterio de referencia de laboratorio y el más discriminante, por encima de la amilasa: se eleva más tiempo y es más específica del páncreas'
+    advertencia: null
+  opciones:
+  - texto: Sin efecto discriminativo
+    correcta: false
+    feedback: 'La fuente clasifica este hallazgo como «LR no medido». LR no medido Población: personas con dolor abdominal agudo que acuden a urgencias; lipasa sérica por encima de tres veces el límite normal. Motivo: la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí. Interpretación registrada: es el criterio de referencia de laboratorio y el más discriminante, por encima de la amilasa: se eleva más tiempo y es más específica del páncreas.'
+  - texto: LR no medido
+    correcta: true
+    feedback: 'LR no medido Población: personas con dolor abdominal agudo que acuden a urgencias; lipasa sérica por encima de tres veces el límite normal. Motivo: la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí. Interpretación registrada: es el criterio de referencia de laboratorio y el más discriminante, por encima de la amilasa: se eleva más tiempo y es más específica del páncreas.'
+  - texto: LR no medible
+    correcta: false
+    feedback: 'La fuente clasifica este hallazgo como «LR no medido». LR no medido Población: personas con dolor abdominal agudo que acuden a urgencias; lipasa sérica por encima de tres veces el límite normal. Motivo: la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí. Interpretación registrada: es el criterio de referencia de laboratorio y el más discriminante, por encima de la amilasa: se eleva más tiempo y es más específica del páncreas.'
+- id: q2
+  pregunta: En Pancreatitis aguda, ¿qué estado de la evidencia corresponde a «Hiperamilasemia» según la fuente?
+  concepto_id: HM:0731
+  referencia_id: pmid:28431198
+  pmid: '28431198'
+  doi: 10.1002/14651858.CD012010.pub2
+  fuente_doi: 10.5281/zenodo.22064424
+  evidencia:
+    condicion_id: HM:6040
+    concepto_id: HM:0731
+    estado_lr: no_medido
+    campo: null
+    dato: null
+    poblacion: personas con dolor abdominal agudo que acuden a urgencias; amilasa sérica por encima de tres veces el límite normal
+    motivo: la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí
+    decision: 'el mismo papel que la lipasa pero menos específica: se eleva también en patología salival y en otras causas, y se normaliza antes'
+    advertencia: no se confunde con la lipasa ni se sustituye por ella. Son enzimas distintas con especificidad distinta, y no se emparejan entre sí.
+  opciones:
+  - texto: LR no medido
+    correcta: true
+    feedback: 'LR no medido Población: personas con dolor abdominal agudo que acuden a urgencias; amilasa sérica por encima de tres veces el límite normal. Motivo: la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí. Interpretación registrada: el mismo papel que la lipasa pero menos específica: se eleva también en patología salival y en otras causas, y se normaliza antes. Advertencia: no se confunde con la lipasa ni se sustituye por ella. Son enzimas distintas con especificidad distinta, y no se emparejan entre sí.'
+  - texto: LR no medible
+    correcta: false
+    feedback: 'La fuente clasifica este hallazgo como «LR no medido». LR no medido Población: personas con dolor abdominal agudo que acuden a urgencias; amilasa sérica por encima de tres veces el límite normal. Motivo: la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí. Interpretación registrada: el mismo papel que la lipasa pero menos específica: se eleva también en patología salival y en otras causas, y se normaliza antes. Advertencia: no se confunde con la lipasa ni se sustituye por ella. Son enzimas distintas con especificidad distinta, y no se emparejan entre sí.'
+  - texto: Sin efecto discriminativo
+    correcta: false
+    feedback: 'La fuente clasifica este hallazgo como «LR no medido». LR no medido Población: personas con dolor abdominal agudo que acuden a urgencias; amilasa sérica por encima de tres veces el límite normal. Motivo: la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí. Interpretación registrada: el mismo papel que la lipasa pero menos específica: se eleva también en patología salival y en otras causas, y se normaliza antes. Advertencia: no se confunde con la lipasa ni se sustituye por ella. Son enzimas distintas con especificidad distinta, y no se emparejan entre sí.'
+---
+
+# Pancreatitis aguda
+
+Hallazgos y criterios clínicos sin cocientes de verosimilitud medidos.
+
+## Nombre en inglés
+
+Acute pancreatitis
+
+## Sinónimos
+
+inflamación aguda del páncreas
+
+## Códigos
+
+Snomed: 197456007; Cie10: No documentado.
+
+## Factores de riesgo
+
+**Consumo de alcohol por encima de 40 g/día** (pmid:26844279): relación dosis-respuesta monótona en varones y no lineal en mujeres. Por debajo de 40 g/día no aumenta el riesgo frente a la abstención: RR 1.1 (IC95% 0.69-1.74) en varones y 0.76 (IC95% 0.60-0.97) en mujeres; por encima, el riesgo crece. El resumen no da el RR de pancreatitis aguda a dosis altas. Metaanálisis de 7 estudios con 157 026 participantes
+
+**Hipertrigliceridemia** (pmid:27820614): triglicéridos no en ayunas de 5 mmol/L o más frente a menos de 1 mmol/L, HR 8.7 (IC95% 3.7-20.0) ajustado; ya de 2.00 a 2.99 mmol/L, HR 2.3 (IC95% 1.3-4.0). HR 1.17 (IC95% 1.10-1.24) por cada 1 mmol/L. Dos cohortes de Copenhague con 116 550 personas y 434 casos
+
+**Colangiopancreatografía retrógrada endoscópica previa** (pmid:25088919): incidencia de pancreatitis tras la CPRE del 9.7% y del 14.7% en pacientes de alto riesgo, en los brazos placebo o sin prótesis de 108 ensayos (13 296 pacientes). La fuente no tiene grupo sin CPRE, así que es un riesgo absoluto, no un cociente
+
+## Hallazgos clínicos
+
+### Hiperlipasemia (HM:0732)
+
+**Rol:** Prueba específica
+
+**Estado del LR:** LR no medido
+
+**Sensibilidad:** 0.79
+
+**Ic95 sensibilidad:** 0.54 / 0.92
+
+**Especificidad:** 0.89
+
+**Ic95 especificidad:** 0.46 / 0.99
+
+**Población:** personas con dolor abdominal agudo que acuden a urgencias; lipasa sérica por encima de tres veces el límite normal
+
+**Referencia:** pmid:28431198
+
+**Motivo:** la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí
+
+**Decisión:** es el criterio de referencia de laboratorio y el más discriminante, por encima de la amilasa: se eleva más tiempo y es más específica del páncreas
+
+**Nota:** el corte es más de tres veces el límite alto, que es también el que exige Atlanta. Las cifras sustituyen al cociente del protocolo de origen, que no declaraba procedencia. El estudio que aportó unos dos tercios de los participantes quedó fuera del análisis presentado por problemas con los participantes incluidos.
+
+### Hiperamilasemia (HM:0731)
+
+**Rol:** Prueba específica
+
+**Estado del LR:** LR no medido
+
+**Sensibilidad:** 0.72
+
+**Ic95 sensibilidad:** 0.59 / 0.82
+
+**Especificidad:** 0.93
+
+**Ic95 especificidad:** 0.66 / 0.99
+
+**Población:** personas con dolor abdominal agudo que acuden a urgencias; amilasa sérica por encima de tres veces el límite normal
+
+**Referencia:** pmid:28431198
+
+**Motivo:** la revisión Cochrane publica sensibilidad y especificidad agrupadas, con riesgo de sesgo incierto o alto en todos los estudios, pero no el cociente. No se calcula aquí
+
+**Decisión:** el mismo papel que la lipasa pero menos específica: se eleva también en patología salival y en otras causas, y se normaliza antes
+
+**Advertencia:** no se confunde con la lipasa ni se sustituye por ella. Son enzimas distintas con especificidad distinta, y no se emparejan entre sí.
+
+### Dolor epigástrico (HM:0202)
+
+**Rol:** Manifestación
+
+**Estado del LR:** LR no medido
+
+**Decisión:** fija la sospecha de partida. Sensible y poco específico, así que lo que se aprovecha de él es sobre todo su ausencia
+
+### Vómitos (HM:0302)
+
+**Rol:** Apoyo diagnóstico
+
+**Estado del LR:** LR no medido
+
+**Decisión:** aporta poca certeza por sí solo
+
+### Irritación peritoneal (HM:0601)
+
+**Rol:** Apoyo diagnóstico
+
+**Estado del LR:** LR no medido
+
+**Decisión:** signo de Blumberg; apoya, no decide
+
+### Signo de Cullen (HM:0611)
+
+**Rol:** Apoyo diagnóstico
+
+**Estado del LR:** LR no medido
+
+**Decisión:** raro pero llamativo: orienta a pancreatitis necrotizante o hemorrágica
+
+**Advertencia:** su AUSENCIA no descarta nada, y por eso no se le declara cociente negativo. Es infrecuente incluso dentro de la enfermedad.
+
+### Hallazgos de imagen compatibles con pancreatitis (HM:0901)
+
+**Rol:** Imagen
+
+**Estado del LR:** LR no medido
+
+**Decisión:** es el tercero de los tres criterios de Atlanta, y el que permite diagnosticar cuando las enzimas no llegan al corte
+
+**Nota:** la referencia es la tomografía con contraste; la ecografía sirve sobre todo para buscar la causa biliar, no para confirmar la pancreatitis
+
+## Notas de uso
+
+LOS CRITERIOS DE ATLANTA NO ESTÁN AQUÍ COMO REGLA, solo descritos abajo en prosa. Una `regla` exige `ref` y su fuente es Atlanta 2012 (pmid:23100216), que ya está cotejada y sin errata pendiente, así que el validador no lo impide: falta registrar la regla.
+
+NINGUNA DE LAS SIETE ARISTAS TRAE COCIENTE, y no es un descuido de la migración: es que el protocolo de origen no declara procedencia para ninguno. La lipasa y la amilasa traen sensibilidad y especificidad de una revisión Cochrane, que no publica el cociente y aquí no se calcula; las otras cinco no traen cifra alguna. Quien lea esta condición esperando cociente con el que mover una probabilidad no lo va a encontrar aquí todavía.
+
+Lo único cuantificado como criterio es la regla de Atlanta, que no es un cociente sino un criterio de clasificación: dice cuándo el diagnóstico está hecho, no cuánto se mueve la probabilidad con cada hallazgo. Además, la lipasa y la amilasa traen sensibilidad y especificidad (pmid:28431198).
+
+## Aspectos pendientes de documentación
+
+Factor retirado: litiasis biliar, incluida la coledocolitiasis. Es la causa más frecuente de pancreatitis aguda, pero no hay fuente con grupo control que la cuantifique como factor. Búsqueda en PubMed del 2026-09-24. Consulta «(gallstone disease OR gallstones OR cholelithiasis) AND (acute pancreatitis) AND (hazard ratio OR relative risk OR odds ratio) AND (population-based cohort OR prospective cohort OR UK Biobank OR Mendelian randomization)»: 125 resultados, cribados por título los 15 primeros. Ninguno da el riesgo de pancreatitis en portadores de litiasis frente a no portadores. Si se registra, será como causa, con la fuente que dé su frecuencia.
+
+COCIENTES DE VEROSIMILITUD: el protocolo de origen asigna un cociente a cada uno de los siete hallazgos, y ninguno se publica aquí porque no declara procedencia verificable. Para la lipasa y la amilasa se buscó en PubMed (2026-10-16) y la mejor fuente es una revisión Cochrane (pmid:28431198) que publica sensibilidad y especificidad con intervalos, no el cociente; esas cifras ya están en las aristas. Para el dolor epigástrico, los vómitos, la irritación peritoneal, el signo de Cullen y los hallazgos de imagen la búsqueda no halló cociente ni sensibilidad y especificidad agrupadas utilizables; el signo de Cullen solo tiene su incidencia (equimosis de la pared corporal en el 3 % de 770 pacientes, Dickson 1984, pmid:6237447), que mide otra cosa.
+
+EL ORIGEN DE LOS COCIENTES YA NO ES UNA INCÓGNITA: GetTheDiagnosis.org, confirmado por el autor del protocolo el 16/09/2026. Lo que falta no es averiguar de dónde salieron, sino llegar al artículo que cada uno resume. GetTheDiagnosis cita sus fuentes por estudio, así que la vía es abrir la ficha de pancreatitis de ese sitio y recuperar el PMID de cada cociente.
+
+Dos atajos que NO valen, y conviene dejarlos escritos para no repetirlos: la serie Rational Clinical Examination no tiene artículo de pancreatitis —comprobado contra PubMed—, y los metaanálisis de pancreatitis POST-CPRE miden otra cosa y no sustituyen a la fuente de estos cocientes.
+
+LA REGLA DE ATLANTA, que es lo único cuantificado y bien citado de todo el protocolo. La referencia (pmid:23100216) ya está cotejada y sin errata pendiente; falta registrar la regla. Sus componentes son dolor abdominal en cinturón y dolor epigástrico (dolor), hiperamilasemia y hiperlipasemia (enzimas) y hallazgos de imagen compatibles con pancreatitis (imagen), con el criterio de dos de tres.
+
+Los cuatro factores de riesgo entran sin `ref`. La asociación es conocida, pero este índice guarda hechos con procedencia y todavía no la tienen.
+
+## Conclusión de la fuente
+
+El diagnóstico de pancreatitis aguda se establece con dos de tres criterios: dolor abdominal característico, elevación de las enzimas pancreáticas por encima de tres veces el límite alto de la normalidad, o hallazgos de imagen compatibles.
+
+## Referencias y procedencia
+
+**pmid:23100216:** Classification of acute pancreatitis--2012: revision of the Atlanta classification and definitions by international consensus. Gut, 2013. DOI: 10.1136/gutjnl-2012-302779.
+
+**pmid:25088919:** Incidence, severity, and mortality of post-ERCP pancreatitis: a systematic review by using randomized, controlled trials. Gastrointest Endosc, 2015. DOI: 10.1016/j.gie.2014.06.045.
+
+**pmid:26844279:** Alcohol Consumption as a Risk Factor for Acute and Chronic Pancreatitis: A Systematic Review and a Series of Meta-analyses. EBioMedicine, 2015. DOI: 10.1016/j.ebiom.2015.11.023.
+
+**pmid:27820614:** Nonfasting Mild-to-Moderate Hypertriglyceridemia and Risk of Acute Pancreatitis. JAMA Intern Med, 2016. DOI: 10.1001/jamainternmed.2016.6875.
+
+**pmid:28431198:** Serum amylase and lipase and urinary trypsinogen and amylase for diagnosis of acute pancreatitis. Cochrane Database Syst Rev, 2017. DOI: 10.1002/14651858.CD012010.pub2.
+
+**pmid:6237447:** The incidence and prognosis of body wall ecchymosis in acute pancreatitis. Surg Gynecol Obstet, 1984. DOI: no documentado.
+
+Fuente clínica: medsemiotics-db, condición HM:6040.

@@ -1,0 +1,437 @@
+---
+id: HM6016-01
+slug: embarazo-ectopico-precision-semiotica
+title: 'Embarazo ectópico: hallazgos y evidencia clínica'
+subtitle: Hallazgos, cocientes documentados y límites de la evidencia.
+date: '2026-08-21'
+author: Alcy E. Torres-Guerrero
+category: medicina_interna
+category_label: Medicina Interna
+tags:
+- embarazo-ectopico
+- medicina_interna
+- semiologia
+reading_time: 8 min
+difficulty: Intermedio
+fuente:
+  repositorio: alcyedmundo281/medsemiotics-db
+  revision: ea2f6e63b8508e6a36a28fd11950bd28c0900a49
+  doi: 10.5281/zenodo.22064424
+  condicion: condiciones/HM6016-embarazo-ectopico.yaml
+  archivos:
+    CITATION.cff: 6e9c73a515bb6225965edda4efc52104a4e3b9776dab1bd4fce8e643d86eb1d2
+    conceptos/HM0001-hallazgo-clinico.yaml: 5cf5cbb0a6ce5c773fd60ad80c8b467259ad4d480cd2cd60aa1335d5c8b65329
+    conceptos/HM0200-dolor.yaml: 583f1c01f2eeeed369469010e4b7d24d73d883bc3ef40266f80eaa0db0089463
+    conceptos/HM0201-dolor-abdominal.yaml: adbaa4992613e08871e7e4d6259066ab9da4d9696dd256e274007f5965dd7813
+    conceptos/HM0600-signo-de-exploracion.yaml: 86a2ac9babe66028eecc797ddbf4d9ea382a6fd685e9cb8df91bb959029d62bf
+    conceptos/HM0710-alteracion-hematologica.yaml: 8779ebf74773e0648f4a534cb7c6528ec05cfc16c33123eb06d539cc1aa0e3ad
+    conceptos/HM0900-hallazgo-de-imagen.yaml: 0b40c9368c746533cc335071c04e027c4465fb29158ed2cc747d65b9bb573e67
+    conceptos/HM3064-masa-anexial-sin-gestacion-intrauterina.yaml: 26a6a3c941046e13dcbd5bc187fd5b150cd4363c1b1c9b580e175db655831b15
+    conceptos/HM3065-anomalia-anexial-en-ecografia-transvaginal.yaml: 201db5101f90698a603a2fed159b9511ebd7e48f0cb70e5c67e2a297241a7c1f
+    conceptos/HM3066-dolor-a-la-movilizacion-cervical.yaml: 2c27db232894c6a15ba314df23163c9b9684b3dbd1340f2fa398bda7648b81be
+    conceptos/HM3067-masa-anexial-en-la-exploracion-bimanual.yaml: 1a1bb1e23bd7e565387065099cfdcd1af8160e58117a524eb84f4847d21255ef
+    conceptos/HM3068-dolor-a-la-palpacion-anexial.yaml: cfacb53553472ff10929397fb4b333684a4110ec83e44a02b807a2742dcc1161
+    conceptos/HM3069-sangrado-vaginal-en-la-gestacion-precoz.yaml: a7c6df28b077ba236b0c2784d246ad30c7e10e5bc9eae7d10725927d836273ee
+    conceptos/HM3165-embarazo-intrauterino-confirmado.yaml: 9526f85850a91e95243c5eafb04dfccb263eb8b37fd37855676a65616a9466c5
+    conceptos/HM3189-hcg-serica-cuantitativa.yaml: 5df98b5d3d6b165b99abf2ef3341ec5d3ad35cf3c7ef75877e7acedb2912b167
+    condiciones/HM6002-sindrome-intestino-irritable.yaml: 361961cdc2583861c1d77bb2ee3c1557c2ebfb096681ba3d806ee565145f69db
+    condiciones/HM6016-embarazo-ectopico.yaml: fb1d6c98506158df5d8cf54771883ac68297f2937ea1e6e5ca9e9396da865d01
+    referencias/pmid-16308901.yaml: 7d83fd01af208b65e0e2e48604c19ee7e3ae2580a9e25c9dcca9a94de5e970f9
+    referencias/pmid-18441863.yaml: d9f899b7a68ba1799bfaae19fadfcc97108841be6db29c7632e00ce769237478
+    referencias/pmid-23055768.yaml: 6ff183a65d1b0bb695846f2ae115ec0e7c0b18ca72b18f8cf6eb2ae158f926ec
+    referencias/pmid-23262929.yaml: baf9bd5ef0bf63da5d43af178030b43d16e0c2a51d182e40e1dc26a27ce90f9d
+    referencias/pmid-23613077.yaml: 8611f28321a818a1dd3195b5ddfc92a6f3f8af796cb75285e456be3693232cc1
+    referencias/pmid-27144627.yaml: 8fee779f41d1a67e9a989383a7d43687d62c6d28617e004730efe3b075dafadf
+    referencias/pmid-36063623.yaml: b3c2b193b298c18f72507cab22503d788ddb54f6e11877b2e91c33665db2d7f0
+grounding:
+  condicion_id: HM:6016
+  condicion_nombre: Embarazo ectópico
+  concepto_id: HM:3064
+  concepto_nombre: Masa anexial sin gestación intrauterina en ecografía transvaginal
+  estado_lr: medido
+  lr_positivo: 111
+  lr_negativo: null
+  lr_positivo_rango: null
+  lr_negativo_rango: null
+  poblacion: gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 6885)
+  referencia_id: pmid:23613077
+  referencia_cita: 'Crochet JR, Bastian LA, Chireau MV Does this woman have an ectopic pregnancy?: the rational clinical examination systematic review JAMA 2013'
+  pmid: '23613077'
+  doi: 10.1001/jama.2013.3914
+triada:
+  significante: Masa anexial sin gestación intrauterina en ecografía transvaginal
+  significado: El mecanismo fisiopatológico no está documentado en esta fuente.
+  decision: el hallazgo que confirma. Con el útero vacío, una masa anexial mueve la probabilidad más que todo lo demás junto
+evidencia:
+- concepto: HM:3165
+  rol: imagen
+  estado_lr: no_medido
+  efecto: excluye
+  dispara_si: presente
+  sostiene: mecanismo
+  poblacion: 143 gestantes sintomáticas del primer trimestre atendidas en urgencias por sangrado vaginal y dolor abdominopélvico
+  ref: pmid:36063623
+  motivo: 'la exclusión no descansa en un cociente sino en la anatomía: un embarazo ectópico está fuera del útero por definición, así que ver el embarazo dentro lo vuelve muy improbable sin que nadie haya tenido que medirlo. Y la fuente no lo mide: su condición diana es el embarazo intrauterino contrastado contra la ecografía transvaginal del obstetra, no el ectópico contrastado contra visualización quirúrgica o seguimiento. Convertir su especificidad del 100% en un cociente del ectópico sería inventar un número que el estudio no calculó. Ver `notas_de_uso`.'
+  decision: 'cuando dice que sí, créele; cuando no lo ve, no has descartado nada. Es una asimetría, no un resultado positivo o negativo: sin intrauterino confirmado hay un embarazo de localización no determinada, que obliga a ecografía transvaginal y hCG, no a un alta'
+  advertencia: 'el embarazo heterotópico existe: confirmar el intrauterino no excluye un ectópico simultáneo, y la excepción pesa de verdad en la mujer que viene de reproducción asistida. El seudosaco es la otra trampa, y es la peligrosa: una colección endometrial central sin saco vitelino ni embrión NO es este hallazgo'
+- concepto: HM:3064
+  rol: imagen
+  estado_lr: medido
+  poblacion: gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 6885)
+  lr_positivo: &id001
+    valor: 111
+    ic95:
+    - 12
+    - 1028
+    ref: pmid:23613077
+  decision: el hallazgo que confirma. Con el útero vacío, una masa anexial mueve la probabilidad más que todo lo demás junto
+  advertencia: el intervalo de confianza abarca de 12 a 1028. La dirección es inequívoca; la magnitud exacta, no. Tratar el 111 como un número fino es leer en la cifra una precisión que el estudio no tiene
+- concepto: HM:3065
+  rol: imagen
+  estado_lr: medido
+  poblacion: gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 6885)
+  lr_negativo:
+    valor: 0.12
+    ic95:
+    - 0.03
+    - 0.55
+    ref: pmid:23613077
+    nota: la fuente lo expresa como el valor de NO encontrar anomalías anexiales, que es el cociente negativo de este hallazgo
+  decision: la exploración anexial normal es lo que más baja la probabilidad, y es la otra mitad de por qué la ecografía transvaginal manda aquí
+- concepto: HM:3066
+  rol: prueba_especifica
+  estado_lr: medido
+  poblacion: gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 1435)
+  lr_positivo:
+    valor: 4.9
+    ic95:
+    - 1.7
+    - 14
+    ref: pmid:23613077
+- concepto: HM:3067
+  rol: apoyo
+  estado_lr: medido
+  poblacion: gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 1378)
+  lr_positivo:
+    valor: 2.4
+    ic95:
+    - 1.6
+    - 3.7
+    ref: pmid:23613077
+  decision: 'la misma masa vista en la ecografía vale 111 y palpada vale 2.4. No es incoherencia: son dos pruebas distintas sobre el mismo órgano'
+- concepto: HM:3068
+  rol: apoyo
+  estado_lr: medido
+  poblacion: gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 1435)
+  lr_positivo:
+    valor: 1.9
+    ic95:
+    - 1.0
+    - 3.5
+    ref: pmid:23613077
+  advertencia: 'el extremo inferior del intervalo toca 1.0: compatible con no aportar nada'
+- concepto: HM:0201
+  rol: manifestacion
+  estado_lr: no_medido
+  ref: pmid:23613077
+  motivo: 'es criterio de entrada del estudio, así que dentro de esa población no hay contraste que medir. La fuente sí acota la anamnesis entera: ningún componente pasa de un LR+ de 1.5'
+- concepto: HM:3069
+  rol: manifestacion
+  estado_lr: no_medido
+  ref: pmid:23613077
+  motivo: 'el otro criterio de entrada, con la misma acotación: ningún componente de la anamnesis alcanza un LR+ de 1.5'
+- concepto: HM:3189
+  rol: prueba_especifica
+  estado_lr: medido
+  lr_positivo:
+    valor: 2.3
+    umbral: hCG > 1500 mIU/mL
+    ref: pmid:16308901
+  lr_negativo:
+    valor: 0.91
+    umbral: hCG > 1500 mIU/mL
+    ref: pmid:16308901
+  poblacion: 527 mujeres con embarazo de localización no determinada (PUL) tras ecografía transvaginal en unidad especializada
+  graduacion:
+    parametro: hCG sérica
+    unidad: mIU/mL
+    lectura: acumulativo
+    nota: 1 IU/L equivale numéricamente a 1 mIU/mL
+  tramos:
+  - umbral: hCG > 1000 mIU/mL
+    desde: 1000
+    sensibilidad: 0.217
+    especificidad: 0.873
+    lr_positivo: 1.71
+    lr_negativo: 0.9
+    ref: pmid:16308901
+    nota: un valor superior a 1000 mIU/mL con útero vacío desplaza muy poco la probabilidad (LR+ 1.71); la mayoría de ectópicos cursan con valores inferiores
+  - umbral: hCG > 1500 mIU/mL
+    desde: 1500
+    sensibilidad: 0.152
+    especificidad: 0.934
+    lr_positivo: 2.3
+    lr_negativo: 0.91
+    ref: pmid:16308901
+    nota: umbral clásico de zona discriminatoria; especificidad del 93.4% pero sensibilidad muy pobre (15.2%), con LR+ de sólo 2.30
+  - umbral: hCG > 2000 mIU/mL
+    desde: 2000
+    sensibilidad: 0.109
+    especificidad: 0.952
+    lr_positivo: 2.27
+    lr_negativo: 0.94
+    ref: pmid:16308901
+    nota: elevar el corte a 2000 mIU/mL aumenta la especificidad al 95.2% pero reduce la sensibilidad al 10.9%, sin ganar potencia diagnóstica (LR+ 2.27)
+  decision: ningún valor aislado de hCG por encima de la zona discriminatoria confirma el ectópico, y un valor por debajo nunca lo descarta (LR− 0.90-0.94). La zona discriminatoria define cuándo un embarazo intrauterino viable debería verse, no cuándo un embarazo es obligadamente ectópico
+  advertencia: el uso aislado de la zona discriminatoria clásica (1500-2000 mIU/mL) para indicar metotrexato o legrado interrumpe gestaciones intrauterinas viables que tardan más en ser visibles. La guía ACOG y Connolly 2013 (pmid:23262929) elevan el corte de visualización fiable al 99% a 3500 mIU/mL
+autoevaluacion:
+- id: q1
+  pregunta: 'En Embarazo ectópico, ¿cuál es el resultado documentado del LR positivo para «Masa anexial sin gestación intrauterina en ecografía transvaginal»? Población: gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 6885).'
+  concepto_id: HM:3064
+  referencia_id: pmid:23613077
+  pmid: '23613077'
+  doi: 10.1001/jama.2013.3914
+  fuente_doi: 10.5281/zenodo.22064424
+  evidencia:
+    condicion_id: HM:6016
+    concepto_id: HM:3064
+    estado_lr: medido
+    campo: lr_positivo
+    dato: *id001
+    poblacion: gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 6885)
+    motivo: null
+    decision: el hallazgo que confirma. Con el útero vacío, una masa anexial mueve la probabilidad más que todo lo demás junto
+    advertencia: el intervalo de confianza abarca de 12 a 1028. La dirección es inequívoca; la magnitud exacta, no. Tratar el 111 como un número fino es leer en la cifra una precisión que el estudio no tiene
+  opciones:
+  - texto: La fuente no dispone de un cociente medido para este hallazgo.
+    correcta: false
+    feedback: 'Sí hay una medición documentada: LR positivo: 111. LR positivo: 111. IC del 95 %: 12 a 1028. Población: gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 6885). Interpretación registrada: el hallazgo que confirma. Con el útero vacío, una masa anexial mueve la probabilidad más que todo lo demás junto. Advertencia: el intervalo de confianza abarca de 12 a 1028. La dirección es inequívoca; la magnitud exacta, no. Tratar el 111 como un número fino es leer en la cifra una precisión que el estudio no tiene.'
+  - texto: 'LR positivo: 111.'
+    correcta: true
+    feedback: 'LR positivo: 111. IC del 95 %: 12 a 1028. Población: gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 6885). Interpretación registrada: el hallazgo que confirma. Con el útero vacío, una masa anexial mueve la probabilidad más que todo lo demás junto. Advertencia: el intervalo de confianza abarca de 12 a 1028. La dirección es inequívoca; la magnitud exacta, no. Tratar el 111 como un número fino es leer en la cifra una precisión que el estudio no tiene.'
+  - texto: El valor 111 corresponde al LR negativo y no al LR positivo.
+    correcta: false
+    feedback: 'Ese número corresponde al LR positivo, no al LR negativo. LR positivo: 111. IC del 95 %: 12 a 1028. Población: gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 6885). Interpretación registrada: el hallazgo que confirma. Con el útero vacío, una masa anexial mueve la probabilidad más que todo lo demás junto. Advertencia: el intervalo de confianza abarca de 12 a 1028. La dirección es inequívoca; la magnitud exacta, no. Tratar el 111 como un número fino es leer en la cifra una precisión que el estudio no tiene.'
+- id: q2
+  pregunta: En Embarazo ectópico, ¿qué estado de la evidencia corresponde a «Embarazo intrauterino confirmado en ecografía» según la fuente?
+  concepto_id: HM:3165
+  referencia_id: pmid:36063623
+  pmid: '36063623'
+  doi: 10.1016/j.ajem.2022.08.045
+  fuente_doi: 10.5281/zenodo.22064424
+  evidencia:
+    condicion_id: HM:6016
+    concepto_id: HM:3165
+    estado_lr: no_medido
+    campo: null
+    dato: null
+    poblacion: 143 gestantes sintomáticas del primer trimestre atendidas en urgencias por sangrado vaginal y dolor abdominopélvico
+    motivo: 'la exclusión no descansa en un cociente sino en la anatomía: un embarazo ectópico está fuera del útero por definición, así que ver el embarazo dentro lo vuelve muy improbable sin que nadie haya tenido que medirlo. Y la fuente no lo mide: su condición diana es el embarazo intrauterino contrastado contra la ecografía transvaginal del obstetra, no el ectópico contrastado contra visualización quirúrgica o seguimiento. Convertir su especificidad del 100% en un cociente del ectópico sería inventar un número que el estudio no calculó. Ver `notas_de_uso`.'
+    decision: 'cuando dice que sí, créele; cuando no lo ve, no has descartado nada. Es una asimetría, no un resultado positivo o negativo: sin intrauterino confirmado hay un embarazo de localización no determinada, que obliga a ecografía transvaginal y hCG, no a un alta'
+    advertencia: 'el embarazo heterotópico existe: confirmar el intrauterino no excluye un ectópico simultáneo, y la excepción pesa de verdad en la mujer que viene de reproducción asistida. El seudosaco es la otra trampa, y es la peligrosa: una colección endometrial central sin saco vitelino ni embrión NO es este hallazgo'
+  opciones:
+  - texto: LR no medido
+    correcta: true
+    feedback: 'LR no medido Población: 143 gestantes sintomáticas del primer trimestre atendidas en urgencias por sangrado vaginal y dolor abdominopélvico. Motivo: la exclusión no descansa en un cociente sino en la anatomía: un embarazo ectópico está fuera del útero por definición, así que ver el embarazo dentro lo vuelve muy improbable sin que nadie haya tenido que medirlo. Y la fuente no lo mide: su condición diana es el embarazo intrauterino contrastado contra la ecografía transvaginal del obstetra, no el ectópico contrastado contra visualización quirúrgica o seguimiento. Convertir su especificidad del 100% en un cociente del ectópico sería inventar un número que el estudio no calculó. Ver `notas_de_uso`. Interpretación registrada: cuando dice que sí, créele; cuando no lo ve, no has descartado nada. Es una asimetría, no un resultado positivo o negativo: sin intrauterino confirmado hay un embarazo de localización no determinada, que obliga a ecografía transvaginal y hCG, no a un alta.
+      Advertencia: el embarazo heterotópico existe: confirmar el intrauterino no excluye un ectópico simultáneo, y la excepción pesa de verdad en la mujer que viene de reproducción asistida. El seudosaco es la otra trampa, y es la peligrosa: una colección endometrial central sin saco vitelino ni embrión NO es este hallazgo.'
+  - texto: LR no medible
+    correcta: false
+    feedback: 'La fuente clasifica este hallazgo como «LR no medido». LR no medido Población: 143 gestantes sintomáticas del primer trimestre atendidas en urgencias por sangrado vaginal y dolor abdominopélvico. Motivo: la exclusión no descansa en un cociente sino en la anatomía: un embarazo ectópico está fuera del útero por definición, así que ver el embarazo dentro lo vuelve muy improbable sin que nadie haya tenido que medirlo. Y la fuente no lo mide: su condición diana es el embarazo intrauterino contrastado contra la ecografía transvaginal del obstetra, no el ectópico contrastado contra visualización quirúrgica o seguimiento. Convertir su especificidad del 100% en un cociente del ectópico sería inventar un número que el estudio no calculó. Ver `notas_de_uso`. Interpretación registrada: cuando dice que sí, créele; cuando no lo ve, no has descartado nada. Es una asimetría, no un resultado positivo o negativo: sin intrauterino confirmado hay un embarazo de localización no determinada, que
+      obliga a ecografía transvaginal y hCG, no a un alta. Advertencia: el embarazo heterotópico existe: confirmar el intrauterino no excluye un ectópico simultáneo, y la excepción pesa de verdad en la mujer que viene de reproducción asistida. El seudosaco es la otra trampa, y es la peligrosa: una colección endometrial central sin saco vitelino ni embrión NO es este hallazgo.'
+  - texto: Sin efecto discriminativo
+    correcta: false
+    feedback: 'La fuente clasifica este hallazgo como «LR no medido». LR no medido Población: 143 gestantes sintomáticas del primer trimestre atendidas en urgencias por sangrado vaginal y dolor abdominopélvico. Motivo: la exclusión no descansa en un cociente sino en la anatomía: un embarazo ectópico está fuera del útero por definición, así que ver el embarazo dentro lo vuelve muy improbable sin que nadie haya tenido que medirlo. Y la fuente no lo mide: su condición diana es el embarazo intrauterino contrastado contra la ecografía transvaginal del obstetra, no el ectópico contrastado contra visualización quirúrgica o seguimiento. Convertir su especificidad del 100% en un cociente del ectópico sería inventar un número que el estudio no calculó. Ver `notas_de_uso`. Interpretación registrada: cuando dice que sí, créele; cuando no lo ve, no has descartado nada. Es una asimetría, no un resultado positivo o negativo: sin intrauterino confirmado hay un embarazo de localización no determinada, que
+      obliga a ecografía transvaginal y hCG, no a un alta. Advertencia: el embarazo heterotópico existe: confirmar el intrauterino no excluye un ectópico simultáneo, y la excepción pesa de verdad en la mujer que viene de reproducción asistida. El seudosaco es la otra trampa, y es la peligrosa: una colección endometrial central sin saco vitelino ni embrión NO es este hallazgo.'
+---
+
+# Embarazo ectópico
+
+Hallazgos, cocientes documentados y límites de la evidencia.
+
+## Nombre en inglés
+
+Ectopic pregnancy
+
+## Sinónimos
+
+gestación ectópica
+
+embarazo extrauterino
+
+embarazo tubárico
+
+## Códigos
+
+Snomed: No documentado.; Cie10: No documentado.
+
+## Hallazgos clínicos
+
+### Embarazo intrauterino confirmado en ecografía (HM:3165)
+
+**Significante:** Saco gestacional dentro del útero con saco vitelino o embrión en su interior, rodeado de un manto de miometrio.
+
+**Significado:** El embarazo está donde debe estar. No confirmarlo no significa que sea ectópico: significa que no se sabe dónde está.
+
+**Falsos positivos:** Seudosaco: colección de líquido o sangre en la cavidad endometrial, central y sin saco vitelino ni embrión, en una mujer que sí tiene un ectópico / Embarazo intersticial o cornual: está en el útero pero fuera de la cavidad, con manto miometrial delgado o ausente hacia un lado / Embarazo en cicatriz de cesárea, que se implanta sobre la cicatriz / Embarazo heterotópico: hay un intrauterino y un ectópico a la vez, así que confirmar el primero no excluye el segundo / Quiste o colección anexial tomada por saco gestacional extrauterino / Líquido libre escaso fisiológico en fondo de saco, sin sangrado / Ventana mala por vejiga vacía, obesidad, gas intestinal o útero muy retrovertido: un estudio no concluyente no es un estudio negativo
+
+**Rol:** Imagen
+
+**Estado del LR:** LR no medido
+
+**Efecto:** excluye
+
+**Dispara si:** presente
+
+**Sostiene:** mecanismo
+
+**Población:** 143 gestantes sintomáticas del primer trimestre atendidas en urgencias por sangrado vaginal y dolor abdominopélvico
+
+**Referencia:** pmid:36063623
+
+**Motivo:** la exclusión no descansa en un cociente sino en la anatomía: un embarazo ectópico está fuera del útero por definición, así que ver el embarazo dentro lo vuelve muy improbable sin que nadie haya tenido que medirlo. Y la fuente no lo mide: su condición diana es el embarazo intrauterino contrastado contra la ecografía transvaginal del obstetra, no el ectópico contrastado contra visualización quirúrgica o seguimiento. Convertir su especificidad del 100% en un cociente del ectópico sería inventar un número que el estudio no calculó. Ver `notas_de_uso`.
+
+**Decisión:** cuando dice que sí, créele; cuando no lo ve, no has descartado nada. Es una asimetría, no un resultado positivo o negativo: sin intrauterino confirmado hay un embarazo de localización no determinada, que obliga a ecografía transvaginal y hCG, no a un alta
+
+**Advertencia:** el embarazo heterotópico existe: confirmar el intrauterino no excluye un ectópico simultáneo, y la excepción pesa de verdad en la mujer que viene de reproducción asistida. El seudosaco es la otra trampa, y es la peligrosa: una colección endometrial central sin saco vitelino ni embrión NO es este hallazgo
+
+### Masa anexial sin gestación intrauterina en ecografía transvaginal (HM:3064)
+
+**Rol:** Imagen
+
+**Estado del LR:** LR medido
+
+**Población:** gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 6885)
+
+**LR positivo:** Valor: 111; IC del 95 %: 12 / 1028; Referencia: pmid:23613077
+
+**Decisión:** el hallazgo que confirma. Con el útero vacío, una masa anexial mueve la probabilidad más que todo lo demás junto
+
+**Advertencia:** el intervalo de confianza abarca de 12 a 1028. La dirección es inequívoca; la magnitud exacta, no. Tratar el 111 como un número fino es leer en la cifra una precisión que el estudio no tiene
+
+### Anomalía anexial en ecografía transvaginal (HM:3065)
+
+**Rol:** Imagen
+
+**Estado del LR:** LR medido
+
+**Población:** gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 6885)
+
+**LR negativo:** Valor: 0.12; IC del 95 %: 0.03 / 0.55; Referencia: pmid:23613077; Nota: la fuente lo expresa como el valor de NO encontrar anomalías anexiales, que es el cociente negativo de este hallazgo
+
+**Decisión:** la exploración anexial normal es lo que más baja la probabilidad, y es la otra mitad de por qué la ecografía transvaginal manda aquí
+
+### Dolor a la movilización cervical (HM:3066)
+
+**Rol:** Prueba específica
+
+**Estado del LR:** LR medido
+
+**Población:** gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 1435)
+
+**LR positivo:** Valor: 4.9; IC del 95 %: 1.7 / 14; Referencia: pmid:23613077
+
+### Masa anexial en la exploración bimanual (HM:3067)
+
+**Rol:** Apoyo diagnóstico
+
+**Estado del LR:** LR medido
+
+**Población:** gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 1378)
+
+**LR positivo:** Valor: 2.4; IC del 95 %: 1.6 / 3.7; Referencia: pmid:23613077
+
+**Decisión:** la misma masa vista en la ecografía vale 111 y palpada vale 2.4. No es incoherencia: son dos pruebas distintas sobre el mismo órgano
+
+### Dolor a la palpación anexial (HM:3068)
+
+**Rol:** Apoyo diagnóstico
+
+**Estado del LR:** LR medido
+
+**Población:** gestantes con dolor abdominal o sangrado vaginal en la gestación precoz (n = 1435)
+
+**LR positivo:** Valor: 1.9; IC del 95 %: 1.0 / 3.5; Referencia: pmid:23613077
+
+**Advertencia:** el extremo inferior del intervalo toca 1.0: compatible con no aportar nada
+
+### Dolor abdominal (HM:0201)
+
+**Significante:** Dolor referido por el paciente en el abdomen. Se caracteriza por su localización (cuadrante o región), carácter, cronología, irradiación y los factores que lo modifican; la localización es el punto de partida de la evaluación (pmid:18441863).
+
+**Significado:** Estímulo nociceptivo de origen visceral (distensión, inflamación o isquemia de una víscera, mal localizado y de línea media), parietal (irritación del peritoneo, bien localizado) o referido desde estructuras extraabdominales (pmid:23055768). En los trastornos funcionales intestinales se asocia a la defecación o a cambios del hábito intestinal (pmid:27144627).
+
+**Falsos positivos:** Dolor de pared abdominal (musculoesquelético o neuropático), que no procede de las vísceras / Dolor referido desde el tórax, como el de origen cardiaco o pleural
+
+**Rol:** Manifestación
+
+**Estado del LR:** LR no medido
+
+**Referencia:** pmid:23613077
+
+**Motivo:** es criterio de entrada del estudio, así que dentro de esa población no hay contraste que medir. La fuente sí acota la anamnesis entera: ningún componente pasa de un LR+ de 1.5
+
+### Sangrado vaginal en la gestación precoz (HM:3069)
+
+**Rol:** Manifestación
+
+**Estado del LR:** LR no medido
+
+**Referencia:** pmid:23613077
+
+**Motivo:** el otro criterio de entrada, con la misma acotación: ningún componente de la anamnesis alcanza un LR+ de 1.5
+
+### hCG sérica cuantitativa (HM:3189)
+
+**Rol:** Prueba específica
+
+**Estado del LR:** LR medido
+
+**LR positivo:** Valor: 2.3; Umbral: hCG > 1500 mIU/mL; Referencia: pmid:16308901
+
+**LR negativo:** Valor: 0.91; Umbral: hCG > 1500 mIU/mL; Referencia: pmid:16308901
+
+**Población:** 527 mujeres con embarazo de localización no determinada (PUL) tras ecografía transvaginal en unidad especializada
+
+**Graduación:** Parámetro: hCG sérica; Unidad: mIU/mL; Lectura: acumulativo; Nota: 1 IU/L equivale numéricamente a 1 mIU/mL
+
+**Tramos:** Umbral: hCG > 1000 mIU/mL; Desde: 1000; Sensibilidad: 0.217; Especificidad: 0.873; LR positivo: 1.71; LR negativo: 0.9; Referencia: pmid:16308901; Nota: un valor superior a 1000 mIU/mL con útero vacío desplaza muy poco la probabilidad (LR+ 1.71); la mayoría de ectópicos cursan con valores inferiores / Umbral: hCG > 1500 mIU/mL; Desde: 1500; Sensibilidad: 0.152; Especificidad: 0.934; LR positivo: 2.3; LR negativo: 0.91; Referencia: pmid:16308901; Nota: umbral clásico de zona discriminatoria; especificidad del 93.4% pero sensibilidad muy pobre (15.2%), con LR+ de sólo 2.30 / Umbral: hCG > 2000 mIU/mL; Desde: 2000; Sensibilidad: 0.109; Especificidad: 0.952; LR positivo: 2.27; LR negativo: 0.94; Referencia: pmid:16308901; Nota: elevar el corte a 2000 mIU/mL aumenta la especificidad al 95.2% pero reduce la sensibilidad al 10.9%, sin ganar potencia diagnóstica (LR+ 2.27)
+
+**Decisión:** ningún valor aislado de hCG por encima de la zona discriminatoria confirma el ectópico, y un valor por debajo nunca lo descarta (LR− 0.90-0.94). La zona discriminatoria define cuándo un embarazo intrauterino viable debería verse, no cuándo un embarazo es obligadamente ectópico
+
+**Advertencia:** el uso aislado de la zona discriminatoria clásica (1500-2000 mIU/mL) para indicar metotrexato o legrado interrumpe gestaciones intrauterinas viables que tardan más en ser visibles. La guía ACOG y Connolly 2013 (pmid:23262929) elevan el corte de visualización fiable al 99% a 3500 mIU/mL
+
+## Notas de uso
+
+LAS CIFRAS DE pmid:36063623 NO SON COCIENTES DEL ECTÓPICO Y NO DEBEN LEERSE COMO TALES. Miden el rendimiento del POCUS transabdominal hecho por médicos de urgencias para CONFIRMAR UN EMBARAZO INTRAUTERINO, contrastado contra la ecografía transvaginal del obstetra, en 143 gestantes sintomáticas del primer trimestre: exactitud 93.0%, sensibilidad 89.0%, especificidad 100%. Añadir un transductor lineal de alta frecuencia las lleva a 97.9%, 96.7% y 100%. La condición diana es el intrauterino, no el ectópico, y el patrón de referencia es otra prueba de imagen, no el desenlace: son dos razones independientes por las que estas cifras no se convierten en un LR de HM:6016.
+
+ESTA FUENTE TIENE ERRATA PUBLICADA Y ESTÁ COTEJADA (Am J Emerg Med 2025;88:277, pmid:39709283). Corrige una sola celda de la Tabla 2 —el recuento de falsos negativos para actividad cardiaca fetal, 8 y no 12— y sus autores declaran que resultados, análisis y conclusiones no se ven afectados. Ninguna de las cifras de arriba cambia. Lo que sí cambia: quien recalcule a mano un cociente desde la fila de actividad cardiaca fetal tiene que usar FN = 8.
+
+## Aspectos pendientes de documentación
+
+El embarazo de localización no determinada no está en el índice como concepto propio, y es el hallazgo que de verdad decide el manejo en urgencias: no es «ausencia de embarazo intrauterino confirmado en ecografía» sino una categoría con su propia ruta. Entrará cuando haya una fuente que lo mida, no antes.
+
+La cinética de la hCG seriada no entra: requiere otra fuente con datos de ascenso porcentual a las 48 horas.
+
+## Conclusión de la fuente
+
+La ecografía transvaginal es la mejor prueba diagnóstica aislada para evaluar a una mujer con sospecha de embarazo ectópico. La presencia de dolor abdominal o sangrado vaginal en la gestación precoz debe llevar a solicitar una ecografía transvaginal y una hCG sérica cuantitativa.
+
+## Referencias y procedencia
+
+**pmid:16308901:** Diagnostic accuracy of varying discriminatory zones for the prediction of ectopic pregnancy in women with a pregnancy of unknown location. Ultrasound Obstet Gynecol, 2005. DOI: 10.1002/uog.2636.
+
+**pmid:23262929:** Reevaluation of discriminatory and threshold levels for serum β-hCG in early pregnancy. Obstet Gynecol, 2013. DOI: 10.1097/aog.0b013e318278f421.
+
+**pmid:23613077:** Does this woman have an ectopic pregnancy?: the rational clinical examination systematic review. JAMA, 2013. DOI: 10.1001/jama.2013.3914.
+
+**pmid:36063623:** The impact of high-frequency linear transducer on the accuracy of pelvic ultrasound in early pregnancy pelvic pain and bleeding. Am J Emerg Med, 2022. DOI: 10.1016/j.ajem.2022.08.045.
+
+**pmid:39709283:** Corrigendum to "The impact of high-frequency linear transducer on the accuracy of pelvic u. Am J Emerg Med, 2022. DOI: 10.1016/j.ajem.2024.12.040.
+
+**pmid:18441863:** Evaluation of acute abdominal pain in adults. Am Fam Physician, 2008. DOI: no documentado.
+
+**pmid:23055768:** Evaluation and management of acute abdominal pain in the emergency department. Int J Gen Med, 2012. DOI: 10.2147/IJGM.S25936.
+
+**pmid:27144627:** Bowel Disorders. Gastroenterology, 2016. DOI: 10.1053/j.gastro.2016.02.031.
+
+Fuente clínica: medsemiotics-db, condición HM:6016.
