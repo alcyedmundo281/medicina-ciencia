@@ -370,3 +370,20 @@
 }{%
   \par\endgroup\vspace{0.45\baselineskip}%
 }
+
+% babel-spanish redefine \% para insertar un espacio fino. Su \es@sppercent consulta
+% \gluestretchorder\lastskip, que en modo matemático encuentra cola mu (p. ej. tras «\,») y
+% aborta con «Incompatible glue units» (MiKTeX, babel-spanish reciente). En texto se conserva
+% el comportamiento original; en fórmulas solo se añade «\,» si no hay ya un espacio delante.
+\makeatletter
+\AtBeginDocument{%
+  \@ifundefined{es@sppercent}{}{%
+    \def\es@sppercent{%
+      \ifmmode
+        \ifnum\lastnodetype=11 \else\mskip\thinmuskip\fi
+      \else
+        \leavevmode
+        \ifnum\gluestretchorder\lastskip=\z@\unskip\fi
+        \,%
+      \fi}}}
+\makeatother

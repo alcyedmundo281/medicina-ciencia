@@ -263,6 +263,13 @@ def _nombre_archivo_condicion(cond: CondicionBlog) -> str:
     return f"{prefijo}-{slug_corto}.qmd"
 
 
+def _celda_referencias(referencia: str) -> str:
+    """Cada identificador en su propio código, separados por «; »; «—» queda sin formato."""
+    if referencia == "—":
+        return referencia
+    return "; ".join(f"`{r.strip()}`" for r in referencia.split(";"))
+
+
 def _generar_capitulo_condicion(cond: CondicionBlog, meta: MetadatosLibro) -> str:
     ancla = _anchor_id(cond.condicion_id)
     url_post = f"{meta.url_sitio}post.html?slug={cond.slug}"
@@ -304,7 +311,7 @@ def _generar_capitulo_condicion(cond: CondicionBlog, meta: MetadatosLibro) -> st
             lineas.append(
                 f"| {h.concepto_nombre} (`{h.concepto_id}`) | {h.rol} | {h.estado_lr} | "
                 f"{h.sensibilidad} | {h.especificidad} | {h.lr_positivo} | {h.lr_negativo} | "
-                f"`{h.referencia}` |"
+                f"{_celda_referencias(h.referencia)} |"
             )
         lineas.extend(["", ': {tbl-colwidths="[25,11,11,9,9,12,12,11]"}', ""])
 

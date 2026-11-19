@@ -59,3 +59,66 @@ def test_mapa_maestro_sincronizado() -> None:
     ruta_mapa = RAIZ / "mapa-maestro-libro.md"
     assert ruta_mapa.is_file()
     assert ruta_mapa.read_text(encoding="utf-8") == renderizar_mapa_maestro(RAIZ)
+
+
+# --- Ciclo 1: columna «Ref.» y caso socrático completo ---------------------------------
+
+
+def _refs_anidadas(nodo: object) -> list[str]:
+    """Todas las claves de referencia (``ref``/``ref_rendimiento``) de una entrada, a cualquier nivel."""
+    encontradas: list[str] = []
+    if isinstance(nodo, dict):
+        for clave, valor in nodo.items():
+            if clave in ("ref", "ref_rendimiento") and isinstance(valor, str) and valor.strip():
+                encontradas.append(valor.strip())
+            else:
+                encontradas.extend(_refs_anidadas(valor))
+    elif isinstance(nodo, list):
+        for item in nodo:
+            encontradas.extend(_refs_anidadas(item))
+    return encontradas
+
+
+def test_columna_ref_no_queda_vacia_si_la_evidencia_esta_referenciada() -> None:
+    libro = cargar_libro(RAIZ)
+    fallos: list[str] = []
+    for cond in libro.condiciones.values():
+        assert len(cond.evidencia) == len(cond.hallazgos_tabla)
+        for ev, fila in zip(cond.evidencia, cond.hallazgos_tabla):
+            refs = _refs_anidadas(ev)
+            if not refs:
+                continue
+            if fila.referencia == "—" or any(r not in fila.referencia for r in refs):
+                fallos.append(f"{cond.condicion_id} {fila.concepto_id}: {fila.referencia!r} vs {refs}")
+    assert not fallos, f"{len(fallos)} filas con referencia perdida, p. ej. {fallos[:3]}"
+
+
+def test_columna_ref_sin_duplicados_y_en_orden_estable() -> None:
+    libro = cargar_libro(RAIZ)
+    for cond in libro.condiciones.values():
+        for fila in cond.hallazgos_tabla:
+            if fila.referencia == "—":
+                continue
+            partes = [p.strip() for p in fila.referencia.split(";")]
+            assert len(partes) == len(set(partes)), fila
+
+
+def test_caso_renderizado_contiene_aviso_cierre_omitidos_y_referencias() -> None:
+    from libro.datos import renderizar_caso_qmd
+
+    libro = cargar_libro(RAIZ)
+    casos = [c for c in libro.condiciones.values() if c.caso_compilado is not None]
+    assert len(casos) == 18
+    for cond in casos:
+        caso = cond.caso_compilado
+        texto = renderizar_caso_qmd(caso)
+        # El aviso de caso ficticio va al inicio, antes de la viñeta.
+        assert caso["aviso"] in texto, cond.condicion_id
+        assert texto.index(caso["aviso"]) < texto.index(caso["vineta"]["texto"])
+        for necesidad in caso["cierre"].get("necesidades_aprendizaje") or []:
+            assert necesidad in texto, cond.condicion_id
+        for omitido in caso.get("omitidos") or []:
+            assert omitido["nombre"] in texto and omitido["motivo"] in texto, cond.condicion_id
+        assert caso["referencias"], cond.condicion_id
+        for ref in caso["referencias"]:
+            assert ref["id"] in texto and ref["cita"] in texto, cond.condicion_id

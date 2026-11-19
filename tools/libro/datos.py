@@ -196,6 +196,39 @@ def _fmt_lr(campo: Any) -> str:
     return str(campo)
 
 
+_CLAVES_REF = ("ref", "ref_rendimiento")
+# Orden de lectura: primero la referencia de nivel superior, luego la de cada medida en el orden
+# en que se muestran las columnas de la tabla; el resto (tramos, graduación…) en orden YAML.
+_CLAVES_PRIORITARIAS = (*_CLAVES_REF, "sensibilidad", "especificidad", "lr_positivo", "lr_negativo")
+
+
+def _referencias_evidencia(ev: dict[str, Any]) -> list[str]:
+    """Referencias de una entrada de evidencia, a cualquier profundidad, sin duplicados y en orden estable.
+
+    En los posts derivados de ``medsemiotics-db`` la referencia de un cociente vive dentro de la
+    medida (``lr_positivo.ref``, ``tramos[].ref``…), no siempre en el nivel superior.
+    """
+    vistas: list[str] = []
+
+    def recorrer(nodo: Any) -> None:
+        if isinstance(nodo, dict):
+            for clave, valor in nodo.items():
+                if clave in _CLAVES_REF:
+                    if isinstance(valor, str) and valor.strip() and valor.strip() not in vistas:
+                        vistas.append(valor.strip())
+                else:
+                    recorrer(valor)
+        elif isinstance(nodo, list):
+            for item in nodo:
+                recorrer(item)
+
+    for clave in _CLAVES_PRIORITARIAS:
+        if clave in ev:
+            recorrer({clave: ev[clave]})
+    recorrer({k: v for k, v in ev.items() if k not in _CLAVES_PRIORITARIAS})
+    return vistas
+
+
 def _extraer_nombres_conceptos(cuerpo: str) -> dict[str, str]:
     """Extrae pares ``HM:xxxx -> Nombre`` de las cabeceras ``### Nombre (HM:xxxx)``."""
     nombres: dict[str, str] = {}
@@ -355,7 +388,7 @@ def cargar_libro(raiz: Path = RAIZ) -> LibroCompleto:
         filas: list[HallazgoTabla] = []
         for ev in evidencia_raw:
             concepto_id = str(ev.get("concepto") or "")
-            ref = str(ev.get("ref") or ev.get("ref_rendimiento") or "—")
+            ref = "; ".join(_referencias_evidencia(ev)) or "—"
             filas.append(
                 HallazgoTabla(
                     condicion_id=cid,
@@ -483,9 +516,10 @@ def renderizar_caso_qmd(compilado: dict[str, Any]) -> str:
             f"*Publicado:* `{pub['fecha']}`"
         ),
         "",
-        f"**Viñeta clínica.** {vineta['texto']}",
-        "",
     ]
+    if compilado.get("aviso"):
+        lineas.extend([f"*{compilado['aviso']}*", ""])
+    lineas.extend([f"**Viñeta clínica.** {vineta['texto']}", ""])
 
     datos_vineta = vineta.get("datos") or []
     if datos_vineta:
@@ -524,11 +558,28 @@ def renderizar_caso_qmd(compilado: dict[str, Any]) -> str:
         if cierre.get("sintesis"):
             lineas.append(f"**Síntesis clínica.** {cierre['sintesis']}")
             lineas.append("")
-        if cierre.get("limite"):
-            lineas.append(f"**Límite de la evidencia.** {cierre['limite']}")
+        necesidades = cierre.get("necesidades_aprendizaje") or []
+        if necesidades:
+            lineas.append("**Necesidades de aprendizaje:**")
+            lineas.append("")
+            lineas.extend(f"- {n}" for n in necesidades)
             lineas.append("")
     elif isinstance(cierre, str) and cierre.strip():
         lineas.append(f"**Cierre.** {cierre.strip()}")
+        lineas.append("")
+
+    omitidos = compilado.get("omitidos") or []
+    if omitidos:
+        lineas.append("**Hallazgos de la ficha que este caso no usa:**")
+        lineas.append("")
+        lineas.extend(f"- {o['nombre']} (`{o['id']}`): {o['motivo'].rstrip('.')}." for o in omitidos)
+        lineas.append("")
+
+    referencias = compilado.get("referencias") or []
+    if referencias:
+        lineas.append("**Referencias del caso:**")
+        lineas.append("")
+        lineas.extend(f"- `{r['id']}` — {r['cita']}" for r in referencias)
         lineas.append("")
 
     lineas.append(":::")
