@@ -38,6 +38,9 @@ herramientas computacionales:
 - **Propuestas de redacción de paratextos** (prefacio, portada, créditos, esta declaración
   y los rótulos y notas de la capa de render, como la presentación del apéndice de claves),
   que el autor revisó y aprobó antes de incorporarlas.
+- **Propuesta de redacción de una frase del capítulo 1**, aprobada por el autor: marca como
+  valor ilustrativo, sin fuente, la prevalencia del 10 % del escenario A, que antes se
+  presentaba como típica de adultos en atención primaria. No añade ninguna cifra.
 
 ## Qué no hizo la inteligencia artificial {.unnumbered}
 
@@ -45,7 +48,7 @@ herramientas computacionales:
 - No editó las fichas de `posts/`, que se derivan de `medsemiotics-db` en una revisión
   fijada; los errores que se detectan en los datos de origen se anotan para corregirlos en
   esa base, no en este libro.
-- No redactó los capítulos.
+- No redactó los capítulos, salvo la frase del capítulo 1 declarada arriba.
 
 ## Herramienta, modelo y periodo {.unnumbered}
 

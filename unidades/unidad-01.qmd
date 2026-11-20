@@ -197,9 +197,10 @@ muy próximo al $\text{LR}^+ = 3{,}4$ documentado para el exudado amigdalino en 
 estreptocócica según `pmid:11147989`; véase @sec-hm6009). Apliquemos exactamente ese mismo
 hallazgo a **1 000 pacientes** en dos escenarios con prevalencias distintas:
 
-1. **Escenario A — Prevalencia baja (10 %, típico de adultos en atención primaria fuera de
-   brote):** de 1 000 pacientes con odinofagia, 100 tienen faringitis estreptocócica y 900
-   no la tienen.
+1. **Escenario A — Prevalencia baja (10 %, valor ilustrativo):** la ficha de faringitis
+   estreptocócica no da una prevalencia agrupada en adultos (@sec-hm6009); el 10 % se elige
+   solo para el cálculo. De 1 000 pacientes con odinofagia, 100 tienen faringitis
+   estreptocócica y 900 no la tienen.
    - $VP = 100 \times 0{,}50 = 50$; $FN = 50$.
    - $VN = 900 \times 0{,}85 = 765$; $FP = 900 - 765 = 135$.
    - $\text{VPP} = 50 / (50 + 135) = 50 / 185 \approx \mathbf{27{,}0\,\%}$.
