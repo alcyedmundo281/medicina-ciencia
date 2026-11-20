@@ -529,6 +529,20 @@ def cargar_libro(raiz: Path = RAIZ) -> LibroCompleto:
     )
 
 
+def _texto_revisor(autoria: dict[str, Any]) -> str:
+    """La revisión tal como fue: si el revisor es uno de los autores, el libro lo dice.
+
+    «Revisión clínica: <nombre>» haría pasar por revisión externa la del propio autor.
+    """
+    revisor = autoria.get("revisor")
+    if not revisor:
+        return ""
+    autores = autoria["autores"]
+    if any(revisor in (a["nombre"], a.get("nombre_bibliografico")) for a in autores):
+        return " · Revisado por el autor" if len(autores) == 1 else f" · Revisado por {revisor} (coautor)"
+    return f" · Revisión clínica: {revisor}"
+
+
 def renderizar_caso_qmd(compilado: dict[str, Any], ancla_claves: str | None = None) -> str:
     """Convierte un caso socrático compilado (JSON) a un bloque Markdown/Quarto estructurado.
 
@@ -538,9 +552,7 @@ def renderizar_caso_qmd(compilado: dict[str, Any], ancla_claves: str | None = No
     vineta = compilado["vineta"]
     autoria = compilado["autoria"]
     pub = compilado["publicacion"]
-    revisor_txt = (
-        f" · Revisión clínica: {autoria['revisor']}" if autoria.get("revisor") else ""
-    )
+    revisor_txt = _texto_revisor(autoria)
 
     lineas: list[str] = [
         "::: {.caso-socratico}",

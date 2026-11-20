@@ -124,6 +124,25 @@ def test_caso_renderizado_contiene_aviso_cierre_omitidos_y_referencias() -> None
             assert ref["id"] in texto and ref["cita"] in texto, cond.condicion_id
 
 
+def test_revision_del_propio_autor_no_se_presenta_como_revision_clinica() -> None:
+    from libro.datos import _texto_revisor, renderizar_caso_qmd
+
+    autor = {"nombre": "Ana Pérez Gómez", "nombre_bibliografico": "Ana Pérez-Gómez"}
+    otro = {"nombre": "Luis Mora"}
+    assert _texto_revisor({"autores": [autor], "revisor": "Ana Pérez Gómez"}) == " · Revisado por el autor"
+    assert _texto_revisor({"autores": [autor], "revisor": "Ana Pérez-Gómez"}) == " · Revisado por el autor"
+    assert _texto_revisor({"autores": [autor, otro], "revisor": "Luis Mora"}) == " · Revisado por Luis Mora (coautor)"
+    assert _texto_revisor({"autores": [autor], "revisor": "Luis Mora"}) == " · Revisión clínica: Luis Mora"
+    assert _texto_revisor({"autores": [autor], "revisor": None}) == ""
+
+    libro = cargar_libro(RAIZ)
+    for cond in libro.condiciones.values():
+        if cond.caso_compilado is not None:
+            texto = renderizar_caso_qmd(cond.caso_compilado)
+            assert "Revisión clínica" not in texto, cond.condicion_id
+            assert "Revisado por el autor" in texto, cond.condicion_id
+
+
 def test_casos_compilados_al_dia() -> None:
     from datetime import date
 
