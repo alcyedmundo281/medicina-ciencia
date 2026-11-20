@@ -12,17 +12,26 @@ from typing import TYPE_CHECKING
 import yaml
 
 from libro import ALTO_MM, ALTO_PULGADAS, ANCHO_MM, ANCHO_PULGADAS, NOMBRE_SALIDA
-from libro.presentacion import formatear_markdown, presentar_cuerpo
+from libro.presentacion import (
+    extraer_ficha,
+    formatear_markdown,
+    presentar_cuerpo,
+    presentar_estructuras,
+    presentar_no_confiar,
+)
 from libro.datos import (
     RAIZ,
     CondicionBlog,
     LibroCompleto,
     MetadatosLibro,
+    _extraer_nombres_conceptos,
     cargar_libro,
     exportar_libro_json,
     identificador_asignado,
     renderizar_caso_qmd,
+    renderizar_claves_caso_qmd,
 )
+from libro.fuente import cargar_condicion_fijada, referencias_declaradas
 
 if TYPE_CHECKING:
     from pathlib import Path
@@ -342,9 +351,25 @@ def _celda_referencias(referencia: str) -> str:
     return "; ".join(f"`{r.strip()}`" for r in referencia.split(";"))
 
 
+def _ancla_claves(cond: CondicionBlog) -> str:
+    return "sec-claves-" + cond.condicion_id.lower().replace(":", "")
+
+
+def preparar_cuerpo(cond: CondicionBlog, raiz: Path = RAIZ) -> tuple[str, str | None]:
+    """Cuerpo del post listo para el capítulo y recuadro de ficha (o ``None``)."""
+    cuerpo, ficha = extraer_ficha(cond.cuerpo_md)
+    datos_fijados = cargar_condicion_fijada(raiz, cond.fuente)
+    cuerpo, _ = presentar_estructuras(cuerpo, datos_fijados, _extraer_nombres_conceptos(cond.cuerpo_md))
+    referencias = referencias_declaradas(cond.fuente)
+    cuerpo, _ = presentar_no_confiar(cuerpo, referencias[0] if len(referencias) == 1 else None)
+    cuerpo, _ = presentar_cuerpo(cuerpo, cond.evidencia)
+    return cuerpo.strip(), ficha
+
+
 def _generar_capitulo_condicion(cond: CondicionBlog, meta: MetadatosLibro) -> str:
     ancla = _anchor_id(cond.condicion_id)
     url_post = f"{meta.url_sitio}post.html?slug={cond.slug}"
+    cuerpo, ficha = preparar_cuerpo(cond)
 
     lineas: list[str] = [
         f"# {cond.nombre_corto} (`{cond.condicion_id}`) {{#{ancla}}}",
@@ -359,6 +384,8 @@ def _generar_capitulo_condicion(cond: CondicionBlog, meta: MetadatosLibro) -> st
         ":::",
         "",
     ]
+    if ficha:
+        lineas.extend([ficha, ""])
 
     if cond.triada:
         lineas.extend(["::: {.triada-signo}", "**Tríada semiótica del hallazgo ancla**", ""])
@@ -387,7 +414,7 @@ def _generar_capitulo_condicion(cond: CondicionBlog, meta: MetadatosLibro) -> st
             )
         lineas.extend(["", ': {tbl-colwidths="[21,11,10,9,9,12,12,16]"}', ""])
 
-    lineas.append(presentar_cuerpo(cond.cuerpo_md, cond.evidencia)[0].strip())
+    lineas.append(cuerpo)
     lineas.append("")
 
     if cond.caso_compilado is not None:
@@ -395,11 +422,30 @@ def _generar_capitulo_condicion(cond: CondicionBlog, meta: MetadatosLibro) -> st
             [
                 "## Caso socrático ABP",
                 "",
-                renderizar_caso_qmd(cond.caso_compilado),
+                renderizar_caso_qmd(cond.caso_compilado, ancla_claves=_ancla_claves(cond)),
                 "",
             ]
         )
 
+    return "\n".join(lineas)
+
+
+def _generar_apendice_claves(libro: LibroCompleto) -> str:
+    lineas = [
+        "# Claves docentes de los casos socráticos {#sec-apendice-claves}",
+        "",
+        (
+            "Claves de las preguntas de los casos socráticos ABP, separadas de cada caso para "
+            "que el lector responda antes de consultarlas. Se agrupan por capítulo, en el orden "
+            "del libro."
+        ),
+        "",
+    ]
+    for cond in libro.condiciones_ordenadas:
+        if cond.caso_compilado is None:
+            continue
+        titulo = f"{cond.nombre_corto} (`{cond.condicion_id}`)"
+        lineas.append(renderizar_claves_caso_qmd(cond.caso_compilado, titulo, _ancla_claves(cond)))
     return "\n".join(lineas)
 
 
@@ -657,8 +703,9 @@ def generar_proyecto_quarto(
     apendices = [
         escribir("apendice-a-autoevaluacion.qmd", formatear_markdown(_generar_apendice_autoevaluacion(libro))),
         escribir("apendice-b-evidencia-iconografia.qmd", formatear_markdown(_generar_apendice_evidencia(libro))),
+        escribir("apendice-c-claves-docentes.qmd", formatear_markdown(_generar_apendice_claves(libro))),
         escribir(
-            "apendice-c-declaracion-ia.qmd",
+            "apendice-d-declaracion-ia.qmd",
             _declaracion_ia(meta),
         ),
     ]

@@ -72,6 +72,7 @@ _PROTEGIDOS = re.compile(
     r"|\b10\.\d{4,9}/\S+"  # DOI sin enlace
     r"|\b(?:pmid|PMID|doi|DOI|HM)[: ]\s?[\w./-]+"  # identificadores con prefijo
     r"|\{[^}\n]*\}"  # atributos Pandoc/Quarto ({#sec-…}, {tbl-colwidths=…})
+    r"|\bPregunta \d+(?:\.\d+)+"  # numeración de las preguntas de los casos («Pregunta 1.2»)
 )
 _DECIMAL = re.compile(r"(?<![\w.,:])(\d+)\.(\d+)(?![\w]|[.,]\d)")
 _PORCENTAJE = re.compile(r"(?<![\w.,])(\d+(?:,\d+)?)[ \u00a0\u2009\u202f]?%")
@@ -178,6 +179,9 @@ def _celda(texto: str) -> str:
 def _valor_celda(clave: str, valor: Any) -> str:
     if valor is None:
         return "—"
+    if isinstance(valor, tuple):  # (valor, [inferior, superior]) de _fusionar_intervalos
+        cifra, (inferior, superior) = valor
+        return f"{_valor_celda(clave, cifra)} ({_numero(inferior)}–{_numero(superior)})"
     if clave in ("ref", "ref_rendimiento") and isinstance(valor, str):
         return f"`{valor}`"
     if isinstance(valor, list) and len(valor) == 2 and all(isinstance(v, (int, float)) for v in valor):
@@ -189,13 +193,49 @@ def _valor_celda(clave: str, valor: Any) -> str:
     return _celda(serializar_como_blog(valor))
 
 
+def _destino_ic(tramo: dict[str, Any], clave_ic: str) -> str | None:
+    """LR al que pertenece un intervalo de la fila, o ``None`` si es ambiguo."""
+    if clave_ic == "ic95_negativo":
+        return "lr_negativo" if "lr_negativo" in tramo else None
+    tiene_pos, tiene_neg = "lr_positivo" in tramo, "lr_negativo" in tramo
+    if tiene_pos and (not tiene_neg or "ic95_negativo" in tramo):
+        return "lr_positivo"
+    if tiene_neg and not tiene_pos:
+        return "lr_negativo"
+    return None
+
+
+def _fusionar_intervalos(tramos: list[dict[str, Any]]) -> list[dict[str, Any]] | None:
+    """Pone cada IC junto a su LR («13 (7,0–24)»), como en la síntesis cuantitativa.
+
+    Solo si en *todas* las filas el LR de destino es inequívoco; si no, ``None``.
+    """
+    fusionados = []
+    for tramo in tramos:
+        nuevo = dict(tramo)
+        for clave_ic in ("ic95", "ic95_negativo"):
+            if clave_ic not in tramo:
+                continue
+            ic = tramo[clave_ic]
+            destino = _destino_ic(tramo, clave_ic)
+            if destino is None or not (isinstance(ic, list) and len(ic) == 2):
+                return None
+            nuevo[destino] = (tramo[destino], ic)
+            del nuevo[clave_ic]
+        fusionados.append(nuevo)
+    return fusionados
+
+
 def tabla_tramos(tramos: list[dict[str, Any]], unidad: str | None = None) -> str:
     """Tabla Markdown de una lista de tramos de un hallazgo o escala."""
+    tramos = _fusionar_intervalos(tramos) or tramos
     claves: list[str] = []
     for tramo in tramos:
         for clave in tramo:
             if clave not in claves:
                 claves.append(clave)
+    if "ref" in claves:  # la referencia, siempre en la última columna
+        claves = [c for c in claves if c != "ref"] + ["ref"]
     tiene_etiqueta = any(c in claves for c in _CLAVES_ETIQUETA_TRAMO)
     columnas = [c for c in claves if not (tiene_etiqueta and c in ("desde", "hasta"))]
     if not tiene_etiqueta and ("desde" in claves or "hasta" in claves):
@@ -224,7 +264,7 @@ def tabla_tramos(tramos: list[dict[str, Any]], unidad: str | None = None) -> str
             else:
                 celdas.append(_valor_celda(c, tramo.get(c)) if c in tramo else "—")
         lineas.append("| " + " | ".join(celdas) + " |")
-    pesos = [3.0 if c in _CLAVES_TEXTO else 1.3 for c in columnas]
+    pesos = [3.0 if c in _CLAVES_TEXTO else 1.9 if c == "ref" else 1.3 for c in columnas]
     anchos = [round(100 * p / sum(pesos)) for p in pesos]
     anchos[-1] += 100 - sum(anchos)
     lineas += ["", f': {{tbl-colwidths="[{",".join(str(a) for a in anchos)}]"}}']
@@ -369,3 +409,191 @@ def presentar_cuerpo(cuerpo: str, evidencia: tuple[dict[str, Any], ...] | list[d
                 continue
         salida.append(linea)
     return "\n".join(salida), recuento
+
+
+# --- Escalas, reglas, núcleo y balance (desde la copia fijada de medsemiotics-db) ----------
+# Su serialización en el post es ambigua (no se sabe a qué nivel pertenece cada campo), así
+# que se leen del YAML fijado (``libro.fuente``). La sección solo se sustituye si el YAML,
+# serializado como lo hace el blog (con los ``HM:`` traducidos a su nombre), reproduce
+# exactamente cada línea del post.
+
+SECCIONES_ESTRUCTURADAS = {
+    "Escalas": "escalas",
+    "Reglas clínicas": "reglas",
+    "Núcleo diagnóstico": "nucleo",
+    "Balance de criterios": "balance",
+}
+_ETIQUETAS_LIBRO = {  # claves sin etiqueta en el blog (que las mostraría sin tilde)
+    "apoyos_minimos": "Apoyos mínimos",
+    "banderas_maximas": "Banderas máximas",
+    "y_al_menos_uno_de": "Y al menos uno de",
+}
+_HM_RE = re.compile(r"HM:\d+")
+
+
+def _etiqueta_libro(clave: str) -> str:
+    return _ETIQUETAS_LIBRO.get(clave, etiqueta_blog(clave))
+
+
+def serializar_con_nombres(valor: Any, nombres: dict[str, str]) -> str:
+    """``render_value`` del blog *con* prosa: los identificadores ``HM:`` se leen por su nombre."""
+    if isinstance(valor, dict):
+        return "; ".join(f"{etiqueta_blog(k)}: {serializar_con_nombres(v, nombres)}" for k, v in valor.items())
+    if isinstance(valor, list):
+        return " / ".join(serializar_con_nombres(v, nombres) for v in valor) if valor else "No documentado."
+    if isinstance(valor, str) and _HM_RE.fullmatch(valor.strip()):
+        return nombres.get(valor.strip(), valor.strip())
+    return serializar_como_blog(valor)
+
+
+def _texto_valor(clave: str, valor: Any, nombres: dict[str, str]) -> str:
+    if isinstance(valor, str) and _HM_RE.fullmatch(valor.strip()):
+        return f"{nombres.get(valor.strip(), valor.strip())} (`{valor.strip()}`)"
+    if isinstance(valor, list) and valor and all(isinstance(v, str) and _HM_RE.fullmatch(v.strip()) for v in valor):
+        return ", ".join(_texto_valor(clave, v, nombres) for v in valor)
+    if isinstance(valor, list) and all(isinstance(v, str) for v in valor):
+        return ", ".join(v.strip() for v in valor) if valor else "No documentado."
+    if isinstance(valor, dict):
+        return "; ".join(f"{_etiqueta_libro(k)}: {_texto_valor(k, v, nombres)}" for k, v in valor.items())
+    return _valor_celda(clave, valor)
+
+
+def _es_lista_de_registros(valor: Any) -> bool:
+    return isinstance(valor, list) and bool(valor) and all(isinstance(v, dict) for v in valor)
+
+
+def _es_mapa_de_registros(valor: Any) -> bool:
+    return isinstance(valor, dict) and bool(valor) and all(isinstance(v, dict) for v in valor.values())
+
+
+def _tabla_mapa(valor: dict[str, dict[str, Any]], nombres: dict[str, str]) -> str:
+    claves: list[str] = []
+    for fila in valor.values():
+        claves += [c for c in fila if c not in claves]
+    lineas = [
+        "| Categoría | " + " | ".join(_etiqueta_libro(c) for c in claves) + " |",
+        "| :--- | " + " | ".join(":---" for _ in claves) + " |",
+    ]
+    for nombre, fila in valor.items():
+        celdas = [_texto_valor(c, fila[c], nombres) if c in fila else "—" for c in claves]
+        lineas.append(f"| {_etiqueta_libro(nombre)} | " + " | ".join(celdas) + " |")
+    return "\n".join(lineas)
+
+
+def bloque_registro(registro: dict[str, Any], nombres: dict[str, str]) -> str:
+    """Un registro (escala, regla, núcleo o balance) como lista de campos y tablas, en orden."""
+    lineas: list[str] = []
+    if registro.get("nombre"):
+        lineas += [f"**{str(registro['nombre']).strip()}**", ""]
+    unidad = (registro.get("graduacion") or {}).get("unidad") if isinstance(registro.get("graduacion"), dict) else None
+    en_lista = False
+    for clave, valor in registro.items():
+        if clave == "nombre":
+            continue
+        if _es_lista_de_registros(valor) or _es_mapa_de_registros(valor):
+            if en_lista:
+                lineas.append("")
+            tabla = tabla_tramos(valor, unidad) if isinstance(valor, list) else _tabla_mapa(valor, nombres)
+            lineas += [f"**{_etiqueta_libro(clave)}:**", "", tabla, ""]
+            en_lista = False
+            continue
+        lineas.append(f"- **{_etiqueta_libro(clave)}:** {_texto_valor(clave, valor, nombres)}")
+        en_lista = True
+    return "\n".join(lineas).rstrip() + "\n"
+
+
+def presentar_estructuras(
+    cuerpo: str, datos: dict[str, Any] | None, nombres: dict[str, str]
+) -> tuple[str, int]:
+    """Sustituye las secciones serializadas por su versión estructurada si coinciden exactamente."""
+    if not datos:
+        return cuerpo, 0
+    convertidas = 0
+    for titulo, clave in SECCIONES_ESTRUCTURADAS.items():
+        m = re.search(rf"^## {re.escape(titulo)}\n(.*?)(?=^## |\Z)", cuerpo, re.M | re.S)
+        if not m or clave not in datos:
+            continue
+        valor = datos[clave]
+        registros = valor if isinstance(valor, list) else [valor]
+        lineas_post = [l for l in m.group(1).split("\n") if l.strip()]
+        if lineas_post != [serializar_con_nombres(r, nombres) for r in registros]:
+            continue
+        nuevo = "\n".join(bloque_registro(r, nombres) for r in registros)
+        cuerpo = cuerpo[: m.start(1)] + "\n" + nuevo + "\n" + cuerpo[m.end(1) :]
+        convertidas += len(registros)
+    return cuerpo, convertidas
+
+
+# --- Ficha de la condición (3c) -------------------------------------------------------------
+
+SECCIONES_FICHA = ("Nombre en inglés", "Sinónimos", "Códigos")
+
+
+def _seccion(cuerpo: str, titulo: str) -> re.Match[str] | None:
+    return re.search(rf"^## {re.escape(titulo)}\n(.*?)(?=^## |\Z)", cuerpo, re.M | re.S)
+
+
+def extraer_ficha(cuerpo: str) -> tuple[str, str | None]:
+    """Quita «Nombre en inglés», «Sinónimos» y «Códigos» del cuerpo y devuelve un recuadro.
+
+    Si alguna sección no tiene la forma esperada (una línea; códigos legibles sin pérdida), el
+    cuerpo se devuelve intacto y sin recuadro.
+    """
+    filas: list[str] = []
+    for titulo in SECCIONES_FICHA:
+        m = _seccion(cuerpo, titulo)
+        if m is None:
+            continue
+        lineas = [l.strip() for l in m.group(1).split("\n") if l.strip()]
+        if not lineas or any(l.startswith(("#", "|", ">", "-", "*")) for l in lineas):
+            return cuerpo, None
+        if titulo == "Códigos":
+            if len(lineas) != 1:
+                return cuerpo, None
+            campos = leer_registro_plano(lineas[0], _CLAVES_CODIGOS)
+            if not campos:
+                return cuerpo, None
+            filas.append(
+                "- "
+                + " · ".join(
+                    f"**{_CLAVES_CODIGOS[k]}:** " + ("no documentado" if v == "No documentado." else f"`{v}`")
+                    for k, v in campos
+                )
+            )
+        else:  # cada línea es un valor (los sinónimos van uno por párrafo)
+            filas.append(f"- **{titulo}:** {'; '.join(lineas)}")
+    if not filas:
+        return cuerpo, None
+    for titulo in SECCIONES_FICHA:
+        m = _seccion(cuerpo, titulo)
+        if m is not None:
+            cuerpo = cuerpo[: m.start()] + cuerpo[m.end() :]
+    recuadro = "\n".join(["::: {.ficha-condicion}", "**Ficha de la condición**", "", *filas, ":::"])
+    return cuerpo, recuadro
+
+
+# --- Dónde NO confiar (3c) ------------------------------------------------------------------
+
+TITULO_NO_CONFIAR = "Dónde NO confiar"
+
+
+def presentar_no_confiar(cuerpo: str, pmid: str | None) -> tuple[str, bool]:
+    """«Conclusión de la fuente» pasa a «Dónde NO confiar»: cita literal y su atribución.
+
+    El PMID solo se da si la ficha declara una única referencia (``pmid``); si no, se dice que
+    la ficha no lo declara. Ningún texto de la conclusión se altera.
+    """
+    m = _seccion(cuerpo, "Conclusión de la fuente")
+    if m is None:
+        return cuerpo, False
+    parrafos = [p.strip() for p in m.group(1).strip().split("\n\n") if p.strip()]
+    if not parrafos:
+        return cuerpo, False
+    cita = "\n>\n".join("> " + p.replace("\n", "\n> ") for p in parrafos)
+    atribucion = (
+        f"> — Conclusión de la fuente (`{pmid}`)."
+        if pmid
+        else "> — Conclusión de la fuente (la ficha no declara de qué referencia procede)."
+    )
+    nuevo = f"## {TITULO_NO_CONFIAR}\n\n{cita}\n>\n{atribucion}\n\n"
+    return cuerpo[: m.start()] + nuevo + cuerpo[m.end() :], True

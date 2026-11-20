@@ -31,9 +31,13 @@ herramientas computacionales:
   que salió una lista de correcciones que el autor priorizó.
 - **Corrección de la capa de render:** cambios en `tools/libro/` y `assets/libro/` que
   modifican cómo se presentan los datos (tablas, casos socráticos, portada, coma decimal y
-  espacio fino ante «%», composición de página), no los datos.
-- **Propuestas de redacción de paratextos** (prefacio, portada, créditos y esta
-  declaración), que el autor revisó y aprobó antes de incorporarlas.
+  espacio fino ante «%», composición de página, recuadro de ficha, sección «Dónde NO
+  confiar», apéndice de claves docentes), no los datos. Para las escalas y reglas, la IA
+  copió sin cambios los archivos de `medsemiotics-db` de la revisión fijada; el libro los
+  verifica por sha256 al compilar.
+- **Propuestas de redacción de paratextos** (prefacio, portada, créditos, esta declaración
+  y los rótulos y notas de la capa de render, como la presentación del apéndice de claves),
+  que el autor revisó y aprobó antes de incorporarlas.
 
 ## Qué no hizo la inteligencia artificial {.unnumbered}
 

@@ -147,6 +147,7 @@ class CondicionBlog:
     caso_compilado: dict[str, Any] | None
     cuerpo_md: str
     articulo: Articulo
+    fuente: dict[str, Any]
 
 
 @dataclass(frozen=True)
@@ -478,6 +479,7 @@ def cargar_libro(raiz: Path = RAIZ) -> LibroCompleto:
             caso_compilado=casos_compilados.get(cid),
             cuerpo_md=cuerpo,
             articulo=articulo,
+            fuente=dict(fm.get("fuente") or {}),
         )
 
     # Contrato 1: revisión única fijada de medsemiotics-db
@@ -519,8 +521,12 @@ def cargar_libro(raiz: Path = RAIZ) -> LibroCompleto:
     )
 
 
-def renderizar_caso_qmd(compilado: dict[str, Any]) -> str:
-    """Convierte un caso socrático compilado (JSON) a un bloque Markdown/Quarto estructurado."""
+def renderizar_caso_qmd(compilado: dict[str, Any], ancla_claves: str | None = None) -> str:
+    """Convierte un caso socrático compilado (JSON) a un bloque Markdown/Quarto estructurado.
+
+    Con ``ancla_claves`` las claves docentes no se imprimen tras cada pregunta: el caso remite
+    al apéndice de claves (véase :func:`renderizar_claves_caso_qmd`).
+    """
     vineta = compilado["vineta"]
     autoria = compilado["autoria"]
     pub = compilado["publicacion"]
@@ -571,8 +577,13 @@ def renderizar_caso_qmd(compilado: dict[str, Any]) -> str:
         for q_idx, preg in enumerate(etapa.get("preguntas") or [], start=1):
             lineas.append(f"**Pregunta {idx}.{q_idx}.** {preg['pregunta']}")
             lineas.append("")
-            lineas.append(f"*Clave docente y evidencia:* {preg['clave']}")
-            lineas.append("")
+            if ancla_claves is None:
+                lineas.append(f"*Clave docente y evidencia:* {preg['clave']}")
+                lineas.append("")
+
+    if ancla_claves is not None and any(e.get("preguntas") for e in compilado.get("etapas") or []):
+        lineas.append(f"*Las claves docentes de este caso están en @{ancla_claves}.*")
+        lineas.append("")
 
     cierre = compilado.get("cierre")
     if isinstance(cierre, dict):
@@ -604,6 +615,18 @@ def renderizar_caso_qmd(compilado: dict[str, Any]) -> str:
         lineas.append("")
 
     lineas.append(":::")
+    return "\n".join(lineas)
+
+
+def renderizar_claves_caso_qmd(compilado: dict[str, Any], titulo: str, ancla: str) -> str:
+    """Sección del apéndice de claves docentes para un caso: cada pregunta con su clave."""
+    lineas = [f"## {titulo} {{#{ancla}}}", ""]
+    for idx, etapa in enumerate(compilado.get("etapas") or [], start=1):
+        for q_idx, preg in enumerate(etapa.get("preguntas") or [], start=1):
+            lineas.append(f"**Pregunta {idx}.{q_idx}.** {preg['pregunta']}")
+            lineas.append("")
+            lineas.append(f"*Clave docente y evidencia:* {preg['clave']}")
+            lineas.append("")
     return "\n".join(lineas)
 
 

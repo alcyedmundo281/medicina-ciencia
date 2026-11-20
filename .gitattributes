@@ -2,3 +2,6 @@
 *.png binary
 *.jpg binary
 *.pdf binary
+
+# Copia literal de medsemiotics-db: los bytes deben coincidir con el sha256 del front-matter.
+assets/data/medsemiotics-db/** -text

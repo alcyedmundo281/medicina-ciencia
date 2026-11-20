@@ -85,6 +85,7 @@ def test_coma_decimal_y_espacio_fino(entrada: str, salida: str) -> None:
         "IC95%",
         "versión 1.2.3",
         "{#sec-hm6009}",
+        "**Pregunta 1.2.** ¿Qué",
     ],
 )
 def test_no_toca_identificadores(intacto: str) -> None:
@@ -162,3 +163,95 @@ def test_ninguna_tabla_nueva_deja_decimales_con_punto(libro) -> None:
         for linea in texto.splitlines():
             if linea.startswith("| ") and "`" not in linea:
                 assert not re.search(r"(?<![\w.])\d+\.\d+(?![\w/])", linea), linea
+
+
+# --- Copia fijada de medsemiotics-db y secciones estructuradas -------------------------------
+
+
+def test_copia_fijada_se_verifica_por_sha256(libro, tmp_path) -> None:
+    import shutil
+
+    from libro.fuente import CARPETA_FIJADA, FuenteAlterada, cargar_condicion_fijada
+
+    fijadas = [c for c in libro.condiciones.values() if cargar_condicion_fijada(RAIZ, c.fuente)]
+    assert len(fijadas) == 8
+    cond = fijadas[0]
+    copia = tmp_path / CARPETA_FIJADA / cond.fuente["condicion"]
+    copia.parent.mkdir(parents=True)
+    shutil.copyfile(RAIZ / CARPETA_FIJADA / cond.fuente["condicion"], copia)
+    with copia.open("ab") as f:
+        f.write(b"\n")
+    with pytest.raises(FuenteAlterada):
+        cargar_condicion_fijada(tmp_path, cond.fuente)
+
+
+def test_escalas_reglas_nucleo_y_balance_se_estructuran(libro) -> None:
+    from libro.datos import _extraer_nombres_conceptos
+    from libro.fuente import cargar_condicion_fijada
+    from libro.presentacion import SECCIONES_ESTRUCTURADAS, presentar_estructuras
+
+    total = 0
+    for cond in libro.condiciones.values():
+        datos = cargar_condicion_fijada(RAIZ, cond.fuente)
+        texto, n = presentar_estructuras(cond.cuerpo_md, datos, _extraer_nombres_conceptos(cond.cuerpo_md))
+        total += n
+        for titulo in SECCIONES_ESTRUCTURADAS:
+            seccion = re.search(rf"^## {titulo}\n(.*?)(?=^## |\Z)", texto, re.M | re.S)
+            if seccion:  # ninguna línea serializada «Clave: valor; Clave: valor» sobrevive
+                assert not re.search(r"^\w[^|\n]*: [^\n]*; \w[^\n]*: ", seccion.group(1), re.M), cond.condicion_id
+    assert total == 14
+
+
+def test_ficha_reune_nombre_sinonimos_y_codigos(libro) -> None:
+    from libro.presentacion import SECCIONES_FICHA, extraer_ficha
+
+    for cond in libro.condiciones.values():
+        texto, ficha = extraer_ficha(cond.cuerpo_md)
+        assert ficha is not None, cond.condicion_id
+        for titulo in SECCIONES_FICHA:
+            assert f"\n## {titulo}\n" not in "\n" + texto
+        for titulo in ("Nombre en inglés", "Sinónimos"):
+            seccion = re.search(rf"^## {titulo}\n(.*?)(?=^## |\Z)", cond.cuerpo_md, re.M | re.S)
+            for valor in (seccion.group(1).split("\n") if seccion else []):
+                assert valor.strip() in ficha, (cond.condicion_id, valor)
+
+
+def test_donde_no_confiar_cita_literal_y_solo_pmid_inequivoco(libro) -> None:
+    from libro.fuente import referencias_declaradas
+    from libro.presentacion import TITULO_NO_CONFIAR, presentar_no_confiar
+
+    n = 0
+    for cond in libro.condiciones.values():
+        refs = referencias_declaradas(cond.fuente)
+        texto, hecho = presentar_no_confiar(cond.cuerpo_md, refs[0] if len(refs) == 1 else None)
+        original = re.search(r"^## Conclusión de la fuente\n(.*?)(?=^## |\Z)", cond.cuerpo_md, re.M | re.S)
+        assert hecho == bool(original)
+        if not original:
+            continue
+        n += 1
+        assert f"## {TITULO_NO_CONFIAR}" in texto and "## Conclusión de la fuente" not in texto
+        for parrafo in original.group(1).strip().split("\n\n"):
+            assert parrafo.strip() in texto.replace("\n> ", "\n")
+        citados = set(re.findall(r"— Conclusión de la fuente \(`(pmid:\d+)`\)", texto))
+        assert citados <= set(refs) and (not citados or len(refs) == 1)
+    assert n == 38
+
+
+def test_claves_docentes_van_al_apendice(libro, tmp_path) -> None:
+    from libro.qmd import generar_proyecto_quarto
+
+    generar_proyecto_quarto(tmp_path)
+    capitulos = "".join(p.read_text(encoding="utf-8") for p in tmp_path.glob("hm*.qmd"))
+    apendice = (tmp_path / "apendice-c-claves-docentes.qmd").read_text(encoding="utf-8")
+    assert "Clave docente" not in capitulos
+    total = 0
+    for cond in libro.condiciones.values():
+        if cond.caso_compilado is None:
+            continue
+        ancla = "sec-claves-" + cond.condicion_id.lower().replace(":", "")
+        assert f"@{ancla}" in capitulos and f"{{#{ancla}}}" in apendice
+        for etapa in cond.caso_compilado["etapas"]:
+            for preg in etapa.get("preguntas") or []:
+                total += 1
+                assert formatear_markdown(preg["clave"]) in apendice
+    assert apendice.count("*Clave docente y evidencia:*") == total == 198

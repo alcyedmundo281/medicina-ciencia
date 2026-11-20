@@ -51,7 +51,7 @@ def test_exportacion_json_y_generacion_quarto(tmp_path: Path) -> None:
     assert (proyecto / "estilo-epub.css").is_file()
     assert (proyecto / "apendice-a-autoevaluacion.qmd").is_file()
     assert (proyecto / "apendice-b-evidencia-iconografia.qmd").is_file()
-    assert (proyecto / "apendice-c-declaracion-ia.qmd").is_file()
+    assert (proyecto / "apendice-d-declaracion-ia.qmd").is_file()
     assert len(generados) >= 60
 
 

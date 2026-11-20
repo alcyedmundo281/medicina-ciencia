@@ -149,8 +149,8 @@ RUTA_DECLARACION = RAIZ / "paratextos" / "declaracion-ia.md"
 
 def test_declaracion_en_apendices_y_citada_en_creditos(proyecto) -> None:
     quarto = yaml.safe_load((proyecto / "_quarto.yml").read_text(encoding="utf-8"))
-    assert "apendice-c-declaracion-ia.qmd" in quarto["book"]["appendices"]
-    apendice = (proyecto / "apendice-c-declaracion-ia.qmd").read_text(encoding="utf-8")
+    assert "apendice-d-declaracion-ia.qmd" in quarto["book"]["appendices"]
+    apendice = (proyecto / "apendice-d-declaracion-ia.qmd").read_text(encoding="utf-8")
     assert "{#sec-declaracion-ia}" in apendice
     assert "{{" not in apendice, "marcadores sin resolver en la declaración"
     assert "/docs/registro-ia.md" in apendice

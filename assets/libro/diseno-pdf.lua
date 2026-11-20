@@ -11,6 +11,7 @@ local MapaEntornos = {
   ["caso-socratico"] = "casosocratico",
   ["perlas-clinicas"] = "perlasclinicas",
   ["enlace-ficha"] = "enlaceficha",
+  ["ficha-condicion"] = "fichacondicion",
 }
 
 local function envolver_entorno(bloques, nombre_entorno)
@@ -70,8 +71,8 @@ local function intervalo_cortable(el)
   return { pandoc.Str(a), pandoc.RawInline("latex", "\\penalty500{}"), pandoc.Str(b) }
 end
 
--- Encabezado seguido de tabla: \Needspace evita que el título quede al pie y que longtable
--- repita la cabecera de la tabla por encima de él en la página siguiente.
+-- Encabezado (o rótulo en negrita, como «Tramos:») seguido de tabla: \Needspace evita que
+-- quede al pie y que longtable repita la cabecera de la tabla por encima de él.
 local filtro_encabezado_tabla = {
   Blocks = function(bloques)
     if not quarto.doc.is_format("pdf") then
@@ -80,8 +81,9 @@ local filtro_encabezado_tabla = {
     local salida = pandoc.Blocks({})
     for i, b in ipairs(bloques) do
       local siguiente = bloques[i + 1]
-      if b.t == "Header" and siguiente and siguiente.t == "Table" then
-        salida:insert(pandoc.RawBlock("latex", "\\Needspace{8\\baselineskip}"))
+      local rotulo = b.t == "Para" and #b.content == 1 and b.content[1].t == "Strong"
+      if (b.t == "Header" or rotulo) and siguiente and siguiente.t == "Table" then
+        salida:insert(pandoc.RawBlock("latex", "\\Needspace{12\\baselineskip}"))
       end
       salida:insert(b)
     end
