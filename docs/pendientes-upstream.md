@@ -61,8 +61,8 @@ parte del libro en que están:
 | Urgencias, medicina crítica y aparato cardiovascular | `HM:6026` Insuficiencia aórtica, `HM:6029` Hipertensión arterial en adultos, `HM:6030` Infarto agudo de miocardio, `HM:6035` Trombosis venosa profunda, `HM:6037` Sobrecarga de volumen, `HM:6044` Tromboembolia pulmonar, `HM:6045` Taponamiento cardíaco |
 | Abdomen agudo, gastroenterología y hepatología | `HM:6040` Pancreatitis aguda, `HM:6042` Colecistitis aguda, `HM:6043` Apendicitis aguda, `HM:6046` Síndrome ascítico, `HM:6047` Síndrome esplenomegálico |
 | Infectología, neumología, inmunología y endocrinología | `HM:6028` Alergia a penicilina, `HM:6041` Absceso de partes blandas, `HM:6048` Bocio |
-| Neurología, oftalmología y salud mental | `HM:6017` Conjuntivitis bacteriana, `HM:6022` Glaucoma primario de ángulo abierto, `HM:6023` Conmoción cerebral pediátrica, `HM:6031` Trastorno de ansiedad generalizada, `HM:6032` Trastorno de pánico, `HM:6038` Lesión intracraneal en el TCE leve del adulto, `HM:6039` Trastorno de estrés postraumático |
-| Pediatría, obstetricia, oncología y dermatología | `HM:6016` Embarazo ectópico, `HM:6018` Apnea obstructiva del sueño, `HM:6024` Maltrato físico infantil, `HM:6025` Hipertensión arterial secundaria pediátrica, `HM:6033` Melanoma cutáneo, `HM:6034` Cáncer de mama, `HM:6036` Neumonía infantil |
+| Neurología, oftalmología y salud mental | `HM:6017` Conjuntivitis bacteriana, `HM:6018` Apnea obstructiva del sueño, `HM:6022` Glaucoma primario de ángulo abierto, `HM:6023` Conmoción cerebral pediátrica, `HM:6031` Trastorno de ansiedad generalizada, `HM:6032` Trastorno de pánico, `HM:6038` Lesión intracraneal en el TCE leve del adulto, `HM:6039` Trastorno de estrés postraumático |
+| Pediatría, obstetricia, oncología y dermatología | `HM:6016` Embarazo ectópico, `HM:6024` Maltrato físico infantil, `HM:6025` Hipertensión arterial secundaria pediátrica, `HM:6033` Melanoma cutáneo, `HM:6034` Cáncer de mama, `HM:6036` Neumonía infantil |
 | Aparato locomotor y traumatología | `HM:6027` Rotura del ligamento cruzado anterior |
 
 Los casos más claros son los que no son de medicina interna en ningún sentido: embarazo
@@ -77,7 +77,7 @@ Propuesta: revisar `category` y `category_label` de esas 30 condiciones en
 `medsemiotics-db` y que el generador no asigne un área por defecto.
 
 La parte del libro en que va cada condición sí es de este repositorio (`mapa.yaml`). Allí
-hay un error propio: la apnea obstructiva del sueño (`HM:6018`) está en «Pediatría,
-obstetricia, oncología y dermatología», y la ficha no trata de población pediátrica ni
+había un error propio: la apnea obstructiva del sueño (`HM:6018`) estaba en «Pediatría,
+obstetricia, oncología y dermatología», aunque la ficha no trata de población pediátrica ni
 obstétrica (su prevalencia procede de cribado comunitario y de unidades de sueño,
-`pmid:23989984`). Su parte correcta queda pendiente de decisión del autor.
+`pmid:23989984`). Por decisión del autor pasa a «Neurología, oftalmología y salud mental».

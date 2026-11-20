@@ -66,6 +66,7 @@
 | `HM:6004` | Meningitis aguda | Neurología | ✅ Sí | 2 | `HM6004-meningitis-aguda-jolt-accentuation.md` |
 | `HM:6015` | Enfermedad de Parkinson | Neurología | — | 2 | `HM6015-enfermedad-parkinson-criterios-mds.md` |
 | `HM:6017` | Conjuntivitis bacteriana | Medicina Interna | — | 2 | `HM6017-conjuntivitis-bacteriana.md` |
+| `HM:6018` | Apnea obstructiva del sueño | Medicina Interna | — | 2 | `HM6018-apnea-obstructiva-del-sueno.md` |
 | `HM:6021` | Trastorno por consumo de alcohol | Psiquiatría y Atención Primaria | — | 2 | `HM6021-trastorno-consumo-alcohol.md` |
 | `HM:6022` | Glaucoma primario de ángulo abierto | Medicina Interna | — | 2 | `HM6022-glaucoma-primario-de-angulo-abierto.md` |
 | `HM:6023` | Conmoción cerebral pediátrica | Medicina Interna | — | 2 | `HM6023-conmocion-cerebral-pediatrica.md` |
@@ -79,7 +80,6 @@
 | Código | Condición | Área | Caso socrático | Preguntas | Archivo |
 | :--- | :--- | :--- | :---: | :---: | :--- |
 | `HM:6016` | Embarazo ectópico | Medicina Interna | — | 2 | `HM6016-embarazo-ectopico.md` |
-| `HM:6018` | Apnea obstructiva del sueño | Medicina Interna | — | 2 | `HM6018-apnea-obstructiva-del-sueno.md` |
 | `HM:6019` | Luxación de cadera en el lactante | Pediatría y Ortopedia | — | 2 | `HM6019-luxacion-cadera-lactante.md` |
 | `HM:6024` | Maltrato físico infantil | Medicina Interna | — | 2 | `HM6024-maltrato-fisico-infantil.md` |
 | `HM:6025` | Hipertensión arterial secundaria pediátrica | Medicina Interna | — | 2 | `HM6025-hipertension-secundaria-pediatrica.md` |

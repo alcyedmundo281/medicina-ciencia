@@ -102,6 +102,7 @@ partes_blog:
       - "HM:6004"
       - "HM:6015"
       - "HM:6017"
+      - "HM:6018"
       - "HM:6021"
       - "HM:6022"
       - "HM:6023"
@@ -113,7 +114,6 @@ partes_blog:
     titulo: "Pediatría, obstetricia, oncología y dermatología"
     condiciones:
       - "HM:6016"
-      - "HM:6018"
       - "HM:6019"
       - "HM:6024"
       - "HM:6025"
