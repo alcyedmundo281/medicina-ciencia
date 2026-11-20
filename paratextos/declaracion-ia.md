@@ -32,7 +32,7 @@ herramientas computacionales:
 - **Corrección de la capa de render:** cambios en `tools/libro/` y `assets/libro/` que
   modifican cómo se presentan los datos (tablas, casos socráticos, portada, coma decimal y
   espacio fino ante «%», composición de página, recuadro de ficha, sección «Dónde NO
-  confiar», apéndice de claves docentes, rótulo de la revisión de los casos), no los datos. Para las escalas y reglas, la IA
+  confiar», apéndice de claves docentes, rótulo de la revisión de los casos, referencias cruzadas entre capítulos), no los datos. Para las escalas y reglas, la IA
   copió sin cambios los archivos de `medsemiotics-db` de la revisión fijada; el libro los
   verifica por sha256 al compilar.
 - **Propuestas de redacción de paratextos** (prefacio, portada, créditos, esta declaración

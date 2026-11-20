@@ -41,6 +41,13 @@ def test_exportacion_json_y_generacion_quarto(tmp_path: Path) -> None:
     assert datos["estadisticas"]["preguntas_autoevaluacion"] == 90
 
     assert (proyecto / "_quarto.yml").is_file()
+    # «(@sec-…)» al inicio de línea no debe leerse como lista de ejemplos de Pandoc.
+    import yaml
+
+    formatos = yaml.safe_load((proyecto / "_quarto.yml").read_text(encoding="utf-8"))["format"]
+    assert {f: formatos[f].get("from") for f in formatos} == dict.fromkeys(
+        formatos, "markdown-example_lists"
+    )
     assert (proyecto / "index.qmd").is_file()
     assert (proyecto / "portada.svg").is_file()
     assert (proyecto / "preambulo-libro.tex").is_file()

@@ -43,6 +43,11 @@ RUTA_CSS_WEB = RAIZ / "assets" / "libro" / "estilo-web.css"
 RUTA_CSS_EPUB = RAIZ / "assets" / "libro" / "estilo-epub.css"
 RUTA_DECLARACION_IA = RAIZ / "paratextos" / "declaracion-ia.md"
 
+# Sin listas de ejemplos de Pandoc: una línea que empieza por «(@sec-…)», como un paréntesis
+# de referencia cortado al ajustar el párrafo, definía un «ejemplo 1» con esa etiqueta, y todas
+# las referencias del capítulo a esa sección salían como «1».
+LECTOR_MARKDOWN = "markdown-example_lists"
+
 
 _MARCADOR_RE = re.compile(r"\{\{([A-Z_]+)\}\}")
 
@@ -575,6 +580,7 @@ def _configuracion_quarto(
         ],
         "format": {
             "html": {
+                "from": LECTOR_MARKDOWN,
                 "theme": "cosmo",
                 "css": "estilo-web.css",
                 "toc": True,
@@ -583,6 +589,7 @@ def _configuracion_quarto(
                 "html-math-method": "katex",
             },
             "pdf": {
+                "from": LECTOR_MARKDOWN,
                 "documentclass": "scrbook",
                 "pdf-engine": "lualatex",
                 "keep-tex": True,
@@ -608,6 +615,7 @@ def _configuracion_quarto(
                 "include-in-header": ["datos-libro.tex", "preambulo-libro.tex"],
             },
             "epub": {
+                "from": LECTOR_MARKDOWN,
                 "epub-cover-image": portada_epub,
                 "css": "estilo-epub.css",
                 "toc": True,
