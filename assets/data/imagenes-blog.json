@@ -1,0 +1,434 @@
+[
+  {
+    "condicion_id": "HM:6001",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/d/de/Jaundice_eye.jpg",
+    "image_title": "Jaundice eye.jpg",
+    "image_license": "Public domain",
+    "image_author": "Autor no declarado",
+    "image_alt": "Ictericia de conjuntivas y piel facial en un paciente con hepatitis A (fotografía de los CDC)",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Jaundice_eye.jpg"
+  },
+  {
+    "condicion_id": "HM:6002",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/b/be/Colon_and_rectum.jpg",
+    "image_title": "Colon and rectum.jpg",
+    "image_license": "Public domain",
+    "image_author": "Alan Hoofring (Illustrator)",
+    "image_alt": "Ilustración del colon y el recto con los órganos vecinos y un detalle de los ganglios linfáticos (National Cancer Institute)",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Colon_and_rectum.jpg"
+  },
+  {
+    "condicion_id": "HM:6003",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/Cervical_lymphadenopathy.jpg/1280px-Cervical_lymphadenopathy.jpg",
+    "image_title": "Cervical lymphadenopathy.jpg",
+    "image_license": "CC0",
+    "image_author": "Whispyhistory",
+    "image_alt": "Tumefacción ganglionar visible en la región cervical posterior, por detrás del músculo esternocleidomastoideo",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Cervical_lymphadenopathy.jpg"
+  },
+  {
+    "condicion_id": "HM:6004",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/6/65/Kernig%27s_sign_cerebrospinal_meningitis.jpg",
+    "image_title": "Kernig's sign cerebrospinal meningitis.jpg",
+    "image_license": "Public domain",
+    "image_author": "R. G. Wiener, Harlem Hospital",
+    "image_alt": "Ilustración histórica de la maniobra de Kernig en un paciente con meningitis cerebroespinal",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Kernig%27s_sign_cerebrospinal_meningitis.jpg"
+  },
+  {
+    "condicion_id": "HM:6005",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Thoracentesis.jpg",
+    "image_title": "Thoracentesis.jpg",
+    "image_license": "Public domain",
+    "image_author": "National Heart, Lung and Blood Institute",
+    "image_alt": "Ilustración de una toracocentesis: el paciente, sentado e inclinado sobre una mesa, tiene el espacio pleural izquierdo ocupado por líquido, que se extrae con una aguja por la espalda y se recoge en una bolsa.",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Thoracentesis.jpg"
+  },
+  {
+    "condicion_id": "HM:6006",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/f/fb/Ultrasonography_of_abdominal_aortic_aneurysm_with_mural_thrombus.jpg",
+    "image_title": "Ultrasonography of abdominal aortic aneurysm with mural thrombus.jpg",
+    "image_license": "CC0",
+    "image_author": "Mikael Häggström , M.D. Author info - Reusing images - Conflicts of interest: None Mikael Häggström , M.D. Consent note : Written informed consent was obtained from the individual, including online publication.",
+    "image_alt": "Ecografía abdominal en corte transversal de un aneurisma de aorta abdominal: la luz aórtica, muy dilatada, está rodeada por un trombo mural, y los calibres marcan su diámetro máximo.",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Ultrasonography_of_abdominal_aortic_aneurysm_with_mural_thrombus.jpg"
+  },
+  {
+    "condicion_id": "HM:6007",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8d/12_Lead_EKG_ST_Elevation_tracing_only.jpg/1280px-12_Lead_EKG_ST_Elevation_tracing_only.jpg",
+    "image_title": "12 Lead EKG ST Elevation tracing only.jpg",
+    "image_license": "Public domain",
+    "image_author": "Displaced",
+    "image_alt": "Trazado de electrocardiograma de 12 derivaciones con elevación del segmento ST compatible con síndrome coronario agudo",
+    "image_source": "https://commons.wikimedia.org/wiki/File:12_Lead_EKG_ST_Elevation_tracing_only.jpg"
+  },
+  {
+    "condicion_id": "HM:6008",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Blood_pressure_monitoring.jpg/1280px-Blood_pressure_monitoring.jpg",
+    "image_title": "Blood pressure monitoring.jpg",
+    "image_license": "CC0",
+    "image_author": "rawpixel.com",
+    "image_alt": "Monitorización de la presión arterial y signos vitales en evaluación postural de volemia",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Blood_pressure_monitoring.jpg"
+  },
+  {
+    "condicion_id": "HM:6009",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/30/Streptococcal_pharyngitis_1.jpg/1280px-Streptococcal_pharyngitis_1.jpg",
+    "image_title": "Streptococcal pharyngitis 1.jpg",
+    "image_license": "Public domain",
+    "image_author": "en:User:RescueFF",
+    "image_alt": "Orofaringe con amígdalas enrojecidas y exudado blanquecino en una faringitis estreptocócica",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Streptococcal_pharyngitis_1.jpg"
+  },
+  {
+    "condicion_id": "HM:6010",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Ventricular_Tachycardia.svg/1280px-Ventricular_Tachycardia.svg.png",
+    "image_title": "Ventricular Tachycardia.svg",
+    "image_license": "CC0",
+    "image_author": "Rocuronium Bromide",
+    "image_alt": "Tira de electrocardiograma que muestra taquicardia ventricular monomórfica como causa de síncope cardiogénico",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Ventricular_Tachycardia.svg"
+  },
+  {
+    "condicion_id": "HM:6011",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/HIV-budding.jpg/1280px-HIV-budding.jpg",
+    "image_title": "HIV-budding.jpg",
+    "image_license": "Public domain",
+    "image_author": "Photo Credit: C. Goldsmith Content Providers(s): CDC/ C. Goldsmith, P. Feorino, E. L. Palmer, W. R. McManus",
+    "image_alt": "Micrografía electrónica de barrido del virus de la inmunodeficiencia humana (VIH) brotando de un linfocito",
+    "image_source": "https://commons.wikimedia.org/wiki/File:HIV-budding.jpg"
+  },
+  {
+    "condicion_id": "HM:6012",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Severe_%28T%C3%B6nnis_grade_3%29_osteoarthritis_of_the_hip.jpg",
+    "image_title": "Severe (Tönnis grade 3) osteoarthritis of the hip.jpg",
+    "image_license": "CC0",
+    "image_author": "Mikael Häggström",
+    "image_alt": "Radiografía anteroposterior de cadera que muestra pinzamiento del espacio articular y osteofitos por artrosis severa",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Severe_(T%C3%B6nnis_grade_3)_osteoarthritis_of_the_hip.jpg"
+  },
+  {
+    "condicion_id": "HM:6013",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/9/96/Shoulder_joint_anatomy_quiz.jpg",
+    "image_title": "Shoulder joint anatomy quiz.jpg",
+    "image_license": "Public domain",
+    "image_author": "Gray326.png : Henry Vandyke Carter derivative work: Raf db ( talk )",
+    "image_alt": "Disección e ilustración anatómica de la articulación del hombro y la musculatura del manguito rotador",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Shoulder_joint_anatomy_quiz.jpg"
+  },
+  {
+    "condicion_id": "HM:6014",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/2/20/Shoulder_impingement_syndrome%2C_X-ray.jpg",
+    "image_title": "Shoulder impingement syndrome, X-ray.jpg",
+    "image_license": "CC0",
+    "image_author": "Jmarchn",
+    "image_alt": "Radiografía simple de hombro izquierdo que muestra cambios degenerativos y disminución del espacio subacromial",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Shoulder_impingement_syndrome,_X-ray.jpg"
+  },
+  {
+    "condicion_id": "HM:6015",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/a/a2/Paralysis_agitans_%281893%2C_after_St._Leger%29.jpg",
+    "image_title": "Paralysis agitans (1893, after St. Leger).jpg",
+    "image_license": "Public domain",
+    "image_author": "William Richard Gowers (1845–1915) after w:Albert Londe (attrib.) in St. Leger., 1879)",
+    "image_alt": "Grabado de 1893 que muestra la postura flexionada característica de la parálisis agitante (enfermedad de Parkinson)",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Paralysis_agitans_(1893,_after_St._Leger).jpg"
+  },
+  {
+    "condicion_id": "HM:6016",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/21/Tubal_Pregnancy_with_embryo.jpg/1280px-Tubal_Pregnancy_with_embryo.jpg",
+    "image_title": "Tubal Pregnancy with embryo.jpg",
+    "image_license": "Public domain",
+    "image_author": "Ed Uthman, MD ( Flickr , Wikipedia )",
+    "image_alt": "Pieza quirúrgica macroscópica de trompa de Falopio abierta con saco gestacional y embrión en embarazo ectópico",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Tubal_Pregnancy_with_embryo.jpg"
+  },
+  {
+    "condicion_id": "HM:6017",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Pinkeye_NIH.jpg",
+    "image_title": "Pinkeye NIH.jpg",
+    "image_license": "Public domain",
+    "image_author": "Centers for Disease Control and Prevention (NIH)",
+    "image_alt": "Fotografía clínica que muestra inyección conjuntival marcada y congestión vascular en ojo con conjuntivitis bacteriana",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Pinkeye_NIH.jpg"
+  },
+  {
+    "condicion_id": "HM:6018",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/69/Obstruction_ventilation_apn%C3%A9e_sommeil.svg/1280px-Obstruction_ventilation_apn%C3%A9e_sommeil.svg.png",
+    "image_title": "Obstruction ventilation apnée sommeil.svg",
+    "image_license": "Public domain",
+    "image_author": "Habib M'henni",
+    "image_alt": "Esquema anatómico de la vía aérea superior mostrando el colapso y obstrucción faríngea durante la apnea del sueño",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Obstruction_ventilation_apn%C3%A9e_sommeil.svg"
+  },
+  {
+    "condicion_id": "HM:6019",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/5/59/X-ray_of_the_pelvis_of_a_22_months_old_male_-_anteroposterior.jpg",
+    "image_title": "X-ray of the pelvis of a 22 months old male - anteroposterior.jpg",
+    "image_license": "CC0",
+    "image_author": "Mikael Häggström , M.D. Author info - Reusing images - Conflicts of interest: None Mikael Häggström , M.D. Consent note : Written informed consent was obtained from the individual, including online publication.",
+    "image_alt": "Radiografía de pelvis pediátrica en proyección anteroposterior para evaluación de sospecha de displasia de cadera",
+    "image_source": "https://commons.wikimedia.org/wiki/File:X-ray_of_the_pelvis_of_a_22_months_old_male_-_anteroposterior.jpg"
+  },
+  {
+    "condicion_id": "HM:6020",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/1/10/Inserting_an_endotracheal_tube.png",
+    "image_title": "Inserting an endotracheal tube.png",
+    "image_license": "Public domain",
+    "image_author": "Munoz; Cayetano S.",
+    "image_alt": "Diagrama esquemático de alineación de ejes anatómicos e inserción de tubo endotraqueal en la vía aérea",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Inserting_an_endotracheal_tube.png"
+  },
+  {
+    "condicion_id": "HM:6021",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/2/2c/Gross_pathology_of_alcoholic_liver_cirrhosis.jpg",
+    "image_title": "Gross pathology of alcoholic liver cirrhosis.jpg",
+    "image_license": "CC0",
+    "image_author": "Centers for Disease Control and Prevention / Dr. Edwin P. Ewing, Jr.",
+    "image_alt": "Pieza macroscópica de hígado con cirrosis hepática alcohólica mostrando nódulos de regeneración difusos",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Gross_pathology_of_alcoholic_liver_cirrhosis.jpg"
+  },
+  {
+    "condicion_id": "HM:6022",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Goldmann_mires.jpg/1280px-Goldmann_mires.jpg",
+    "image_title": "Goldmann mires.jpg",
+    "image_license": "Public domain",
+    "image_author": "Manimury at English Wikipedia",
+    "image_alt": "Visión a través de lámpara de hendidura de las miras semicirculares durante la tonometría de aplanación de Goldmann",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Goldmann_mires.jpg"
+  },
+  {
+    "condicion_id": "HM:6023",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/9/96/CT_of_a_normal_brain_%28thumbnail%29.png",
+    "image_title": "CT of a normal brain (thumbnail).png",
+    "image_license": "CC0",
+    "image_author": "Mikael Häggström , M.D. Author info - Reusing images - Conflicts of interest: None Mikael Häggström , M.D. Consent note : Written informed consent was obtained from the individual, including online publication.",
+    "image_alt": "Tomografía computarizada craneal multiaxial utilizada en la valoración de traumatismo craneoencefálico pediátrico",
+    "image_source": "https://commons.wikimedia.org/wiki/File:CT_of_a_normal_brain_(thumbnail).png"
+  },
+  {
+    "condicion_id": "HM:6024",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/4/4d/Tibial_Fracture.jpg",
+    "image_title": "Tibial Fracture.jpg",
+    "image_license": "Public domain",
+    "image_author": "National Institutes of Health",
+    "image_alt": "Radiografía ósea pediátrica que revela fractura espiroidea de tibia en un lactante",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Tibial_Fracture.jpg"
+  },
+  {
+    "condicion_id": "HM:6025",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/7/7f/Coarctation.png",
+    "image_title": "Coarctation.png",
+    "image_license": "Public domain",
+    "image_author": "No machine-readable author provided. Ekko assumed (based on copyright claims).",
+    "image_alt": "Esquema anatómico del arco aórtico con coartación aórtica, causa vascular de hipertensión secundaria",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Coarctation.png"
+  },
+  {
+    "condicion_id": "HM:6026",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Aortic_stenosis_rheumatic%2C_gross_pathology_20G0014_lores.jpg",
+    "image_title": "Aortic stenosis rheumatic, gross pathology 20G0014 lores.jpg",
+    "image_license": "Public domain",
+    "image_author": "CDC/Dr. Edwin P. Ewing, Jr.",
+    "image_alt": "Fotografía macroscópica anatómica de la raíz aórtica abierta para examinar las valvas de la válvula aórtica",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Aortic_stenosis_rheumatic,_gross_pathology_20G0014_lores.jpg"
+  },
+  {
+    "condicion_id": "HM:6027",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Gray347.png",
+    "image_title": "Gray347.png",
+    "image_license": "Public domain",
+    "image_author": "Henry Vandyke Carter",
+    "image_alt": "Disección anatómica de la rodilla en vista anterior mostrando la disposición del ligamento cruzado anterior",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Gray347.png"
+  },
+  {
+    "condicion_id": "HM:6028",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/6/64/Hives_urticaria.jpg",
+    "image_title": "Hives urticaria.jpg",
+    "image_license": "CC0",
+    "image_author": "Psixtras",
+    "image_alt": "Lesiones eritematosas pruriginosas habonosas de urticaria aguda en la piel características de reacción alérgica medicamentosa",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Hives_urticaria.jpg"
+  },
+  {
+    "condicion_id": "HM:6029",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ae/Sphygmomanometer%26Cuff.JPG/1280px-Sphygmomanometer%26Cuff.JPG",
+    "image_title": "Sphygmomanometer&Cuff.JPG",
+    "image_license": "Public domain",
+    "image_author": "ML5 at English Wikipedia",
+    "image_alt": "Esfigmomanómetro con manguito para medir la presión arterial",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Sphygmomanometer%26Cuff.JPG"
+  },
+  {
+    "condicion_id": "HM:6030",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/5/59/12_lead_generated_inferior_MI.JPG",
+    "image_title": "12 lead generated inferior MI.JPG",
+    "image_license": "Public domain",
+    "image_author": "Glenlarson",
+    "image_alt": "Electrocardiograma de 12 derivaciones con infarto inferior: elevación del ST en II, III y aVF con cambios recíprocos",
+    "image_source": "https://commons.wikimedia.org/wiki/File:12_lead_generated_inferior_MI.JPG"
+  },
+  {
+    "condicion_id": "HM:6031",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Lifetime_Prevalence_of_Anxiety_Disorders_%28ECA_Study%29.jpg",
+    "image_title": "Lifetime Prevalence of Anxiety Disorders (ECA Study).jpg",
+    "image_license": "Public domain",
+    "image_author": "Robertboland at English Wikibooks",
+    "image_alt": "Gráfico epidemiológico que ilustra la prevalencia de los trastornos de ansiedad en estudios de salud comunitaria",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Lifetime_Prevalence_of_Anxiety_Disorders_(ECA_Study).jpg"
+  },
+  {
+    "condicion_id": "HM:6032",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/4/4e/Difference_between_Anxiety_and_COVID-19_Symptoms.jpg",
+    "image_title": "Difference between Anxiety and COVID-19 Symptoms.jpg",
+    "image_license": "Public domain",
+    "image_author": "National Institute of Mental Health (NIMH)",
+    "image_alt": "Infografía de salud mental del NIMH diferenciando crisis de angustia, ataque de pánico y manifestaciones físicas",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Difference_between_Anxiety_and_COVID-19_Symptoms.jpg"
+  },
+  {
+    "condicion_id": "HM:6033",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Malignant_melanoma_on_chest.jpg",
+    "image_title": "Malignant melanoma on chest.jpg",
+    "image_license": "Public domain",
+    "image_author": "CDC/ Carl Washington, M.D., Emory Univ. School of Medicine; Mona Saraiya, MD, MPH",
+    "image_alt": "Fotografía clínica dermatológica de lesión cutánea hiperpigmentada asimétrica compatible con melanoma maligno",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Malignant_melanoma_on_chest.jpg"
+  },
+  {
+    "condicion_id": "HM:6034",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/80/Breast_cancer.JPG/1280px-Breast_cancer.JPG",
+    "image_title": "Breast cancer.JPG",
+    "image_license": "Public domain",
+    "image_author": "John Hayman",
+    "image_alt": "Tejido mamario resecado con un carcinoma estrellado de 2 cm, palpable como nódulo duro",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Breast_cancer.JPG"
+  },
+  {
+    "condicion_id": "HM:6035",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Ultrasonography_of_thrombosis_of_the_fibular_veins%2C_axial_plane%2C_annotated.svg/1280px-Ultrasonography_of_thrombosis_of_the_fibular_veins%2C_axial_plane%2C_annotated.svg.png",
+    "image_title": "Ultrasonography of thrombosis of the fibular veins, axial plane, annotated.svg",
+    "image_license": "CC0",
+    "image_author": "Mikael Häggström , M.D. Author info - Reusing images - Conflicts of interest: None Mikael Häggström , M.D. Consent note : Written informed consent was obtained from the individual, including online publication.",
+    "image_alt": "Ecografía de la pantorrilla con trombosis de las venas peroneas, corte axial anotado",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Ultrasonography_of_thrombosis_of_the_fibular_veins,_axial_plane,_annotated.svg"
+  },
+  {
+    "condicion_id": "HM:6036",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/a/a6/Pneumonia_x-ray.jpg",
+    "image_title": "Pneumonia x-ray.jpg",
+    "image_license": "Public domain",
+    "image_author": "Autor no declarado",
+    "image_alt": "Radiografías de tórax comparadas: normal y con neumonía (infiltrado), el patrón de referencia del artículo",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Pneumonia_x-ray.jpg"
+  },
+  {
+    "condicion_id": "HM:6037",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/5/56/Chest_radiograph_of_a_lung_with_Kerley_B_lines_-_annotated.jpg",
+    "image_title": "Chest radiograph of a lung with Kerley B lines - annotated.jpg",
+    "image_license": "CC0",
+    "image_author": "Mikael Häggström",
+    "image_alt": "Radiografía de tórax que muestra líneas B de Kerley y congestión vascular pulmonar por sobrecarga hidrosalina",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Chest_radiograph_of_a_lung_with_Kerley_B_lines_-_annotated.jpg"
+  },
+  {
+    "condicion_id": "HM:6038",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/3/38/Trauma_subdural_arrow.jpg",
+    "image_title": "Trauma subdural arrow.jpg",
+    "image_license": "Public domain",
+    "image_author": "Glitzy queen00 at English Wikipedia",
+    "image_alt": "Tomografía de cráneo con hematoma subdural traumático señalado con una flecha",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Trauma_subdural_arrow.jpg"
+  },
+  {
+    "condicion_id": "HM:6039",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/d/d7/Ptsd-brain.png",
+    "image_title": "Ptsd-brain.png",
+    "image_license": "Public domain",
+    "image_author": "The National Institute of Mental Health (NIMH)",
+    "image_alt": "Diagrama neuroanatómico del sistema límbico destacando amígdala e hipocampo implicados en la respuesta al estrés postraumático",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Ptsd-brain.png"
+  },
+  {
+    "condicion_id": "HM:6040",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Human_Pancreas_%28NIH_BioArt_239%29.png/1280px-Human_Pancreas_%28NIH_BioArt_239%29.png",
+    "image_title": "Human Pancreas (NIH BioArt 239).png",
+    "image_license": "Public domain",
+    "image_author": "Courtesy of NIAID Ryan Kissinger",
+    "image_alt": "Ilustración médica de la anatomía del páncreas, duodeno y conducto pancreático involucrados en la pancreatitis",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Human_Pancreas_(NIH_BioArt_239).png"
+  },
+  {
+    "condicion_id": "HM:6041",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Cutaneous_abscess_MRSA_staphylococcus_aureus_7826_lores.jpg/1280px-Cutaneous_abscess_MRSA_staphylococcus_aureus_7826_lores.jpg",
+    "image_title": "Cutaneous abscess MRSA staphylococcus aureus 7826 lores.jpg",
+    "image_license": "Public domain",
+    "image_author": "CDC/Bruno Coignard, M.D.; Jeff Hageman, M.H.S.",
+    "image_alt": "Fotografía clínica de absceso cutáneo fluctuante con eritema perilesional y colección purulenta en partes blandas",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Cutaneous_abscess_MRSA_staphylococcus_aureus_7826_lores.jpg"
+  },
+  {
+    "condicion_id": "HM:6042",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/7/76/Ultrasonography_of_cholecystitis.jpg",
+    "image_title": "Ultrasonography of cholecystitis.jpg",
+    "image_license": "CC0",
+    "image_author": "Mikael Häggström , M.D. Author info - Reusing images - Conflicts of interest: None Mikael Häggström , M.D.",
+    "image_alt": "Ecografía abdominal con colecistitis aguda: cálculos, pared vesicular engrosada y líquido perivesicular",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Ultrasonography_of_cholecystitis.jpg"
+  },
+  {
+    "condicion_id": "HM:6043",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/8/82/Appendizitis5ct.jpg",
+    "image_title": "Appendizitis5ct.jpg",
+    "image_license": "Public domain",
+    "image_author": "Benutzer:Rho",
+    "image_alt": "Tomografía axial de pelvis con apéndice engrosado e inflamado (señalado) en un caso de apendicitis aguda",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Appendizitis5ct.jpg"
+  },
+  {
+    "condicion_id": "HM:6044",
+    "featured_image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/Pulmonary-embolism.png/1280px-Pulmonary-embolism.png",
+    "image_title": "Pulmonary-embolism.png",
+    "image_license": "CC0",
+    "image_author": "Baedr-9439",
+    "image_alt": "Esquema de tromboembolia pulmonar: émbolo en una rama de la arteria pulmonar con sobrecarga de cavidades derechas",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Pulmonary-embolism.png"
+  },
+  {
+    "condicion_id": "HM:6045",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Pericarditis.jpg",
+    "image_title": "Pericarditis.jpg",
+    "image_license": "Public domain",
+    "image_author": "National Heart Lung and Blood Institute (NIH)",
+    "image_alt": "Ilustración médica de la silueta cardíaca y las capas del pericardio mostrando derrame e inflamación pericárdica",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Pericarditis.jpg"
+  },
+  {
+    "condicion_id": "HM:6046",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/6/61/A_man_with_ascites.jpg",
+    "image_title": "A man with ascites.jpg",
+    "image_license": "Public domain",
+    "image_author": "Hobart Amory Hare (1862-1931)",
+    "image_alt": "Fotografía clínica histórica que documenta distensión abdominal prominente por acumulación de líquido ascítico",
+    "image_source": "https://commons.wikimedia.org/wiki/File:A_man_with_ascites.jpg"
+  },
+  {
+    "condicion_id": "HM:6047",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/9/93/Location_of_the_spleen_in_the_human_body%2C_without_text.jpg",
+    "image_title": "Location of the spleen in the human body, without text.jpg",
+    "image_license": "Public domain",
+    "image_author": "Henry Vandyke Carter",
+    "image_alt": "Esquema anatómico de la cavidad abdominal que ilustra la localización y relaciones del bazo en el hipocondrio izquierdo",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Location_of_the_spleen_in_the_human_body,_without_text.jpg"
+  },
+  {
+    "condicion_id": "HM:6048",
+    "featured_image": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Goiter_Kocher_1874.jpg",
+    "image_title": "Goiter Kocher 1874.jpg",
+    "image_license": "Public domain",
+    "image_author": "Emil Theodor Kocher",
+    "image_alt": "Fotografía clínica histórica documentada por Emil Theodor Kocher de paciente con bocio tiroideo endémico voluminoso",
+    "image_source": "https://commons.wikimedia.org/wiki/File:Goiter_Kocher_1874.jpg"
+  }
+]

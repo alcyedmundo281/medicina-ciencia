@@ -1,9 +1,15 @@
-name: EPUB y LuaLaTeX del libro
+name: publicación
 
-# Motor de publicación replicado de alcyedmundo281/biosemiotics:
-# genera EPUB 3 (validado con EPUBCheck 5.1.0), PDF LuaLaTeX (170 x 244 mm,
-# verificado con pdfinfo) y fuente LuaLaTeX autocontenida (.zip) desde el mismo
-# proyecto Quarto (JSON -> QMD -> Quarto).
+# Única compilación del libro por cambio: HTML, EPUB 3 (validado con EPUBCheck 5.1.0),
+# PDF LuaLaTeX (170 x 244 mm, verificado con pdfinfo) y fuente LuaLaTeX (.zip), desde el
+# mismo proyecto Quarto (JSON -> QMD -> Quarto). Motor replicado de
+# alcyedmundo281/biosemiotics.
+#
+# - compilar: corre en PR, en push a main, en releases y a mano; solo lee el repositorio.
+# - pages:    despliega build/html (más EPUB y JSON) en GitHub Pages tras un push a main.
+# - release:  adjunta los artefactos al release; es el único job con contents: write.
+#
+# Las pruebas y la validación rápida viven en ci.yml.
 
 on:
   push:
@@ -36,15 +42,15 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: editorial-${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: publicacion-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  publicar:
-    name: Generar JSON, EPUB, PDF LuaLaTeX y ZIP fuente
+  compilar:
+    name: Compilar HTML, EPUB, PDF LuaLaTeX y ZIP fuente
     runs-on: ubuntu-latest
     env:
       PYTHONPATH: tools
@@ -94,35 +100,18 @@ jobs:
           unzip -q /tmp/epubcheck.zip -d /opt
           echo "EPUBCHECK_JAR=/opt/epubcheck-${VER}/epubcheck.jar" >> "$GITHUB_ENV"
 
-      - name: Validar fuentes y pruebas
+      - name: Compilar y verificar las tres ediciones
         run: |
-          python -m libro check
-          python -m pytest
-
-      - name: Compilar EPUB 3, PDF LuaLaTeX y paquete fuente LuaLaTeX
-        run: |
+          python -m libro html
           python -m libro epub
           python -m libro pdf
           python -m libro latex-zip
           python -m libro check
 
       - name: Validar EPUB con EPUBCheck
-        run: java -jar "$EPUBCHECK_JAR" build/libro-medicina-y-ciencia.epub
-
-      - name: Adjuntar artefactos al release
-        if: github.event_name == 'release'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: >-
-          gh release upload "${{ github.event.release.tag_name }}"
-          build/libro.json
-          build/libro-medicina-y-ciencia.epub
-          build/libro-medicina-y-ciencia.pdf
-          build/quarto/libro-medicina-y-ciencia.tex
-          build/medicina-ciencia-latex.zip --clobber
+        run: java -jar "$EPUBCHECK_JAR" --failonwarnings build/libro-medicina-y-ciencia.epub
 
       - name: Publicar artefactos descargables
-        if: github.event_name != 'release'
         uses: actions/upload-artifact@v4
         with:
           name: medicina-ciencia-epub-pdf-latex
@@ -133,3 +122,55 @@ jobs:
             build/quarto/libro-medicina-y-ciencia.tex
             build/medicina-ciencia-latex.zip
           retention-days: 90
+
+      - name: Preparar el sitio de GitHub Pages
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+        run: |
+          cp build/libro-medicina-y-ciencia.epub build/html/
+          cp build/libro.json build/html/
+
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+        with:
+          path: build/html/
+
+  pages:
+    needs: compilar
+    if: github.event_name == 'push' || (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main')
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - uses: actions/configure-pages@v5
+      - id: despliegue
+        uses: actions/deploy-pages@v4
+
+  release:
+    needs: compilar
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: medicina-ciencia-epub-pdf-latex
+          path: artefactos
+      - name: Adjuntar artefactos al release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release upload "${{ github.event.release.tag_name }}"
+          --repo "${{ github.repository }}" --clobber
+          artefactos/libro.json
+          artefactos/libro-medicina-y-ciencia.epub
+          artefactos/libro-medicina-y-ciencia.pdf
+          artefactos/quarto/libro-medicina-y-ciencia.tex
+          artefactos/medicina-ciencia-latex.zip

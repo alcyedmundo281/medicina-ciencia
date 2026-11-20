@@ -63,13 +63,23 @@ class MetadatosLibro:
     autores: tuple[AutorLibro, ...]
 
 
+_TITULO_QMD_RE = re.compile(r"^# (.+?)(?:\s+\{[^}]*\})?\s*$", re.MULTILINE)
+
+
+def _titulo_de_unidad(ruta: Path) -> str:
+    """Título del capítulo: el encabezado de primer nivel de su ``.qmd`` (única fuente)."""
+    m = _TITULO_QMD_RE.search(ruta.read_text(encoding="utf-8"))
+    if not m:
+        raise ValueError(f"{ruta}: no tiene encabezado de primer nivel («# Título»).")
+    return m.group(1).strip()
+
+
 @dataclass(frozen=True)
 class UnidadCurso:
     numero: int
     clave: str
     archivo: str
-    titulo: str
-    semanas: str
+    titulo: str  # del encabezado «# …» de su .qmd, no de mapa.yaml
     casos_ancla: tuple[str, ...]
 
 
@@ -331,8 +341,7 @@ def leer_metadatos(raiz: Path = RAIZ) -> tuple[MetadatosLibro, tuple[UnidadCurso
             numero=int(u["numero"]),
             clave=_requerido(u, "clave", "mapa.yaml"),
             archivo=_requerido(u, "archivo", "mapa.yaml"),
-            titulo=_requerido(u, "titulo", "mapa.yaml"),
-            semanas=str(u["semanas"]),
+            titulo=_titulo_de_unidad(raiz / _requerido(u, "archivo", "mapa.yaml")),
             casos_ancla=tuple(u.get("casos_ancla", ())),
         )
         for u in raw["unidades"]
@@ -349,13 +358,12 @@ def leer_metadatos(raiz: Path = RAIZ) -> tuple[MetadatosLibro, tuple[UnidadCurso
 
 
 def _leer_imagenes_blog(raiz: Path) -> dict[str, ImagenCondicion]:
-    ruta = raiz / "assets" / "data" / "blog-index.json"
-    if not ruta.is_file():
-        return {}
-    datos = json.loads(ruta.read_text(encoding="utf-8"))
+    """Imagen destacada de cada condición, del índice mínimo ``assets/data/imagenes-blog.json``."""
+    from libro.imagenes import leer_indice
+
     imagenes: dict[str, ImagenCondicion] = {}
-    for item in datos:
-        cid = item.get("grounding", {}).get("condicion_id")
+    for item in leer_indice(raiz):
+        cid = item.get("condicion_id")
         url = item.get("featured_image")
         if cid and url:
             imagenes[cid] = ImagenCondicion(

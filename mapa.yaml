@@ -42,29 +42,22 @@ autores:
     afiliacion: "PowerSemiotics · Publicación independiente"
 
 unidades:
+  # El título de cada capítulo es el encabezado «# …» de su archivo .qmd (única fuente).
   - numero: 1
     clave: unidad-01
     archivo: unidades/unidad-01.qmd
-    titulo: "Capítulo 1 · Del hallazgo al número"
-    semanas: "Fundamentos I"
     casos_ancla: ["HM:6009", "HM:6007"]
   - numero: 2
     clave: unidad-02
     archivo: unidades/unidad-02.qmd
-    titulo: "Capítulo 2 · Razonar con probabilidades"
-    semanas: "Fundamentos II"
     casos_ancla: ["HM:6043", "HM:6040", "HM:6042", "HM:6044", "HM:6035"]
   - numero: 3
     clave: unidad-03
     archivo: unidades/unidad-03.qmd
-    titulo: "Capítulo 3 · Cuán seguro es el número"
-    semanas: "Lectura crítica"
     casos_ancla: ["HM:6007", "HM:6036", "HM:6034", "HM:6038"]
   - numero: 4
     clave: unidad-04
     archivo: unidades/unidad-04.qmd
-    titulo: "Capítulo 4 · Datos, inteligencia artificial y comunicación del riesgo"
-    semanas: "Síntesis aplicada"
     casos_ancla: ["HM:6030", "HM:6029"]
 
 partes_blog:

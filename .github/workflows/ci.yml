@@ -1,5 +1,8 @@
 name: contrato
 
+# Validación rápida en cada push y PR: fuentes, metadatos, casos compilados y pruebas.
+# No compila el libro: de eso se encarga una sola vez epub-pdf.yml.
+
 on:
   push:
     branches: [main]
@@ -16,27 +19,15 @@ jobs:
       PYTHONPATH: tools
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # el registro de uso de IA se comprueba contra el historial
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
       - run: pip install -r requirements.txt
-      - uses: quarto-dev/quarto-actions/setup@v2
       - name: Validar fuentes, metadatos y pruebas
         run: |
           python -m libro check
           cffconvert --validate
           python -m pytest
-      - name: Generar JSON, proyecto Quarto y EPUB
-        run: |
-          python -m libro qmd
-          python -m libro epub
-          python -m libro check
-      - uses: actions/upload-artifact@v4
-        with:
-          name: libro-artefactos
-          path: |
-            build/libro.json
-            build/libro-medicina-y-ciencia.epub
-            build/quarto/
-          retention-days: 30

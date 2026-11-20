@@ -22,12 +22,14 @@ El [mapa maestro](mapa-maestro-libro.md) registra la estructura completa:
   socráticos** compilados determinísticamente desde `casos/`.
 - **Apéndices:** banco completo de **90 preguntas de autoevaluación** (*Reto clínico*) con
   clave razonada, índice maestro de hallazgos con $\text{LR}^+ / \text{LR}^-$ medido,
-  registro de iconografía abierta de Wikimedia Commons y declaración de uso de IA.
+  registro de iconografía abierta de Wikimedia Commons, claves docentes de los casos y
+  declaración de uso de IA.
 
 ## Arquitectura: `JSON → QMD → Quarto (HTML, PDF LuaLaTeX y EPUB)`
 
-1. **Capa de datos y JSON:** `mapa.yaml`, `posts/*.md`, `casos/*.yaml` y
-   `assets/data/blog-index.json` se validan y consolidan en `build/libro.json`.
+1. **Capa de datos y JSON:** `mapa.yaml`, `posts/*.md`, `casos/*.yaml`,
+   `assets/data/imagenes-blog.json` y la copia fijada `assets/data/medsemiotics-db/` se
+   validan y consolidan en `build/libro.json`.
 2. **Capa QMD:** `tools/libro/qmd.py` proyecta el proyecto Quarto completo en
    `build/quarto/` (`_quarto.yml`, capítulos `.qmd`, portada vectorial `portada.svg`,
    preámbulo `preambulo-libro.tex`, filtros Lua y hojas CSS web/EPUB).
@@ -49,7 +51,7 @@ cffconvert --validate                   # valida CITATION.cff
 
 python -m libro json                    # exporta build/libro.json
 python -m libro qmd                     # genera build/quarto/
-python -m libro html                    # compila HTML en build/quarto/_book/
+python -m libro html                    # compila HTML en build/html/
 python -m libro pdf                     # compila build/libro-medicina-y-ciencia.pdf (LuaLaTeX)
 python -m libro epub                    # compila build/libro-medicina-y-ciencia.epub (EPUB 3)
 python -m libro all                     # compila HTML, PDF y EPUB

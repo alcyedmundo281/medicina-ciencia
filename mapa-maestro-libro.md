@@ -11,12 +11,12 @@
 
 ## Parte I — Fundamentos: del hallazgo a la decisión
 
-| Cap. | Bloque | Título | Casos ancla |
-| :--- | :--- | :--- | :--- |
-| 1 | Fundamentos I | Capítulo 1 · Del hallazgo al número | `HM:6009`, `HM:6007` |
-| 2 | Fundamentos II | Capítulo 2 · Razonar con probabilidades | `HM:6043`, `HM:6040`, `HM:6042`, `HM:6044`, `HM:6035` |
-| 3 | Lectura crítica | Capítulo 3 · Cuán seguro es el número | `HM:6007`, `HM:6036`, `HM:6034`, `HM:6038` |
-| 4 | Síntesis aplicada | Capítulo 4 · Datos, inteligencia artificial y comunicación del riesgo | `HM:6030`, `HM:6029` |
+| Cap. | Título | Casos ancla |
+| :--- | :--- | :--- |
+| 1 | Del hallazgo al número | `HM:6009`, `HM:6007` |
+| 2 | Razonar con probabilidades | `HM:6043`, `HM:6040`, `HM:6042`, `HM:6044`, `HM:6035` |
+| 3 | Cuán seguro es el número | `HM:6007`, `HM:6036`, `HM:6034`, `HM:6038` |
+| 4 | Datos, inteligencia artificial y comunicación del riesgo | `HM:6030`, `HM:6029` |
 
 ## Parte 2 — Urgencias, medicina crítica y aparato cardiovascular
 

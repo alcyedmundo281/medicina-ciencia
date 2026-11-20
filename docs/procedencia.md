@@ -20,8 +20,19 @@ ISBN están pendientes de asignación.
 - **`casos/`**: 18 casos socráticos en YAML (`HM6001.yaml` a `HM6044.yaml`), cuyos
   tokens de evidencia (`{{lr+ ...}}`, `{{sensibilidad ...}}`, `{{estado ...}}`) se
   resuelven en tiempo de compilación contra `posts/` mediante `tools/casos/`.
-- **`assets/data/`**: índice `blog-index.json` (48 entradas), fichas JSON de los 48
-  artículos (`assets/data/posts/`) y 18 casos JSON compilados (`assets/data/casos/`).
+- **`assets/data/`**:
+  - `imagenes-blog.json`: imagen destacada y licencia de cada una de las 48 condiciones,
+    extraídas sin cambios del `blog-index.json` de medsemiotics
+    (`python -m libro imagenes --desde <blog-index.json>`; `--comprobar` detecta
+    diferencias).
+  - `casos/`: los 18 casos JSON compilados desde `casos/` y `posts/`
+    (`python -m libro casos`; `python -m libro check` falla si no están al día).
+  - `medsemiotics-db/`: copia fijada y verificada por sha256 de los YAML de condición que
+    el libro necesita para escalas y reglas (véase su `README.md`).
+
+  Las fichas JSON por artículo (`assets/data/posts/`) y el índice completo del blog se
+  retiraron el 19 de noviembre de 2026: las genera `build-blog.mjs` para `post.html` en
+  medsemiotics y este libro no las leía.
 - **`unidades/`**: 4 capítulos metodológicos sobre inferencia diagnóstica, razonamiento
   bayesiano, lectura crítica de evidencia, datos clínicos e inteligencia artificial.
 

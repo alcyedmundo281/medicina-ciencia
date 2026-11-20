@@ -5,14 +5,17 @@ Tubería reproducible: JSON -> QMD -> Quarto (HTML, PDF LuaLaTeX 170 x 244 mm y 
 Órdenes disponibles:
 - ``json``:  exporta el manifiesto estructurado ``build/libro.json``.
 - ``qmd``:   exporta ``build/libro.json`` y genera el proyecto Quarto en ``build/quarto``.
-- ``html``:  compila la edición web HTML en ``build/quarto/_book``.
+- ``html``:  compila la edición web HTML y la copia a ``build/html``.
 - ``pdf`` / ``build``: compila el PDF con LuaLaTeX (170 x 244 mm) y verifica con ``pdfinfo``.
 - ``epub``:  compila el EPUB 3 y verifica su estructura.
 - ``all``:   genera JSON, QMD, HTML, PDF y EPUB.
 - ``mapa``:  regenera ``mapa-maestro-libro.md``.
 - ``registro-ia``: regenera ``docs/registro-ia.md`` desde los trailers ``Asistido-por``.
-- ``check``: valida ``mapa.yaml``, revisión fijada de ``medsemiotics-db``, 48 posts, 18 casos y
-             artefactos compilados si existen.
+- ``casos``: recompila ``assets/data/casos/`` desde ``casos/`` y ``posts/``.
+- ``imagenes``: regenera (``--desde``) o compara (``--comprobar``) ``assets/data/imagenes-blog.json``
+             con el ``blog-index.json`` de medsemiotics.
+- ``check``: valida ``mapa.yaml``, revisión fijada de ``medsemiotics-db``, 48 posts, 18 casos
+             (``assets/data/casos/`` al día), índice de imágenes y artefactos compilados si existen.
 """
 
 from __future__ import annotations
@@ -31,6 +34,7 @@ from libro.pdf import (
     empaquetar_latex,
     inspeccionar_pdf_con_pdfinfo,
     validar_epub,
+    validar_html,
     validar_info_pdf,
     validar_tex_libro,
 )
@@ -40,6 +44,7 @@ RUTA_JSON_DEFECTO = RAIZ / "build" / "libro.json"
 RUTA_PROYECTO_DEFECTO = RAIZ / "build" / "quarto"
 RUTA_PDF_DEFECTO = RAIZ / "build" / f"{NOMBRE_SALIDA}.pdf"
 RUTA_EPUB_DEFECTO = RAIZ / "build" / f"{NOMBRE_SALIDA}.epub"
+RUTA_HTML_DEFECTO = RAIZ / "build" / "html"
 RUTA_LATEX_ZIP_DEFECTO = RAIZ / "build" / "medicina-ciencia-latex.zip"
 
 
@@ -65,6 +70,15 @@ def _verificar_pdf(ruta_proyecto: Path, ruta_pdf: Path) -> int:
     return 1 if errores else 0
 
 
+def _verificar_html(carpeta: Path) -> int:
+    errores = validar_html(carpeta)
+    for err in errores:
+        print(f"ERROR: {err}", file=sys.stderr)
+    if not errores:
+        print(f"HTML verificado: {carpeta} ({len(list(carpeta.glob('*.html')))} páginas)")
+    return 1 if errores else 0
+
+
 def _verificar_epub(ruta_epub: Path) -> int:
     errores = validar_epub(ruta_epub)
     for err in errores:
@@ -74,6 +88,24 @@ def _verificar_epub(ruta_epub: Path) -> int:
             f"EPUB verificado: {ruta_epub} ({ruta_epub.stat().st_size:,} bytes)"
         )
     return 1 if errores else 0
+
+
+def _comprobar_fuentes(libro) -> list[str]:
+    """Casos compilados al día con ``casos/`` e índice de imágenes completo."""
+    from datetime import date
+
+    from casos.compilar import Rutas, construir
+    from libro.imagenes import RUTA_INDICE, leer_indice
+
+    errores = [
+        f"{ruta} no coincide con casos/; ejecute `python -m libro casos`."
+        for ruta in construir(Rutas(RAIZ), date.today(), solo_comprobar=True)
+    ]
+    con_imagen = {e["condicion_id"] for e in leer_indice(RAIZ)}
+    faltan = sorted(set(libro.condiciones) - con_imagen)
+    if faltan:
+        errores.append(f"{RUTA_INDICE.as_posix()} no tiene imagen para: {', '.join(faltan)}.")
+    return errores
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -92,6 +124,7 @@ def main(argv: list[str] | None = None) -> int:
 
     p_html = sub.add_parser("html", help="Compila el libro web HTML con Quarto.")
     p_html.add_argument("--proyecto", type=Path, default=RUTA_PROYECTO_DEFECTO)
+    p_html.add_argument("--salida", type=Path, default=RUTA_HTML_DEFECTO)
 
     for nombre in ("pdf", "build"):
         p_pdf = sub.add_parser(nombre, help="Compila el PDF (LuaLaTeX 170 x 244 mm).")
@@ -110,15 +143,24 @@ def main(argv: list[str] | None = None) -> int:
     p_all.add_argument("--proyecto", type=Path, default=RUTA_PROYECTO_DEFECTO)
     p_all.add_argument("--pdf", type=Path, default=RUTA_PDF_DEFECTO)
     p_all.add_argument("--epub", type=Path, default=RUTA_EPUB_DEFECTO)
+    p_all.add_argument("--html", type=Path, default=RUTA_HTML_DEFECTO)
     p_all.add_argument("--latex-zip", type=Path, default=RUTA_LATEX_ZIP_DEFECTO)
 
     sub.add_parser("mapa", help="Regenera mapa-maestro-libro.md.")
     sub.add_parser("registro-ia", help="Regenera docs/registro-ia.md desde git log.")
 
+    sub.add_parser("casos", help="Recompila assets/data/casos/ desde casos/ y posts/.")
+
+    p_img = sub.add_parser("imagenes", help="Índice mínimo de imágenes desde blog-index.json.")
+    grupo = p_img.add_mutually_exclusive_group(required=True)
+    grupo.add_argument("--desde", type=Path, help="blog-index.json del blog: regenera el índice.")
+    grupo.add_argument("--comprobar", type=Path, help="blog-index.json del blog: solo compara.")
+
     p_check = sub.add_parser("check", help="Valida fuentes, mapa, casos y salidas compiladas.")
     p_check.add_argument("--proyecto", type=Path, default=RUTA_PROYECTO_DEFECTO)
     p_check.add_argument("--pdf", type=Path, default=RUTA_PDF_DEFECTO)
     p_check.add_argument("--epub", type=Path, default=RUTA_EPUB_DEFECTO)
+    p_check.add_argument("--html", type=Path, default=RUTA_HTML_DEFECTO)
 
     args = parser.parse_args(argv)
 
@@ -134,9 +176,9 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.orden == "html":
-        indice = compilar_libro_html(args.proyecto, raiz=RAIZ)
+        indice = compilar_libro_html(args.proyecto, raiz=RAIZ, destino=args.salida)
         print(f"Libro HTML compilado en {indice}.")
-        return 0
+        return _verificar_html(args.salida)
 
     if args.orden in ("pdf", "build"):
         compilar_libro_pdf(args.salida, args.proyecto, raiz=RAIZ)
@@ -152,15 +194,16 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.orden == "all":
-        indice = compilar_libro_html(args.proyecto, raiz=RAIZ)
+        indice = compilar_libro_html(args.proyecto, raiz=RAIZ, destino=args.html)
         print(f"Libro HTML compilado en {indice}.")
+        rc_html = _verificar_html(args.html)
         compilar_libro_pdf(args.pdf, args.proyecto, raiz=RAIZ)
         rc_pdf = _verificar_pdf(args.proyecto, args.pdf)
         empaquetar_latex(args.latex_zip, args.proyecto)
         print(f"Paquete LuaLaTeX generado en {args.latex_zip}.")
         compilar_libro_epub(args.epub, args.proyecto, raiz=RAIZ)
         rc_epub = _verificar_epub(args.epub)
-        return 1 if (rc_pdf or rc_epub) else 0
+        return 1 if (rc_html or rc_pdf or rc_epub) else 0
 
     if args.orden == "mapa":
         ruta = escribir_mapa_maestro(RAIZ)
@@ -174,8 +217,38 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Registro de uso de IA actualizado en {ruta}.")
         return 0
 
+    if args.orden == "casos":
+        from datetime import date
+
+        from casos.compilar import Rutas, construir
+
+        escritas = construir(Rutas(RAIZ), date.today(), solo_comprobar=False)
+        print(f"Casos compilados: {len(escritas)} archivo(s) actualizado(s).")
+        for ruta in escritas:
+            print(f"  {ruta}")
+        return 0
+
+    if args.orden == "imagenes":
+        from libro.imagenes import diferencias, escribir_indice
+
+        if args.desde:
+            ruta = escribir_indice(RAIZ, args.desde)
+            print(f"Índice de imágenes actualizado en {ruta}.")
+            return 0
+        distintas = diferencias(RAIZ, args.comprobar)
+        for cid in distintas:
+            print(f"ERROR: la imagen de {cid} no coincide con {args.comprobar}.", file=sys.stderr)
+        if not distintas:
+            print("Índice de imágenes al día.")
+        return 1 if distintas else 0
+
     # check
     libro = cargar_libro(RAIZ)
+    errores_check = _comprobar_fuentes(libro)
+    for err in errores_check:
+        print(f"ERROR: {err}", file=sys.stderr)
+    if errores_check:
+        return 1
     esperado = renderizar_mapa_maestro(RAIZ)
     ruta_mapa_md = RAIZ / "mapa-maestro-libro.md"
     if not ruta_mapa_md.is_file() or ruta_mapa_md.read_text(encoding="utf-8") != esperado:
@@ -197,6 +270,8 @@ def main(argv: list[str] | None = None) -> int:
         rc |= _verificar_pdf(args.proyecto, args.pdf)
     if args.epub.is_file():
         rc |= _verificar_epub(args.epub)
+    if args.html.is_dir():
+        rc |= _verificar_html(args.html)
     return rc
 
 

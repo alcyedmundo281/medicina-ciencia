@@ -36,13 +36,13 @@ def renderizar_mapa_maestro(raiz: Path = RAIZ) -> str:
         "",
         "## Parte I — Fundamentos: del hallazgo a la decisión",
         "",
-        "| Cap. | Bloque | Título | Casos ancla |",
-        "| :--- | :--- | :--- | :--- |",
+        "| Cap. | Título | Casos ancla |",
+        "| :--- | :--- | :--- |",
     ]
 
     for u in libro.unidades:
         anclas = ", ".join(f"`{a}`" for a in u.casos_ancla)
-        lineas.append(f"| {u.numero} | {u.semanas} | {u.titulo} | {anclas} |")
+        lineas.append(f"| {u.numero} | {u.titulo} | {anclas} |")
 
     for idx_parte, parte in enumerate(libro.partes, start=2):
         lineas.extend(
@@ -68,5 +68,5 @@ def renderizar_mapa_maestro(raiz: Path = RAIZ) -> str:
 
 def escribir_mapa_maestro(raiz: Path = RAIZ) -> Path:
     destino = raiz / "mapa-maestro-libro.md"
-    destino.write_text(renderizar_mapa_maestro(raiz), encoding="utf-8")
+    destino.write_text(renderizar_mapa_maestro(raiz), encoding="utf-8", newline="\n")
     return destino

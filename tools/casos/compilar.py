@@ -1,7 +1,9 @@
 """Validación cruzada caso ↔ artículo y compilación a ``assets/data/casos/<slug>.json``.
 
-Solo los casos ``publicado`` generan JSON; los borradores se validan igual, pero no llegan
-al sitio. ``build-blog.mjs`` incorpora el JSON compilado al artículo correspondiente.
+Solo los casos ``publicado`` generan JSON; los borradores se validan igual, pero no se
+publican. En este libro el JSON lo escribe ``python -m libro casos``; ``python -m libro check``
+lo compara con lo que se compilaría ahora (``construir(..., solo_comprobar=True)``) y falla si
+difiere. El capítulo de cada condición se compila aparte, en memoria, desde ``casos/``.
 """
 
 from __future__ import annotations

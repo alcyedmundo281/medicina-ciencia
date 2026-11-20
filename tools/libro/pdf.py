@@ -185,10 +185,32 @@ def validar_epub(ruta_epub: Path) -> list[str]:
     return errores
 
 
-def compilar_libro_html(carpeta_proyecto: Path, raiz: Path = RAIZ) -> Path:
+def compilar_libro_html(carpeta_proyecto: Path, raiz: Path = RAIZ, destino: Path | None = None) -> Path:
+    """Compila el sitio HTML y lo copia a ``destino`` (por defecto ``build/html``).
+
+    Quarto vacía ``_book/`` en cada render: si después se compila el EPUB o el PDF, el HTML
+    desaparece de ahí. Por eso el sitio se copia fuera, igual que el PDF y el EPUB.
+    """
     generar_proyecto_quarto(carpeta_proyecto, raiz=raiz)
     _ejecutar_quarto(carpeta_proyecto, "html")
-    return carpeta_proyecto / "_book" / "index.html"
+    origen = carpeta_proyecto / "_book"
+    if not (origen / "index.html").is_file():
+        raise FileNotFoundError(f"Quarto no generó el sitio HTML esperado en {origen}")
+    destino = destino or carpeta_proyecto.parent / "html"
+    if destino.exists():
+        shutil.rmtree(destino)
+    shutil.copytree(origen, destino)
+    return destino / "index.html"
+
+
+def validar_html(carpeta_html: Path) -> list[str]:
+    indice = carpeta_html / "index.html"
+    if not indice.is_file():
+        return [f"No se encontró el sitio HTML: {indice}"]
+    paginas = list(carpeta_html.glob("*.html"))
+    if len(paginas) < 50:
+        return [f"Sitio HTML incompleto: solo {len(paginas)} páginas (se esperaban >= 50)."]
+    return []
 
 
 def compilar_libro_pdf(ruta_salida: Path, carpeta_proyecto: Path, raiz: Path = RAIZ) -> Path:
@@ -210,7 +232,40 @@ def compilar_libro_epub(ruta_salida: Path, carpeta_proyecto: Path, raiz: Path = 
         raise FileNotFoundError(f"Quarto no generó el EPUB esperado en {origen}")
     ruta_salida.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(origen, ruta_salida)
+    declarar_mathml_en_nav(ruta_salida)
     return ruta_salida
+
+
+def declarar_mathml_en_nav(ruta_epub: Path) -> bool:
+    """Declara ``mathml`` en el ítem ``nav`` del OPF si el índice contiene fórmulas.
+
+    Pandoc copia al índice (``nav.xhtml``) la notación matemática de los títulos
+    («La tabla 2 × 2», «LR+»), pero no declara la propiedad en el manifiesto, y EPUBCheck lo
+    marca como error (OPF-014). El EPUB se reescribe con ``mimetype`` primero y sin comprimir.
+    """
+    with zipfile.ZipFile(ruta_epub) as zf:
+        entradas = [(info, zf.read(info.filename)) for info in zf.infolist()]
+    entradas.sort(key=lambda e: e[0].filename != "mimetype")  # estable: mimetype primero
+    contenido = {info.filename: datos for info, datos in entradas}
+    nav = next((n for n in contenido if n.endswith("nav.xhtml")), None)
+    opf = next((n for n in contenido if n.endswith(".opf")), None)
+    if nav is None or opf is None or b"<math" not in contenido[nav]:
+        return False
+    texto_opf = contenido[opf].decode("utf-8")
+    nuevo_opf, n = re.subn(
+        r'(<item\b[^>]*\bproperties=")nav(")', r"\1nav mathml\2", texto_opf, count=1
+    )
+    if n == 0:
+        return False
+    temporal = ruta_epub.with_suffix(".tmp")
+    with zipfile.ZipFile(temporal, "w") as destino:
+        for info, datos in entradas:
+            if info.filename == opf:
+                datos = nuevo_opf.encode("utf-8")
+            compresion = zipfile.ZIP_STORED if info.filename == "mimetype" else zipfile.ZIP_DEFLATED
+            destino.writestr(info.filename, datos, compress_type=compresion)
+    temporal.replace(ruta_epub)
+    return True
 
 
 def empaquetar_latex(ruta_zip: Path, carpeta_proyecto: Path) -> Path:
