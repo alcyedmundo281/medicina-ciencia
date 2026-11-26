@@ -5,11 +5,12 @@ herramientas computacionales:
 
 1. **Fuente clínica única y verificable.** Ninguna cifra de sensibilidad, especificidad,
    cociente de verosimilitud ($\text{LR}^+$ o $\text{LR}^-$), intervalo de confianza ni
-   probabilidad basal se genera con modelos de lenguaje. Todos los valores numéricos
+   probabilidad basal se genera con modelos de lenguaje. Todos los valores clínicos medidos
    proceden de `medsemiotics-db` (DOI `10.5281/zenodo.22064424`, revisión fijada
    `ea2f6e63b8508e6a36a28fd11950bd28c0900a49`) y conservan su referencia primaria en
    PubMed o DOI. Cuando la literatura no documenta un cociente de verosimilitud o este no
-   es medible por sesgo de incorporación, el texto lo declara explícitamente.
+   es medible por sesgo de incorporación, el texto lo declara explícitamente. Los valores
+   ilustrativos de los ejemplos didácticos se rotulan como tales en el texto.
 2. **Transparencia en la asistencia computacional.** En la preparación técnica y editorial
    de esta obra se emplearon herramientas de inteligencia artificial en las tareas que se
    declaran más abajo, y solo en ellas. La salida de cualquier modelo de lenguaje se trata
